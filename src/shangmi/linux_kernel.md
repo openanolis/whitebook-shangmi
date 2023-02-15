@@ -4,8 +4,9 @@
 
 ## 内核模块国密签名与验证
 
-## 内核完整性度量架构支持（IMA）
-
 ## RPM 包国密签名与分发验证
 
 ## KTLS （Kernel TLS）实践
+
+
+{{#template ../template/footer.md}}
