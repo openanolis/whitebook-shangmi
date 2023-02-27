@@ -5,7 +5,9 @@
 传输层安全协议（TLS）一般是在用户态库中实现，比如OpenSSL和gnutls库都实现了TLS协议，除了与内核的网络交互外，协议自身对内核是透明的。Kernel
 TLS（KTLS）从名字可以看到，是把TLS协议的数据平面（相对于处理协议的控制平面来说，也就是真正用于传输负载数据的部分）下沉到了内核中，发送数据时由内核加密后直接发送到网络设备，接收到数据后先解密再交给应用，呈现在用户态的仍然是明文。
 
-![TLS Offload Layers](images/tls-offload-layers.svg)
+<div align=center>
+<img src="images/tls-offload-layers.svg" alt="TLS Offload Layers" style="width: 70%; height: 70%">
+</div>
 
 > 🟢 **优势**
 

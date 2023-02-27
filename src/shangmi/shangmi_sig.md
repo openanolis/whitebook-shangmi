@@ -88,7 +88,7 @@
 欢迎加入钉钉交流群，与社区用户和开发者实时交流：
 
 <div align=center>
-<img src="images/qr_ding.jpg" alt="商密软件栈交流群">
+<img src="images/qr_ding.jpg" alt="商密软件栈交流群" style="width: 40%; height: 40%">
 </div>
 
 {{#template ../template/footer.md}}
