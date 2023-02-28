@@ -25,5 +25,6 @@
 - [基于国密的安全协议与应用](shangmi/protocols.md)
 - [国密应用开发实践](shangmi/dev_practices.md)
 - [国密硬件加速与优化](shangmi/optimize.md)
+- [Python国密签名实践](shangmi/python_shangmi.md)
 
 [Contributors](contributors.md)
