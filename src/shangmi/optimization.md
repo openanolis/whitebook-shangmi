@@ -59,7 +59,9 @@ SM3TT2A完成前16次循环中所定义的的TT2运算和准备下一轮TT2运�
 
 以下是在阿里云倚天710上的benchmark数据，SM3与SHA256哈希算法的软件实现（无优化）与Cryptographic Extension指令集优化后的性能对比：
 
-![SM3CE](images/sm3ce_4.png)
+<div align=center>
+<img src="images/sm3ce_4.png" alt="SM3CE" style="width: 90%; height: 90%">
+</div>
 
 ##### SM3 优化总结
 
