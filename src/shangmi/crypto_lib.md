@@ -1,11 +1,10 @@
-# OpenAnolis 国密算法库支持与使用
+# OpenAnolis 国密算法库
 
 ## OpenSSL
-## BabaSSL
-## GmSSL
-## Intel IPP
 ## libgcrypt
-## gnulib
 ## nettle
+## gnulib
 ## RustCrypto
 ## coreutils/sm3sum
+## GmSSL
+## Intel IPP

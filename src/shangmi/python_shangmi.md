@@ -1,8 +1,11 @@
 # Python国密签名实践（pyopenssl + cryptography + OpenSSL）
 
 ## pyopenssl与cryptography python库介绍
+
 ### pyopenssl
+
 [pyopenssl](https://github.com/pyca/pyopenssl)是一个基于OpenSSL库的Python wrapper。
+
 - 其中源码目录下crypto.py是[OpenSSL crypto密码学库](https://github.com/openssl/openssl/tree/master/crypto)的wrapper，通过调用crypto.py的函数来实现对应的OpenSSL crypto API的调用 
 
 ```
@@ -19,7 +22,7 @@
 
 以crypto.sign(位于pyopenssl/src/OpenSSL/crypto.py中)为例：会调用OpenSSL._util（位于pyopenssl/src/OpenSSL/_util.py中）里面的lib API完成签名
 
-```Python
+```python
 from OpenSSL._util import (
     ffi as _ffi,
     lib as _lib,
@@ -159,16 +162,17 @@ class Binding(object):
 
 正常安装OpenSSL 3.x和pyopenssl以及cryptography后（无需修改）后，生成SM2-with-SM3所需要的商密密钥与证书
 
-```shell
+```sh
 openssl ecparam -genkey -name SM2 -out private.pem
 openssl req -new -x509 -days 36500 -key private.pem -out cert.crt -sm3 -subj "/C=CN/ST=Zhejiang/L=Hangzhou/O=Alibaba/OU=OS/CN=CA/emailAddress=ca@foo.com"
 ```
 
 开发商密签名测试程序test_shangmi.py（以python 3为例），注意上文的pyopenssl与cryptography编译安装时与测试程序的python大版本号（同是python 2或者同是python 3）保持一致, 该测试程序功能主要是：
+
 - 加载之前生成好的SM2-with-SM3的私钥和证书
 - 调用pyopenssl的sign和verify函数进行SM2-with-SM3的商密签名和验签
 
-```Python3
+```python
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -216,17 +220,21 @@ if __name__ == "__main__":
 ```
 
 执行测试程序即可(无报错则验签成功，详见pyopenssl对应的验签函数逻辑)
-```shell
+
+```sh
 ./test_shangmi.py private.pem cert.crt
 ```
 
 ### 基于OpenSSL 1.1.x的python的商密签名实践
+
 #### OpenSSL 1.1.x的选择
+
 OpenSSL社区1.1.x版本对国密算法的支持能力有限且不支持SM2-with-SM3这种组合算法。龙蜥社区移植了部分国密能力（包括SM2-with-SM3这种组合算法）到对应的[龙蜥openssl仓库](https://gitee.com/anolis/openssl/tree/anolis_sm234/)以及[龙蜥RPM仓库](https://gitee.com/src-anolis-os/openssl/tree/a8)，未来Anolis 8.8镜像可以默认安装龙蜥移植后的OpenSSL。当然你也可以使用[Tongsuo](https://github.com/Tongsuo-Project/Tongsuo)(原BabaSSL)作为支持国密算法且兼容OpenSSL 1.1.x的密码库。
 
 除了对国密的支持外，在[OpenSSL社区官方文档](https://github.com/openssl/openssl/blob/OpenSSL_1_1_1/doc/man3/EVP_PKEY_set1_RSA.pod)中指出, 需要使用`EVP_PKEY_set_alias_type(pkey, EVP_PKEY_SM2)` 函数将ECCkey其转换为SM2 算法。所以基于OpenSSL 1.1.x的python的商密签名实践中，也需要对python库cryptography和pyopenssl库进行改造来导出`EVP_PKEY_set_alias_type`函数以及添加对应的逻辑（原有的cryptography和pyopenssl库并不支持这一能力）。
 
 #### cryptography
+
 龙蜥社区经过一些开发和测试在cryptography中提交并合入了导出`EVP_PKEY_set_alias_type`函数的代码，详见https://github.com/pyca/cryptography/pull/7935 ，以便用户使用SM2算法，因此用户在使用cryptography仓库时无需修改。可以看到在安装cryptography（这里以python2为例）后可以在`_openssl.so`（上文已经详细介绍）里看到对应的`EVP_PKEY_set_alias_type`函数符号
 
 ```shell
@@ -247,7 +255,8 @@ EVP_PKEY_set_alias_type@@OPENSSL_1_1_1
 #### pyopenssl的修改
 
 至于也需要一些修改，目前龙蜥社区已经在pyopenssl发起了，正在review中，详见https://github.com/pyca/pyopenssl/pull/1172 。在代码合入之前仍需要用户手动打入patch，可参考如下步骤(以python 3为例)进行安装。
-```shell
+
+```sh
 git clone https://github.com/hustliyilin/pyopenssl.git
 python3 setup.py sdist
 cd dist
