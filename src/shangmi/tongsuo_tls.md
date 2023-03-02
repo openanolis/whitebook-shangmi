@@ -29,14 +29,17 @@ openssl x509 -req -in sm2.csr -signkey sm2.key \
 server端：命令行输入
 
 ```sh
-openssl s_server -cert test_certs/sm2_cert/sm2-second.crt \
-    -key test_certs/sm2_cert/sm2-second.key -accept 127.0.0.1:4433
+openssl s_server \
+    -cert test_certs/sm2_cert/sm2-second.crt \
+    -key test_certs/sm2_cert/sm2-second.key \
+    -accept 127.0.0.1:4433
 ```
 
 client端：命令行输入
 
 ```sh
-openssl s_client -connect 127.0.0.1:4433 -tls1_3 -ciphersuites TLS_SM4_GCM_SM3
+openssl s_client -connect 127.0.0.1:4433 \
+    -tls1_3 -ciphersuites TLS_SM4_GCM_SM3
 ```
 
 ## 在你的client/server中使用（相关api使用）

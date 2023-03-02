@@ -37,8 +37,9 @@
 #include <openssl/ssl.h>
 #include <zlib.h>
 
-static int zlib_compress(SSL *s, const unsigned char *in, size_t inlen,
-                         unsigned char *out, size_t *outlen)
+static int
+zlib_compress(SSL *s, const unsigned char *in, size_t inlen,
+              unsigned char *out, size_t *outlen)
 {
     if (out == NULL) {
         *outlen = compressBound(inlen);
@@ -49,8 +50,9 @@ static int zlib_compress(SSL *s, const unsigned char *in, size_t inlen,
     return 1;
 }
 
-static int zlib_decompress(SSL *s, const unsigned char *in, size_t inlen,
-                           unsigned char *out, size_t outlen)
+static int
+zlib_decompress(SSL *s, const unsigned char *in, size_t inlen,
+                unsigned char *out, size_t outlen)
 {
     size_t len = outlen;
     if (uncompress(out, &len, in, inlen) != Z_OK)
@@ -81,10 +83,15 @@ int main()
 
 ```sh
 # 服务端
-/opt/babassl/bin/openssl s_server -accept 127.0.0.1:34567 -cert server.crt -key server.key -tls1_3 -cert_comp zlib -www -quiet
+/opt/babassl/bin/openssl s_server \
+    -accept 127.0.0.1:34567 \
+    -cert server.crt -key server.key \
+    -tls1_3 -cert_comp zlib -www -quiet
 
 # 客户端
-/opt/babassl/bin/openssl s_client -connect 127.0.0.1:34567 -tls1_3 -cert_comp zlib -ign_eof -trace
+/opt/babassl/bin/openssl s_client \
+    -connect 127.0.0.1:34567 \
+    -tls1_3 -cert_comp zlib -ign_eof -trace
 ```
 
 ## 测试压缩算法和压缩率

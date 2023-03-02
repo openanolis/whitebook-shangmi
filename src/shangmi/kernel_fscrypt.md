@@ -79,7 +79,8 @@ Present (user_count=1, added_by_self)
 # 创建加密目录 endir，并设置加密策略
 # 使用之前添加的密钥和 SM4 算法来加密该目录中的文件和子目录
 > mkdir /mnt/endir
-> fscryptctl set_policy --contents=SM4-XTS --filenames=SM4-CTS 23086a13ed81fd75ca5fe9b8f2ff25c7 /mnt/endir
+> fscryptctl set_policy --contents=SM4-XTS \
+        --filenames=SM4-CTS 23086a13ed81fd75ca5fe9b8f2ff25c7 /mnt/endir
 
 # 查看策略是否生效（不是必需）
 > fscryptctl get_policy /mnt/endir

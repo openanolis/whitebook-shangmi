@@ -43,7 +43,8 @@ LUKS （Linux Unified Key Setup）是 Linux 硬盘加密的标准。 通过提�
 
 ```sh
 # 根据提示输入大写的 YES 和密码完成格式化操作
-> cryptsetup --cipher sm4-xts-plain64 --key-size=256 --hash sm3 luksFormat /dev/vda4
+> cryptsetup --cipher sm4-xts-plain64 --key-size=256 \
+            --hash sm3 luksFormat /dev/vda4
 
 # 打开该加密分区，密码正确后，会创建代表该分区的透明设备 /dev/mapper/diskluks
 # 该设备展示给用户的是一个未加密的普通的分区设备，可以对它进行任何针对分区的操作

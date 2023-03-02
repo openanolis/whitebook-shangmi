@@ -164,7 +164,10 @@ class Binding(object):
 
 ```sh
 openssl ecparam -genkey -name SM2 -out private.pem
-openssl req -new -x509 -days 36500 -key private.pem -out cert.crt -sm3 -subj "/C=CN/ST=Zhejiang/L=Hangzhou/O=Alibaba/OU=OS/CN=CA/emailAddress=ca@foo.com"
+
+openssl req -new -x509 -days 36500 \
+    -key private.pem -out cert.crt -sm3 \
+    -subj "/C=CN/ST=Zhejiang/L=Hangzhou/O=Alibaba/OU=OS/CN=CA/emailAddress=ca@foo.com"
 ```
 
 开发商密签名测试程序test_shangmi.py（以python 3为例），注意上文的pyopenssl与cryptography编译安装时与测试程序的python大版本号（同是python 2或者同是python 3）保持一致, 该测试程序功能主要是：
@@ -238,7 +241,8 @@ OpenSSL社区1.1.x版本对国密算法的支持能力有限且不支持SM2-with
 龙蜥社区经过一些开发和测试在cryptography中提交并合入了导出`EVP_PKEY_set_alias_type`函数的代码，详见https://github.com/pyca/cryptography/pull/7935 ，以便用户使用SM2算法，因此用户在使用cryptography仓库时无需修改。可以看到在安装cryptography（这里以python2为例）后可以在`_openssl.so`（上文已经详细介绍）里看到对应的`EVP_PKEY_set_alias_type`函数符号
 
 ```shell
-# strings /usr/lib64/python2.7/site-packages/cryptography/hazmat/bindings/_openssl.so | grep EVP_PKEY_set_alias_type
+# strings /usr/lib64/python2.7/site-packages/cryptography/hazmat/bindings/_openssl.so \
+    | grep EVP_PKEY_set_alias_type
 EVP_PKEY_set_alias_type
 EVP_PKEY_set_alias_type
 _cffi_d_EVP_PKEY_set_alias_type
@@ -254,7 +258,7 @@ EVP_PKEY_set_alias_type@@OPENSSL_1_1_1
 
 #### pyopenssl的修改
 
-至于也需要一些修改，目前龙蜥社区已经在pyopenssl发起了，正在review中，详见https://github.com/pyca/pyopenssl/pull/1172 。在代码合入之前仍需要用户手动打入patch，可参考如下步骤(以python 3为例)进行安装。
+至于也需要一些修改，目前龙蜥社区已经在pyopenssl发起了，正在review中，详见<https://github.com/pyca/pyopenssl/pull/1172> 。在代码合入之前仍需要用户手动打入patch，可参考如下步骤(以python 3为例)进行安装。
 
 ```sh
 git clone https://github.com/hustliyilin/pyopenssl.git

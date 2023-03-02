@@ -49,62 +49,9 @@ libgcrypt 是很多基础组件依赖的密码库，比如 gpg，systemd，qemu�
 
 libgcrypt 从 1.9.0 版本开始陆续支持了国密算法和国密的指令集优化。
 
-## nettle
-
-官网：<http://www.lysator.liu.se/~nisse/nettle>
-
-Nettle 是一个相对低层的加密库，旨在轻松适应各种工具包和应用程序。它开始于2001年的lsh的低级加密函数的集合。自2009年6月以来，Nettle是GNU软件包。
-
-Nettle 的定位跟 libgcrypt 有点类似，是很多基础组件选择依赖的一个密码学库。
-
-从提供的 API 上来看，Nettle 没有对算法做更高层次的抽象，每个不同的算法都有一套更易理解的接口，开发者也会更容易上手。
-
-Nettle 从 3.8 版本开始支持了 SM3 算法，最新的开发分支已经合入了 SM4 算法，会在下一个 release 版本会发布。
-
-## gnulib
-
-官网：<https://www.gnu.org/software/gnulib>
-
-从名字可以看出，gnulib 并不是一个纯密码算法的库，它的定位是 GNU 的公共代码库，旨在 GNU 包的源代码级别之间共享。
-
-之所以在这里提 gnulib，是因为这个库里面实现了常用的哈希算法，也包括SM3算法，gnulib 里的 哈希算法主要是为 coreutils 包里的 sha*sum, md5sum 系列工具提供支持的，当然开发者也可以基于 gnulib 构建自己的程序。
-
-gnulib 是在 2017 年 10 月支持了 SM3 算法，由阿里巴巴张佳贡献。
-
-## coreutils
-
-coreutils 支持了大量的计算哈希的工具，比如 cksum，md5sum，b2sum，sha*sum 等，这些工具是紧密依赖于 gnulib 库的。
-
-2017 年 10 月，在 gnulib 库支持了 SM3 之后，我们便向 coreutils 社区提交了 sm3sum 工具的支持，coreutils 社区却迟迟不愿接收，因为 SM3 算法的IV向量没有明确的来历说明，社区对算法的安全性有质疑，虽然披时 SM3 已经是 ISO 的国际标准算法。社区人员认为 SM3 在 gnulib 中作为库提供给开发者是没有问题的，因为开发者具备也应该具备判断一个算法是否安全的能力，但是在 coreutils 中提供一个 sm3sum 的工具提供给终端用户会引起用户的误导，用户可能误认为算法安全性是得到保证的，尤其是在 SM3 算法安全性被质疑的前提下。
-
-直到四年后，2021 年 9 月，在包括Linux 内核，libgcrypt，OpenSSL 等主流的密码算法社区都支持了SM3算法后，在龙蜥的几次推动下，coreutils 社区终于不再质疑 SM3 的安全性问题，但是社区也不愿意再多引入一个工具，应该把这个哈希算法整合为一个工具，因为类似 *sum 的工具太多了。
-
-因此，社区提出一个 `cksum -a [algo]` 的方案，通过给 cksum 工具添加一个算法参数，整合了目前 coreutils 中支持的所有哈希算法，为了兼容考虑，之前的 *sum 工具也继续保留了，SM3 是唯一仅在 cksum 工具中支持的算法，当然这并不是优点，使用习惯上也会有一些差异，用户需要通过 `cksum -a sm3` 来计算 SM3
-哈希，除这个区别外，其它用法跟 md5sum 类似。
-
-coreutils 从 9.0 版本开始支持 SM3 的哈希计算。
-
-## RustCrypto
-
-这是一个纯 Rust 编写的密码算法库，供 Rust 开发者使用。
-
-该项目维护着数十个流行的 crate，都提供密码算法的纯 Rust 实现，主要包括以下算法：
-
-* 非对称加密：椭圆曲线、rsa
-* 加密编码格式：const-oid、der、pem-rfc7468、pkcs8
-* 数字签名：dsa、ecdsa、ed25519、rsa
-* 椭圆曲线：k256、p256、p384
-* 哈希函数：blake2、sha2、sha3、sm3
-* 密钥派生函数：hkdf、pbkdf2
-* 消息认证码：hmac
-* 密码哈希：argon2、pbkdf2、scrypt
-* Sponge 函数：ascon、keccak
-* 对称加密：aes-gcm、aes-gcm-siv、chacha20poly1305、sm4
-* Traits：aead、密码、摘要、密码哈希、签名
-
-该算法库目前支持 SM3 和 SM4 算法。
-
 ## GmSSL
+
+项目地址：<https://github.com/guanzhi/GmSSL>
 
 GmSSL 是一个开源密码工具包，为 GM/T 系列标准中规定的中国国家密码算法和协议提供一级支持。 作为 OpenSSL 项目的一个分支，GmSSL 提供了与 OpenSSL 的 API 级兼容性并保持了所有的功能。 现有项目（例如 Apache Web 服务器）可以轻松地移植到 GmSSL，只需进行少量修改和简单的重建。
 
@@ -136,6 +83,61 @@ GmSSL 支持许多有用的加密算法和方案：
 * 编码：Base58
 
 ECDSA、RSA、AES、SHA-1 等 OpenSSL 算法在 GmSSL 中仍然可用。
+
+## nettle
+
+官网：<http://www.lysator.liu.se/~nisse/nettle>
+
+Nettle 是一个相对低层的加密库，旨在轻松适应各种工具包和应用程序。它开始于2001年的lsh的低级加密函数的集合。自2009年6月以来，Nettle是GNU软件包。
+
+Nettle 的定位跟 libgcrypt 有点类似，是很多基础组件选择依赖的一个密码学库。
+
+从提供的 API 上来看，Nettle 没有对算法做更高层次的抽象，每个不同的算法都有一套更易理解的接口，开发者也会更容易上手。
+
+Nettle 从 3.8 版本开始支持了 SM3 算法，最新的开发分支已经合入了 SM4 算法，会在下一个 release 版本会发布。
+
+## gnulib
+
+官网：<https://www.gnu.org/software/gnulib>
+
+从名字可以看出，gnulib 并不是一个纯密码算法的库，它的定位是 GNU 的公共代码库，旨在 GNU 包的源代码级别之间共享。
+
+之所以在这里提 gnulib，是因为这个库里面实现了常用的哈希算法，也包括SM3算法，gnulib 里的 哈希算法主要是为 coreutils 包里的 sha*sum, md5sum 系列工具提供支持的，当然开发者也可以基于 gnulib 构建自己的程序。
+
+gnulib 是在 2017 年 10 月支持了 SM3 算法，由阿里巴巴张佳贡献。
+
+## coreutils
+
+coreutils 支持了大量的计算哈希的工具，比如 cksum，md5sum，b2sum，sha*sum 等，这些工具是紧密依赖于 gnulib 库的。
+
+2017 年 10 月，在 gnulib 库支持了 SM3 之后，我们便向 coreutils 社区提交了 sm3sum 工具的支持，coreutils 社区却迟迟不愿接收，因为 SM3 算法的IV向量没有明确的来历说明，社区对算法的安全性有质疑，虽然披时 SM3 已经是 ISO 的国际标准算法。社区人员认为 SM3 在 gnulib 中作为库提供给开发者是没有问题的，因为开发者具备也应该具备判断一个算法是否安全的能力，但是在 coreutils 中提供一个 sm3sum 的工具提供给终端用户会引起用户的误导，用户可能误认为算法安全性是得到保证的，尤其是在 SM3 算法安全性被质疑的前提下。
+
+直到四年后的 2021 年 9 月，在包括Linux 内核，libgcrypt，OpenSSL 等主流的密码算法社区都支持了SM3算法后，在龙蜥的几次推动下，coreutils 社区终于不再质疑 SM3 的安全性问题，但是社区也不愿意再多引入一个工具，应该把这个哈希算法整合为一个工具，因为类似 *sum 的工具太多了。
+
+因此，社区提出一个 `cksum -a [algo]` 的方案，通过给 cksum 工具添加一个算法参数，整合了目前 coreutils 中支持的所有哈希算法，为了兼容考虑，之前的 *sum 工具也继续保留了，SM3 是唯一仅在 cksum 工具中支持的算法，当然这并不是优点，使用习惯上也会有一些差异，用户需要通过 `cksum -a sm3` 来计算 SM3
+哈希，除这个区别外，其它用法跟 md5sum 类似。
+
+coreutils 从 9.0 版本开始支持 SM3 的哈希计算。
+
+## RustCrypto
+
+这是一个纯 Rust 编写的密码算法库，供 Rust 开发者使用。
+
+该项目维护着数十个流行的 crate，都提供密码算法的纯 Rust 实现，主要包括以下算法：
+
+* 非对称加密：椭圆曲线、rsa
+* 加密编码格式：const-oid、der、pem-rfc7468、pkcs8
+* 数字签名：dsa、ecdsa、ed25519、rsa
+* 椭圆曲线：k256、p256、p384
+* 哈希函数：blake2、sha2、sha3、sm3
+* 密钥派生函数：hkdf、pbkdf2
+* 消息认证码：hmac
+* 密码哈希：argon2、pbkdf2、scrypt
+* Sponge 函数：ascon、keccak
+* 对称加密：aes-gcm、aes-gcm-siv、chacha20poly1305、sm4
+* Traits：aead、密码、摘要、密码哈希、签名
+
+该算法库目前支持 SM3 和 SM4 算法。
 
 ## Intel IPP
 

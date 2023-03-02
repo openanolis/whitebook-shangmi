@@ -95,10 +95,17 @@ BabaSSL发布的8.2.0版本支持Delegated Credentials，且已经合并到开�
 
 ```sh
 # 创建dc密钥
-openssl genpkey -algorithm ec -pkeyopt ec_paramgen_curve:P-256 -out dc-ecc-server-longterm.key
+openssl genpkey -algorithm ec \
+    -pkeyopt ec_paramgen_curve:P-256 \
+    -out dc-ecc-server-longterm.key
 
 # 签发dc
-openssl delecred -new -server -sec 604800 -dc_key dc-ecc-server-longterm.key -out dc-ecc-server-longterm.dc -parent_cert dc-ecc-leaf.crt -parent_key dc-ecc-leaf.key -expect_verify_md sha256 -sha256
+openssl delecred -new -server -sec 604800 \
+    -dc_key dc-ecc-server-longterm.key \
+    -out dc-ecc-server-longterm.dc \
+    -parent_cert dc-ecc-leaf.crt \
+    -parent_key dc-ecc-leaf.key \
+    -expect_verify_md sha256 -sha256
 ```
 
 ### 使用DC通信
@@ -107,20 +114,38 @@ openssl delecred -new -server -sec 604800 -dc_key dc-ecc-server-longterm.key -ou
 
 ```sh
 # server端
-openssl s_server -accept 127.0.0.1:4433 -cert dc-ecc-leaf.crt -dc_pkey dc-ecc-server-longterm.key -dc dc-ecc-server-longterm.dc -enable_sign_by_dc
+openssl s_server -accept 127.0.0.1:4433 \
+    -cert dc-ecc-leaf.crt \
+    -dc_pkey dc-ecc-server-longterm.key \
+    -dc dc-ecc-server-longterm.dc -enable_sign_by_dc
 
 # client端
-openssl s_client -connect 127.0.0.1:4433 -enable_verify_peer_by_dc -verifyCAfile dc-ecc-chain-ca.crt -verify_return_error
+openssl s_client -connect 127.0.0.1:4433 \
+    -enable_verify_peer_by_dc \
+    -verifyCAfile dc-ecc-chain-ca.crt \
+    -verify_return_error
 ```
 
 双向认证：
 
 ```sh
 # server端
-openssl s_server -accept 127.0.0.1:4433 -cert dc-ecc-leaf.crt -dc_pkey dc-ecc-server-longterm.key -dc dc-ecc-server-longterm.dc -enable_sign_by_dc -enable_verify_peer_by_dc -Verify 1 -verifyCAfile dc-ecc-chain-ca.crt -verify_return_error
+openssl s_server -accept 127.0.0.1:4433 \
+    -cert dc-ecc-leaf.crt \
+    -dc_pkey dc-ecc-server-longterm.key \
+    -dc dc-ecc-server-longterm.dc \
+    -enable_sign_by_dc -enable_verify_peer_by_dc \
+    -Verify 1 -verifyCAfile dc-ecc-chain-ca.crt \
+    -verify_return_error
 
 # client端
-openssl s_client -connect 127.0.0.1:4433 -cert dc-ecc-leaf-clientUse.crt -dc_pkey dc-ecc-client-longterm.key -dc dc-ecc-client-longterm.dc -enable_verify_peer_by_dc -enable_sign_by_dc -verifyCAfile dc-ecc-chain-ca.crt -verify_return_error
+openssl s_client -connect 127.0.0.1:4433 \
+    -cert dc-ecc-leaf-clientUse.crt \
+    -dc_pkey dc-ecc-client-longterm.key \
+    -dc dc-ecc-client-longterm.dc \
+    -enable_verify_peer_by_dc -enable_sign_by_dc \
+    -verifyCAfile dc-ecc-chain-ca.crt \
+    -verify_return_error
 ```
 
 ### 应用基于BabaSSL集成DC
@@ -153,7 +178,8 @@ if (!SSL_CTX_use_dc_PrivateKey_file(ctx, key_file, SSL_FILETYPE_PEM)) {
     // error
 }
 
-//功能：开启dc签名功能，server在开启该功能并收到dc请求时才会选择使用dc进行签名
+// 功能：开启dc签名功能
+// server在开启该功能并收到dc请求时才会选择使用dc进行签名
 SSL_CTX_enable_sign_by_dc(ctx);
 ...
     

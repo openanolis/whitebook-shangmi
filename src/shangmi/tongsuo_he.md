@@ -97,9 +97,10 @@ EC_ELGAMAL_DECRYPT_TABLE，该对象用来保存解密表的内部信息。椭�
 
 ```c
 //创建 EC_ELGAMAL_DECRYPT_TABLE 对象
-//decrypt_negative 为 1 时表示该解密表可以解密负数，初始化解密表时将可能的负数运算后插入到 hash 中。
-EC_ELGAMAL_DECRYPT_TABLE *EC_ELGAMAL_DECRYPT_TABLE_new(EC_ELGAMAL_CTX *ctx,
-                                                       int32_t decrypt_negative);
+//decrypt_negative 为 1 时表示该解密表可以解密负数，
+//初始化解密表时将可能的负数运算后插入到 hash 中。
+EC_ELGAMAL_DECRYPT_TABLE *
+EC_ELGAMAL_DECRYPT_TABLE_new(EC_ELGAMAL_CTX *ctx, int32_t decrypt_negative);
 
 //释放 EC_ELGAMAL_DECRYPT_TABLE 对象
 void EC_ELGAMAL_DECRYPT_TABLE_free(EC_ELGAMAL_DECRYPT_TABLE *table);
@@ -128,10 +129,12 @@ void EC_ELGAMAL_CIPHERTEXT_free(EC_ELGAMAL_CIPHERTEXT *ciphertext);
 
 ```c
 //加密，将明文 plaintext 进行加密，结果保存到 EC_ELGAMAL_CIPHERTEXT 对象指针 r 中
-int EC_ELGAMAL_encrypt(EC_ELGAMAL_CTX *ctx, EC_ELGAMAL_CIPHERTEXT *r, int32_t plaintext);
+int EC_ELGAMAL_encrypt(EC_ELGAMAL_CTX *ctx,
+        EC_ELGAMAL_CIPHERTEXT *r, int32_t plaintext);
 
 //解密，将密文 ciphertext 进行解密，结果保存到 int32_t 指针 r 中
-int EC_ELGAMAL_decrypt(EC_ELGAMAL_CTX *ctx, int32_t *r, EC_ELGAMAL_CIPHERTEXT *ciphertext);
+int EC_ELGAMAL_decrypt(EC_ELGAMAL_CTX *ctx,
+        int32_t *r, EC_ELGAMAL_CIPHERTEXT *ciphertext);
 ```
 
 > 🟢 **密文加/减/标量乘运算接口**
@@ -159,14 +162,16 @@ int EC_ELGAMAL_mul(EC_ELGAMAL_CTX *ctx, EC_ELGAMAL_CIPHERTEXT *r,
 ```c
 //编码，将密文 ciphertext 编码后保存到 out 指针中，out 指针的内存需要提前分配好；
 //如果 out 为 NULL，则返回编码所需的内存大小；
-//compressed 为是否采用压缩方式编码，1 为压缩编码（编码结果长度较小），0 为正常编码（编码结果长度较大）
-size_t EC_ELGAMAL_CIPHERTEXT_encode(EC_ELGAMAL_CTX *ctx, unsigned char *out,
-                                    size_t size, EC_ELGAMAL_CIPHERTEXT *ciphertext,
-                                    int compressed);
+//compressed 为是否采用压缩方式编码
+//  1 为压缩编码（编码结果长度较小）
+//  0 为正常编码（编码结果长度较大）
+size_t EC_ELGAMAL_CIPHERTEXT_encode(EC_ELGAMAL_CTX *ctx,
+        unsigned char *out, size_t size,
+        EC_ELGAMAL_CIPHERTEXT *ciphertext, int compressed);
 
 //解码，将长度为 size 的内存数据 in 解码后保存到密文对象 r 中
-int EC_ELGAMAL_CIPHERTEXT_decode(EC_ELGAMAL_CTX *ctx, EC_ELGAMAL_CIPHERTEXT *r,
-                                 unsigned char *in, size_t size);
+int EC_ELGAMAL_CIPHERTEXT_decode(EC_ELGAMAL_CTX *ctx,
+        EC_ELGAMAL_CIPHERTEXT *r, unsigned char *in, size_t size);
 ```
 
 ### 核心实现
@@ -220,8 +225,10 @@ int PAILLIER_KEY_type(PAILLIER_KEY *key);
 **上下文对象**：PAILLIER_CTX，该对象用来保存公私钥对象以及一些其他内部用到的信息，是 Paillier 算法其他接口的第一个参数。相关接口如下：
 
 ```c
-// 创建 PAILLIER_CTX 对象，key 为 paillier 公钥或者私钥，threshold 为支持最大的数字阈值，加密场景可设置为 0，解密场景可使用默认值：
-PAILLIER_MAX_THRESHOLDPAILLIER_CTX *PAILLIER_CTX_new(PAILLIER_KEY *key, int64_t threshold);
+// 创建 PAILLIER_CTX 对象，key 为 paillier 公钥或者私钥，
+// threshold 为支持最大的数字阈值，加密场景可设置为 0，解密场景可使用默认值：
+PAILLIER_MAX_THRESHOLDPAILLIER_CTX *
+PAILLIER_CTX_new(PAILLIER_KEY *key, int64_t threshold);
 
 // 释放 PAILLIER_CTX 对象
 void PAILLIER_CTX_free(PAILLIER_CTX *ctx);
@@ -247,10 +254,12 @@ void PAILLIER_CIPHERTEXT_free(PAILLIER_CIPHERTEXT *ciphertext);
 
 ```c
 // 加密，将明文 m 进行加密，结果保存到 PAILLIER_CIPHERTEXT 对象指针 out 中
-int PAILLIER_encrypt(PAILLIER_CTX *ctx, PAILLIER_CIPHERTEXT *out, int32_t m);
+int PAILLIER_encrypt(PAILLIER_CTX *ctx,
+        PAILLIER_CIPHERTEXT *out, int32_t m);
 
 // 解密，将密文 c 进行解密，结果保存到 int32_t 指针 out 中
-int PAILLIER_decrypt(PAILLIER_CTX *ctx, int32_t *out, PAILLIER_CIPHERTEXT *c);
+int PAILLIER_decrypt(PAILLIER_CTX *ctx,
+        int32_t *out, PAILLIER_CIPHERTEXT *c);
 ```
 
 > 🟢 **密文加/减/标量乘运算接口**
