@@ -150,7 +150,7 @@ class Binding(object):
         libm.so.6 => /lib64/libm.so.6 (0x00007fccba200000)
 ```
 
-## python的商密签名实践
+## python 的商密签名实践
 
 结合上文介绍，可以看到在签名上，
 - python的基础密码学库cryptography依赖OpenSSL
@@ -158,7 +158,7 @@ class Binding(object):
 
 龙蜥社区不仅在OpenSSL社区参与SM2/3/4等国密算法的优化，而且也在cryptography和pyopenssl仓库导出OpenSSL的国密签名来保障python的用户能够正常使用。接下来我们分别以OpenSSL 3.x和OpenSSL 1.1.x两个支持国密版本的OpenSSL为例阐述python的商密签名实践。
 
-### 基于OpenSSL 3.x的python的商密签名(SM2-with-SM3)实践
+### 基于OpenSSL 3.x 的 python 的商密签名(SM2-with-SM3)实践
 
 正常安装OpenSSL 3.x和pyopenssl以及cryptography后（无需修改）后，生成SM2-with-SM3所需要的商密密钥与证书
 
@@ -228,11 +228,11 @@ if __name__ == "__main__":
 ./test_shangmi.py private.pem cert.crt
 ```
 
-### 基于OpenSSL 1.1.x的python的商密签名实践
+### 基于 OpenSSL 1.1.x 的 python 的商密签名实践
 
-#### OpenSSL 1.1.x的选择
+#### OpenSSL 1.1.x 的选择
 
-OpenSSL社区1.1.x版本对国密算法的支持能力有限且不支持SM2-with-SM3这种组合算法。龙蜥社区移植了部分国密能力（包括SM2-with-SM3这种组合算法）到对应的[龙蜥openssl仓库](https://gitee.com/anolis/openssl/tree/anolis_sm234/)以及[龙蜥RPM仓库](https://gitee.com/src-anolis-os/openssl/tree/a8)，未来Anolis 8.8镜像可以默认安装龙蜥移植后的OpenSSL。当然你也可以使用[Tongsuo](https://github.com/Tongsuo-Project/Tongsuo)(原BabaSSL)作为支持国密算法且兼容OpenSSL 1.1.x的密码库。
+OpenSSL社区1.1.x版本对国密算法的支持能力有限且不支持SM2-with-SM3这种组合算法。龙蜥社区移植了部分国密能力（包括SM2-with-SM3这种组合算法）到对应的[龙蜥openssl仓库](https://gitee.com/anolis/openssl/tree/anolis_sm234/)以及[龙蜥RPM仓库](https://gitee.com/src-anolis-os/openssl/tree/a8)，未来Anolis 8.8镜像可以默认安装龙蜥移植后的OpenSSL。当然你也可以使用 [Tongsuo](https://github.com/Tongsuo-Project/Tongsuo) 作为支持国密算法且兼容OpenSSL 1.1.x的密码库。
 
 除了对国密的支持外，在[OpenSSL社区官方文档](https://github.com/openssl/openssl/blob/OpenSSL_1_1_1/doc/man3/EVP_PKEY_set1_RSA.pod)中指出, 需要使用`EVP_PKEY_set_alias_type(pkey, EVP_PKEY_SM2)` 函数将ECCkey其转换为SM2 算法。所以基于OpenSSL 1.1.x的python的商密签名实践中，也需要对python库cryptography和pyopenssl库进行改造来导出`EVP_PKEY_set_alias_type`函数以及添加对应的逻辑（原有的cryptography和pyopenssl库并不支持这一能力）。
 
@@ -256,7 +256,7 @@ _cffi_f_EVP_PKEY_set_alias_type
 EVP_PKEY_set_alias_type@@OPENSSL_1_1_1
 ```
 
-#### pyopenssl的修改
+#### pyopenssl 的修改
 
 至于也需要一些修改，目前龙蜥社区已经在pyopenssl发起了，正在review中，详见<https://github.com/pyca/pyopenssl/pull/1172> 。在代码合入之前仍需要用户手动打入patch，可参考如下步骤(以python 3为例)进行安装。
 

@@ -81,17 +81,17 @@ DC的有效期最长不能超过7天，更短的周期意味着频繁的轮转�
 
 DC既需要服务端支持，也需要客户端支持，目前支持DC的浏览器并不多，以Firefox为主。
 
-支持DC的开源密码库包括Google的BoringSSL、Firefox的NSS、蚂蚁的BabaSSL，目前OpenSSL还不支持DC。
+支持DC的开源密码库包括 Google 的 BoringSSL、Firefox 的 NSS、国内的 Tongsuo，目前OpenSSL还不支持DC。
 
-BabaSSL发布的8.2.0版本支持Delegated Credentials，且已经合并到开源BabaSSL，欢迎大家使用内部RPM包或开源版本。
+Tongsuo 发布的 8.2.0 版本支持 Delegated Credentials，且已经合并到开源 Tongsuo，欢迎大家使用内部RPM包或开源版本。
 
 ## 实战Delegated Credentials
 
 ### 签发DC
 
-注意：需要使用BabaSSL才能签发dc，开源OpenSSL并不支持。
+注意：需要使用 Tongsuo 才能签发dc，开源OpenSSL并不支持。
 
-完整的脚本请参考BabaSSL开源代码库，<https://github.com/BabaSSL/BabaSSL/blob/master/test/recipes/80-test_dc_sign_data/sign_dc.sh>
+完整的脚本请参考 Tongsuo 开源代码库文件。
 
 ```sh
 # 创建dc密钥
@@ -148,7 +148,7 @@ openssl s_client -connect 127.0.0.1:4433 \
     -verify_return_error
 ```
 
-### 应用基于BabaSSL集成DC
+### 应用基于 Tongsuo 集成DC
 
 ```c
 SSL *s;

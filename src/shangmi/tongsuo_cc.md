@@ -29,7 +29,7 @@
 
 ## 实战TLS证书压缩
 
-开源 BabaSSL 密码库已经支持 TLS 证书压缩功能，需要在构建 BabaSSL 时开启该功能，config 后添加 enable-cert-compression。
+开源 Tongsuo 密码库已经支持 TLS 证书压缩功能，需要在构建 Tongsuo 时开启该功能，config 后添加参数 `enable-cert-compression`。
 
 可以在设置 SSL_CTX 时，添加证书压缩算法，代码示例如下：
 
@@ -79,17 +79,17 @@ int main()
 }
 ```
 
-也可以使用 BabaSSL 提供的 s_client 和 s_server 来使用 TLS 证书压缩功能：
+也可以使用 Tongsuo 提供的 s_client 和 s_server 来使用 TLS 证书压缩功能：
 
 ```sh
 # 服务端
-/opt/babassl/bin/openssl s_server \
+openssl s_server \
     -accept 127.0.0.1:34567 \
     -cert server.crt -key server.key \
     -tls1_3 -cert_comp zlib -www -quiet
 
 # 客户端
-/opt/babassl/bin/openssl s_client \
+openssl s_client \
     -connect 127.0.0.1:34567 \
     -tls1_3 -cert_comp zlib -ign_eof -trace
 ```
@@ -112,6 +112,6 @@ int main()
 
 ## 结语
 
-TLS 会话复用时不需要发送证书，所以，在完整握手时，就可以通过证书压缩来优化。在双向认证的场景下，即服务端开启了客户端认证，如果客户端和服务端都开启 TLS 证书压缩功能，压缩效果更明显，可以节省 TLS 握手中 80% 以上的带宽。后面 BabaSSL 还会支持 Compact TLS 1.3，即 TLS 1.3 的袖珍版，保持协议同构的前提下，占用最小的带宽。
+TLS 会话复用时不需要发送证书，所以，在完整握手时，就可以通过证书压缩来优化。在双向认证的场景下，即服务端开启了客户端认证，如果客户端和服务端都开启 TLS 证书压缩功能，压缩效果更明显，可以节省 TLS 握手中 80% 以上的带宽。后面 Tongsuo 还会支持 Compact TLS 1.3，即 TLS 1.3 的袖珍版，保持协议同构的前提下，占用最小的带宽。
 
 {{#template ../template/footer.md}}
