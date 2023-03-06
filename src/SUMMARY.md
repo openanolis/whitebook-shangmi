@@ -21,6 +21,7 @@
     - [证书压缩（RFC 8879）](shangmi/tongsuo_cc.md)
     - [TLCP 安全传输协议](shangmi/tongsuo_tlcp.md)
     - [同态算法](shangmi/tongsuo_he.md)
+    - [Tongsuo-Java-SDK](shangmi/tongsuo_java_sdk.md)
 - [OpenAnolis 国密算法库](shangmi/crypto_lib.md)
 - [国密应用开发实践](shangmi/dev_practices.md)
     - [Python 国密签名实践](shangmi/python_shangmi.md)
