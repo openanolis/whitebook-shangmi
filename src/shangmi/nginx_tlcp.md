@@ -96,9 +96,8 @@ gmssl req -new -key Server.key -out Server.csr \
     -config /usr/local/gmssl/ssl/openssl.cnf
 
 # 签发证书
-gmssl x509 -req -sm3 -days 3650 -CA RootCA.crt \
-    -CAkey Root.key -CAcreateserial \
-    -in Server.req -out ServerCA.crt
+gmssl x509 -req -sm3 -days 3650 -CA RootCA.crt -CAkey Root.key \
+    -CAcreateserial -in Server.req -out ServerCA.crt
 
 # 证书验证
 gmssl verify -CAfile RootCA.crt ServerCA.crt
@@ -118,8 +117,8 @@ gmssl req -new -key Client.key -out Client.req \
 
 # 签发证书
 gmssl x509 -req -sm3 -days 3650 -CA RootCA.crt \
-    -CAkey demoCA/private/Root.key -CAcreateserial \
-    -in Client.req -out Client.crt
+    -CAkey demoCA/private/Root.key \
+    -CAcreateserial -in Client.req -out Client.crt
 
 # 证书验证
 gmssl verify -CAfile RootCA.crt Client.crt
@@ -128,9 +127,6 @@ gmssl verify -CAfile RootCA.crt Client.crt
 生成国密双证书的完整脚本：
 
 ```sh
-#!/bin/sh
-# gen GM certificate files
-
 GmsslRootPath=/usr/local/gmssl
 CONF_FILE=${GmsslRootPath}/apps/openssl.cnf
 DemoCaDir=${GmsslRootPath}/apps/demoCA/
@@ -139,85 +135,39 @@ CertDir=${DemoCaDir}/certs/
 KeyDir=${CertDir}/keys/
 ReqDir=${DemoCaDir}/reqs/
 
-SUBJ_STR=" /C=CN/ST=Beijing/L=Beijing/O=CSG/OU=WangAn (GM)/CN=*.vpn.test.cn"
+SUBJ_STR="/C=CN/ST=Beijing/L=Beijing/O=CSG/OU=WangAn (GM)/CN=*.vpn.test.cn"
 
 CACert=${CertDir}/CA.cert.pem
 CAKey=${KeyDir}/CA.key.pem
 CAReq=${ReqDir}/CA.req
 
-SSCert=${CertDir}/SS.cert.pem
-SSKey=${KeyDir}/SS.key.pem
-SSReq={ReqDir}/SS.req
-
-SECert=${CertDir}/SE.cert.pem
-SEKey=${KeyDir}/SE.key.pem
-SEReq=${ReqDir}/SE.req
-
-CSCert=${CertDir}/CS.cert.pem
-CSKey=${KeyDir}/CS.key.pem
-CSReq=${ReqDir}/CS.req
-
-CECert=${CertDir}/CE.cert.pem
-CEKey=${KeyDir}/CE.key.pem
-CEReq=${ReqDir}/CE.req
-
 export LD_LIBRARY_PATH=/usr/local/gmssl/lib
 
-rm -rf "${GmsslRootPath}/apps/demoCA/"
+rm -rf ${GmsslRootPath}/apps/demoCA/
 
-mkdir -p "${CertDir}" "${KeyDir}" "${ReqDir}"
+mkdir -p ${CertDir} ${KeyDir} ${ReqDir}
 
 # 生成 CA 证书文件
 
-gmssl ecparam -name sm2p256v1 -out "${DemoCaDir}/SM2.pem"
+gmssl ecparam -name sm2p256v1 -out ${DemoCaDir}/SM2.pem
 
-gmssl req -config "${CONF_FILE}" -nodes \
-    -subj "${SUBJ_STR}" -keyout "${CAKey}" \
-    -newkey "ec:${DemoCaDir}/SM2.pem" -new -out "${CAReq}"
+gmssl req -new -config ${CONF_FILE} -nodes -subj ${SUBJ_STR} \
+    -keyout ${CAKey} -newkey ec:${DemoCaDir}/SM2.pem -out ${CAReq}
 
-gmssl x509 -sm3 -req -days 10000 -in "${CAReq}" \
-    -extfile "${CONF_FILE}" -extensions v3_ca \
-    -signkey "${CAKey}" -CAcreateserial -out "${CACert}"
+gmssl x509 -sm3 -req -days 1000 -in ${CAReq} -extfile ${CONF_FILE} \
+    -extensions v3_ca -signkey ${CAKey} -CAcreateserial -out ${CACert}
 
-# 生成服务端签名证书
+# 生成服务端和客户端证书
+for tt in SS SE CS CE; do
+    gmssl req -new -config ${CONF_FILE} -nodes -subj ${SUBJ_STR} \
+        -keyout ${KeyDir}/${tt}.key.pem \
+        -newkey ec:${DemoCaDir}/SM2.pem -out ${ReqDir}/${tt}.req
 
-gmssl req -config "${CONF_FILE}" -nodes \
-    -subj "${SUBJ_STR}" -keyout "${SSKey}" \
-    -newkey "ec:${DemoCaDir}/SM2.pem" -new -out "${SSReq}"
-
-gmssl x509 -sm3 -req -days 10000 -in "${SSReq}" \
-    -CA "${CACert}" -CAkey "${CAKey}" -extfile "${CONF_FILE}" \
-    -extensions v3_req -CAcreateserial -out "${SSCert}"
-
-# 生成服务端加密证书
-
-gmssl req -config "${CONF_FILE}" -nodes \
-    -subj "${SUBJ_STR}" -keyout "${SEKey}" \
-    -newkey "ec:${DemoCaDir}/SM2.pem" -new -out "${SEReq}"
-
-gmssl x509 -sm3 -req -days 10000 -in "${SEReq}" \
-    -CA "${CACert}" -CAkey "${CAKey}" -extfile "${CONF_FILE}" \
-    -extensions v3_req -CAcreateserial -out "${SECert}"
-
-# 生成客户端签名证书
-
-gmssl req -config "${CONF_FILE}" -nodes \
-    -subj "${SUBJ_STR}" -keyout "${CSKey}" \
-    -newkey "ec:${DemoCaDir}/SM2.pem" -new -out "${CSReq}"
-
-gmssl x509 -sm3 -req -days 10000 -in "${CSReq}" \
-    -CA "${CACert}" -CAkey "${CAKey}" -extfile "${CONF_FILE}" \
-    -extensions v3_req -CAcreateserial -out "${CSCert}"
-
-# 生成客户端加密证书
-
-gmssl req -config "${CONF_FILE}" -nodes \
-    -subj "${SUBJ_STR}" -keyout "${CEKey}" \
-    -newkey "ec:${DemoCaDir}/SM2.pem" -new -out "${CEReq}"
-
-gmssl x509 -sm3 -req -days 10000 -in "${CEReq}" \
-    -CA "${CACert}" -CAkey "${CAKey}" -extfile "${CONF_FILE}" \
-    -extensions v3_req -CAcreateserial -out "${CECert}"
+    gmssl x509 -sm3 -req -days 1000 -in ${ReqDir}/${tt}.req \
+        -CA ${CACert} -CAkey ${CAKey} \
+        -extfile ${CONF_FILE} -extensions v3_req \
+        -CAcreateserial -out ${CertDir}/${tt}.cert.pem
+done
 ```
 
 生成证书注销列表的脚本代码：
@@ -231,23 +181,23 @@ if [ -z "$1" ]; then
     echo "Usage: "`basename "$0"`" cert0 [cert1 cert2 ...]"
 fi
 
-touch "${DemoCaDir}/index.txt"
-touch "${DemoCaDir}/index.txt.attr"
+touch ${DemoCaDir}/index.txt
+touch ${DemoCaDir}/index.txt.attr
 
 echo 01 > "${DemoCaDir}/crlnumber"
 
-cd "${DemoCaDir}/.."
+cd ${DemoCaDir}/..
 
 until [ $# -eq 0 ] do
-    gmssl ca -revoke "${CertDir}/$1" \
-        -keyfile "${CertDir}/keys/CA.key.pem" \
-        -cert "${CertDir}/CA.cert.pem"
+    gmssl ca -revoke ${CertDir}/$1 \
+        -keyfile ${CertDir}/keys/CA.key.pem \
+        -cert ${CertDir}/CA.cert.pem
 
     shift
 done
 
-gmssl ca -gencrl -keyfile "${CertDir}/keys/CA.key.pem" \
-    -cert "${CertDir}/CA.cert.pem" -out "${DemoCaDir}/crl/gm_cert.crl"
+gmssl ca -gencrl -keyfile ${CertDir}/keys/CA.key.pem \
+    -cert ${CertDir}/CA.cert.pem -out ${DemoCaDir}/crl/gm_cert.crl
 ```
 
 下面是最终在`/usr/local/gmssl/apps`下生成的目录结构：
