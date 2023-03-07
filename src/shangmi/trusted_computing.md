@@ -61,7 +61,22 @@ rpm -ivh iTrustMidware-3.0.1-20220827200013.kos.x86_6.rpm
 
 4）如需添加对特定系统程序或配置文件的度量需要进一步配置策略
 
-![TPM](images/tpm_5.png)
+```shell
+> tlcptool
+1. Check Policy State.
+2. Turn on Supervisory Policy.
+3. Update Supervisory Policy.
+4. Turn on Interception Policy.
+5. Update Interception Policy.
+6. Turn off Policy.
+7. Export BootLoader Passphrase.
+8. Deploy Measurement File.
+9. Update Measurement File.
+10. Delete Measurement File.
+11. Export Software Trusted Report.
+O.Exit.
+Please Input the Corresponding Operations.
+```
 
 5）如需添加启动控制策略（在可信度量的基础上、基于国密进一步进行可信验证、需要配置可信启动控制策略。
 
@@ -88,9 +103,7 @@ rpm -ivh iTrustMidware-3.0.1-20220827200013.kos.x86_6.rpm
 9	f0ba7132cceaea8cb7ea4066406099d48b7ff493fa6da8753c845bce861c1862 [IPL] grub_linuxefi Initrd
 ```
 
-使用iTrustMidware提供的策略管理工具查看：
-
-![TPM](images/tpm_6.png)
+其次使用iTrustMidware提供的策略管理工具也可以查看到详细的度量日志。
 
 ## TPM 国密证书部署与远程证明
 

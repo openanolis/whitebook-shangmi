@@ -25,9 +25,30 @@ export LD_LIBRARY_PATH=/usr/local/gmssl/lib:$LD_LIBRARY_PATH
 
 `openssl.cnf` 位于 `/usr/local/gmssl/ssl` 下，可以按需修改生成各种文件位置、信息等等，需要注意的是生成证书、私钥的位置、名称要与openssl中保持一致。
 
-openssl.cnf的部分配置，详细配置可以参考：
+openssl.cnf 的部分配置，详细配置可以参考：
 
-![Nginx TLCP](images/nginx_tlcp.png)
+```
+[ CA_default ]
+name        = CA
+dir         = /home/gmssl/demoCA    # Where everything is kept
+certs       = $dir/certs        # Where the issued certs are kept
+crl_dir     = $dir/crl          # Where the issued crl are kept
+database    = $sdir/index.txt   # database index file.
+#unique_subject = no            # Set to "no' to allow creation of
+                                # several certs with same subject.
+
+new_certs_dir = Sdir/newcerts   # default place for new certs.
+
+certificate = $dir/$name.pem    # The CA certificate
+serial      = $dir/serial       # The current serial number
+crlnumber   = $dir/crlnumber    # the current crl number
+                                # must be commented out to leave a V1 CRL
+crl         = $dir/crl.pem      # The current CRL
+private_key = $dir/private/$name.pem    # The private key
+RANDFILE    = $dir/private/.rand        # private random number file
+
+x509_extensions = usr_cert      # The extensions to add to the cert
+```
 
 准备主配置文件：
 
