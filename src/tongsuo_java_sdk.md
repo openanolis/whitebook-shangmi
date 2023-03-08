@@ -21,4 +21,4 @@ Tongsuo-Java-SDK 支持以下核心特性:
 
 项目地址: <https://github.com/Tongsuo-Project/tongsuo-java-sdk>
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

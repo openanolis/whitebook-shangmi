@@ -123,4 +123,4 @@ recv(sock, buffer, sizeof(buffer));
 
 除了应用程序数据，TLS 还具有控制消息，例如警报消息（记录类型 21）和握手消息（记录类型 22）等。这些消息可以通过 CMSG 提供 TLS 记录类型通过套接字发送。 控制消息是完全符合TLS协议规范的，关于如何通过 KTLS 来发送或者接收 TLS 控制消息，可以参考[内核文档](https://www.kernel.org/doc/html/latest/networking/tls.html)。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

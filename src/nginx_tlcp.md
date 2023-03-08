@@ -332,4 +332,4 @@ server {
 }
 ```
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

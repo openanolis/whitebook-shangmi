@@ -82,4 +82,4 @@ UEFI 安全启动从设计上补齐了系统启动的安全短板，能够解决
 
     注:  国密SM2签名规范没有强制要求Hash 算法，但实际应用中推荐使用SM3 Hash 算法。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

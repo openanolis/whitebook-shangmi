@@ -90,4 +90,4 @@ SM4 的密钥长度是 128 位，因为 XTS 模式使用两个密钥，所以这
 
 除了密码之外，还可以选择使用密钥文件解密硬盘，也就是相当于一个密钥，当然也可以只使用密钥文件或者同时使用密码与密钥文件，用户需要使用子命令 `cryptsetup luksAddKey` 和 `cryptsetup luksRemoveKey` 来管理密钥。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

@@ -135,4 +135,4 @@ int X509_REQ_verify_ctx(X509_REQ *a, EVP_PKEY *r, EVP_MD_CTX *ctx);
 
 **_X509_sign 参考：<https://www.openssl.org/docs/man1.1.1/man3/X509_sign_ctx.html>_**
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

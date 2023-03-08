@@ -188,4 +188,4 @@ s = SSL_new(ctx);
 ...
 ```
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

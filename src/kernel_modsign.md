@@ -56,4 +56,4 @@ nft_fib_inet 262144 1 - Live 0xffff0000034a0000 (E)
 
 这时候可以通过`dmesg`查看详细的错误原因，比如`PKCS#7 signature not signed with a trusted key`是指使用了错误的私钥来签名。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

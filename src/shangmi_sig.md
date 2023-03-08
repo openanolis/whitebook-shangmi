@@ -99,4 +99,4 @@
 <img src="images/qr_ding.jpg" alt="商密软件栈交流群" style="width: 40%; height: 40%">
 </div>
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

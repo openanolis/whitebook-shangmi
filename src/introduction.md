@@ -95,4 +95,4 @@ SM9算法是一种基于双线性对的标识密码算法，它可以把用户�
 
 该标准适用于指导分等级的非涉密对象的安全建设和监督管理。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

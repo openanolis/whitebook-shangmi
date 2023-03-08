@@ -191,4 +191,4 @@ block-size |     16      64      256      512     1024     1420     4096     819
 
 [**国密硬件加速与优化**](optimization.html)章节会重点介绍armv8下Crypto Extension的细节信息。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

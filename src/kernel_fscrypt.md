@@ -176,4 +176,4 @@ fscryptctl 是一个相对原生的工具，更接近内核，可以看到，该
 
 实际环境中，一般会使用 **[fscrypt](https://github.com/google/fscrypt)** 工具来完成加密策略操作，该工具由 Google 开发，用Go语言写成，通过在用户层面维护了一些元数据来简化用户操作，命令更易于理解，也更接近用户。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

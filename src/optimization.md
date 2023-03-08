@@ -227,4 +227,4 @@ hygon CPU上启动内核的命令行参数参考如下：
 amd_iommu=on iommu=pt
 ```
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

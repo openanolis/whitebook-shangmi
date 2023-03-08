@@ -283,4 +283,4 @@ audit: type=1800 audit(1631788187.296:8): pid=1426 uid=1001 auid=0 ses=4 op=appr
 
 我们看到，通过对这些软件栈的改造，可以平滑迁移到商密算法，并且完全基于商密算法构建出IMA的安全机制，而这些机制在以前都是完全且只能构建在国际标准的算法之上的。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

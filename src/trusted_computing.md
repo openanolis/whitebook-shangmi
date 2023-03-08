@@ -117,4 +117,4 @@ Please Input the Corresponding Operations.
 
 ![TPM](images/tpm_8.png)
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

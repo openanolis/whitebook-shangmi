@@ -163,4 +163,4 @@ int main()
 
 由于国密双证书的握手流程和协议版本号与标准tls流程存在一定的不同，因此我们选择将双证书的实现(代码里命名为 ntls )同现有的 tls 状态机拆分开来，然后在入口处通过对请求的版本号进行识别，然后使其进入正确的状态机。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

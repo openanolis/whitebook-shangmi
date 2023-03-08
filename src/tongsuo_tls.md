@@ -60,4 +60,4 @@ client端 client无需做修改，只需要强制指定算法套件为**TLS_SM4_
 SSL_CTX_set_ciphersuites(ctx, "TLS_SM4_GCM_SM3");
 ```
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

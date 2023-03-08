@@ -343,4 +343,4 @@ arg2          The second argument of a homomorphic operation
 
 另外还实现了 Paillier 的 speed 命令，可以进行性能测试，详情请查阅相关代码和文档。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

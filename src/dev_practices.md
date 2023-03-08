@@ -4,4 +4,4 @@
 
 本小节将介绍如何依托于国密基础组件，构建起广泛使用的国密应用。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

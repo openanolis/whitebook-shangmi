@@ -22,4 +22,4 @@ Linux 内核Crypto API提供了以下的算法类型：
 
 本小节内容会详细介绍内核中国密算法的支持情况以及结合内核国密的诸多应用场景。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

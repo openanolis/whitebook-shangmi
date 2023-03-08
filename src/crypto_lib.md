@@ -185,4 +185,4 @@ Intel Integrated Performance Primitives (Intel IPP) Cryptography 是一个安全
 * 内核模式兼容性
 * 线程安全设计
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}

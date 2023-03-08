@@ -58,4 +58,4 @@ TTC的成员可以是个人也可以是组织。
 
 本节会重点介绍铜锁项目的特色功能。
 
-{{#template ../template/footer.md}}
+{{#template template/footer.md}}
