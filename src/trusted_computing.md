@@ -40,8 +40,8 @@ tpm2_createak -C ${h_ek_persistent_ecc} -G ecc -g sm3_256 \
   - 服务器集成了TPM2.0芯片（该芯片许支持SM3、PCR SM3 Bank等特性
 * OS 要具备的特性：
   - 部署支持基于国密可信启动的引导程序（grub）
-  - 部署可信启动策略管理工具（iTrustMidware)
-  - **说明**：当以上组件可从Inspur KOS获取，Inspur KOS V5.8是浪潮信息基于龙蜥开源社区最新技术成果自主研发的一款服务器操作系统
+  - 部署可信启动策略管理工具 (iTrustMidware)
+  - **说明**：当以上组件可从Inspur KOS获取，Inspur KOS 基于龙蜥 OS 的商业发行版
 
 1）BIOS国密可信度量Enable方法：需要将 SM3_256 PCR Bank 改为Enable
 
@@ -85,22 +85,16 @@ Please Input the Corresponding Operations.
 直接在 `/sys/kernel/security/tpm0/binary_bios_measurements` 查看（以下是输出的部分片断）：
 
 ```
-0	0d818d47f8b73f1ae27dd82cdcc265aebfd79fd007ab65571c6822c7caacabd0 [S-CRTM Version]
-0	b16790da86a87f9b4cb58f8ae0685c21190efdcc8e90f411fd32edecb84f35bf [POST CODE]
-7	c3e86209704b2133d5f77fba5ffa3e04ef633729b1ea6086dc6584956db47b6d [EV_EFI_VARIABLE_DRIVER_CONFIG] SecureBoot
-7	205702258aeaecaf68533e90c2c6cb17cdc1bc34f5c99e0564bb57f5ed3a0e27 [EV_EFI_VARIABLE_DRIVER_CONFIG] (null)
-7	afcc870fa20c507995499794371e8c25e3a7310fa72200c109379973ae236845 [SEPARATOR]
-2	0e9c74fcdf311f1e4b3e317b28de5e9e4d1463468204d8ae8db7768ddd1f38ef [EV_EFI_BOOT_SERVICES_DRIVER]
-
+0 0d818d47f8b7... [S-CRTM Version]
+0 b16790da86a8... [POST CODE]
+7 c3e86209704b... [EV_EFI_VARIABLE_DRIVER_CONFIG] SecureBoot
 ... ...
-
-8	de8564716bef9c6c971ba04f50bcd1b10a20e103a4b0d8c9fb218b92c1f715fc [IPL] grub_cmd insmod all_video
-8	c9eef8824efbf671f25251594d2318ea8ba13a7c03eab76a6ffc70148059b9ad [IPL] grub_cmd set gfx_payload=keep
-8	6a1007c86dc8ee319275e7f0638668cfbba0eb3dfb974d2bd8d37dc0433d8fd9 [IPL] grub_cmd insmod gzio
-8	eb204c91fc3dcc42968f4110285d3c265ec735943cf3b34f5b5992cccd07b1a0 [IPL] grub_cmd linux (hd0,gpt2)/vmlinuz-4.18.0 root=/dev/sda2 ro
-9	3e9ff31a468703754a43ae6fc3a20d4ba8fdb3e38b2a94daa5044ad0da4628a0 [IPL] grub_linuxefi Kernel
-8	603cfbaa83759e9579df8526a21093c4e9851ff3bdd7c40a1284cae6467c0fae [IPL] grub_cmd initrd (hd0,gpt2)/initramfs-4.18.0.img
-9	f0ba7132cceaea8cb7ea4066406099d48b7ff493fa6da8753c845bce861c1862 [IPL] grub_linuxefi Initrd
+8 c9eef8824efb... [IPL] grub_cmd set gfx_payload=keep
+8 6a1007c86dc8... [IPL] grub_cmd insmod gzio
+8 eb204c91fc3d... [IPL] grub_cmd linux (hd0,gpt2)/vmlinuz-4.18.0 root=/dev/sda2 ro
+9 3e9ff31a4687... [IPL] grub_linuxefi Kernel
+8 603cfbaa8375... [IPL] grub_cmd initrd (hd0,gpt2)/initramfs-4.18.0.img
+9 f0ba7132ccea... [IPL] grub_linuxefi Initrd
 ```
 
 其次使用iTrustMidware提供的策略管理工具也可以查看到详细的度量日志。

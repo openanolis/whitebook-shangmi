@@ -40,7 +40,7 @@
 | :--------------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :--: | :-: | --: | ---------: |
 | [gnulib](http://git.savannah.gnu.org/cgit/gnulib.git/log/?qt=author&q=Jia+Zhang)                           | -  | ✅ | -  | -      | -  |   5 |     -5/+1046 |
 | [libgcrypt](https://git.gnupg.org/cgi-bin/gitweb.cgi?p=libgcrypt.git;a=search;s=Tianjia+Zhang;st=author)   | ✅ | ✅ | ✅ | -      | -  |  22 |   -155/+4202 |
-| [linux](https://git.kernel.org/pub/scm/linux/kernel/git/herbert/cryptodev-2.6.git/log/?qt=author&q=Tianjia+Zhang) | ✅ | Y | Y | ✅ | ✅ | 68 | -1536/+15478 |
+| [linux](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=Tianjia+Zhang) | ✅ | Y | Y | ✅ | ✅ | 68 | -1536/+15478 |
 | [RustCrypto](https://github.com/RustCrypto/hashes/commits?author=uudiin)                                   | ❌ | ✅ | Y  | -      | -  |   1 |      -0/+851 |
 | [ima-evm-utils](https://github.com/mimizohar/ima-evm-utils/commits?author=uudiin)                          | ✅ | ✅ | -  | -      | -  |   5 |      -13/+97 |
 | [ltp](https://github.com/linux-test-project/ltp/commits?author=hustliyilin)                                | ❌ | ✅ | ✅ | -      | -  |   2 |       -7/+30 |
