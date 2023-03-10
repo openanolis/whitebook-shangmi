@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Kernel TLS（KTLS）实践 - 商用密码技术最佳实践白皮书</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="custom.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="overview.html">前言</a></li><li class="chapter-item expanded "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item expanded "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item expanded "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item expanded "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item expanded "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item expanded "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item expanded "><a href="linux_kernel.html">Linux 内核国密支持</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item expanded "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item expanded "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item expanded "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item expanded "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item expanded "><a href="kernel_tls.html" class="active">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item expanded "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item expanded "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item expanded "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item expanded "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item expanded "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item expanded "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item expanded "><a href="crypto_lib.html">OpenAnolis 国密算法库</a></li><li class="chapter-item expanded "><a href="dev_practices.html">国密应用开发实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item expanded "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li></ol></li><li class="chapter-item expanded "><a href="optimization.html">国密硬件加速与优化</a></li><li class="chapter-item expanded affix "><a href="contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">商用密码技术最佳实践白皮书</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="kernel-tlsktls实践"><a class="header" href="#kernel-tlsktls实践">Kernel TLS（KTLS）实践</a></h1>
+<h2 id="ktls-简介"><a class="header" href="#ktls-简介">KTLS 简介</a></h2>
+<p>传输层安全协议（TLS）一般是在用户态库中实现，比如OpenSSL和gnutls库都实现了TLS协议，除了与内核的网络交互外，协议自身对内核是透明的。Kernel
+TLS（KTLS）从名字可以看到，是把TLS协议的数据平面（相对于处理协议的控制平面来说，也就是真正用于传输负载数据的部分）下沉到了内核中，发送数据时由内核加密后直接发送到网络设备，接收到数据后先解密再交给应用，呈现在用户态的仍然是明文。</p>
+<div align=center>
+<img src="images/tls-offload-layers.svg" alt="TLS Offload Layers" style="width: 70%; height: 70%">
+</div>
+<blockquote>
+<p>🟢 <strong>优势</strong></p>
+</blockquote>
+<p>众所周知，<code>sendfile</code>在内核提供的重要的优化网络服务的手段，但完全实现在用户态的TLS库是不支持<code>sendfile</code>的，因为要把文件内容读入用户态，加密后再交给内核发送到网络设备。</p>
+<p>在使用Kernel TLS 时，一定程度上是解决了在TLS中使用<code>sendfile</code>的问题，KTLS 是内核提供的又一个重要的优化TLS协议的手段。尤其是在静态文件服务的场景下，对TLS协议的性能提升明显，对基于TLS协议的https流量的性能提升非常有帮助，因为在内核加解密数据会减少数据在内核态和用户态的两次数据拷贝。</p>
+<h2 id="ktls-国密实践"><a class="header" href="#ktls-国密实践">KTLS 国密实践</a></h2>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc8998">RFC 8998</a>定义了在TLS 1.3协议中使用国密算法套件的规范，KTLS 也支持使用 SM4 CCM/GCM AEAD 算法加密数据。</p>
+<p>内核的KTLS跟应用是通过sockopt来交互的，开发者需要明确告诉内核某个套接字要使用KTLS并且传递加密所需要的各种信息，比如密钥，记录序号等。</p>
+<p>以下示例演示了在网络应用中使用 SM4 GCM 算法在内核加密数据。注意，内核KTLS依赖TLS协议握手之后得到的密钥数据，但不必实现完整的TLS协议，即便这个密钥不是TLS握手得到的。</p>
+<blockquote>
+<p>🟢 <strong>准备套接字</strong></p>
+</blockquote>
+<p>创建新的TCP套接字，并通过 SOL_TCP 选项明确告诉内核使用KTLS：</p>
+<pre><code class="language-c">sock = socket(AF_INET, SOCK_STREAM, 0);
+setsockopt(sock, SOL_TCP, TCP_ULP, &quot;tls&quot;, sizeof(&quot;tls&quot;));
+</code></pre>
+<p>以下内容是在 <code>linux/tls.h</code> 头文件中与国密相关的定义，会在之后的代码片断中引用：</p>
+<pre><code class="language-c">/* From linux/tls.h */
+struct tls_crypto_info {
+        unsigned short version;
+        unsigned short cipher_type;
+};
+
+struct tls12_crypto_info_sm4_gcm {
+	struct tls_crypto_info info;
+	unsigned char iv[TLS_CIPHER_SM4_GCM_IV_SIZE];
+	unsigned char key[TLS_CIPHER_SM4_GCM_KEY_SIZE];
+	unsigned char salt[TLS_CIPHER_SM4_GCM_SALT_SIZE];
+	unsigned char rec_seq[TLS_CIPHER_SM4_GCM_REC_SEQ_SIZE];
+};
+
+struct tls12_crypto_info_sm4_ccm {
+	struct tls_crypto_info info;
+	unsigned char iv[TLS_CIPHER_SM4_CCM_IV_SIZE];
+	unsigned char key[TLS_CIPHER_SM4_CCM_KEY_SIZE];
+	unsigned char salt[TLS_CIPHER_SM4_CCM_SALT_SIZE];
+	unsigned char rec_seq[TLS_CIPHER_SM4_CCM_REC_SEQ_SIZE];
+};
+
+#define TLS_CIPHER_SM4_GCM				55
+#define TLS_CIPHER_SM4_GCM_IV_SIZE			8
+#define TLS_CIPHER_SM4_GCM_KEY_SIZE		16
+#define TLS_CIPHER_SM4_GCM_SALT_SIZE		4
+#define TLS_CIPHER_SM4_GCM_TAG_SIZE		16
+#define TLS_CIPHER_SM4_GCM_REC_SEQ_SIZE		8
+
+#define TLS_CIPHER_SM4_CCM				56
+#define TLS_CIPHER_SM4_CCM_IV_SIZE			8
+#define TLS_CIPHER_SM4_CCM_KEY_SIZE		16
+#define TLS_CIPHER_SM4_CCM_SALT_SIZE		4
+#define TLS_CIPHER_SM4_CCM_TAG_SIZE		16
+#define TLS_CIPHER_SM4_CCM_REC_SEQ_SIZE		8
+</code></pre>
+<p>设置 TLS_ULP 后允许我们设置/获取 TLS 套接字选项。 国密算法目前只支持带认证的 GCM/CCM 模式。 TLS 握手完成后，我们拥有将数据平面下沉到内核所需的所有参数。 有一个单独的套接字选项<code>SOL_TLS</code>用于将传输和接收下沉到内核中。</p>
+<p>KTLS 的发送和接收是单独设置的，设置方法是相同的，发送使用<code>TLS_TX</code>，接收使用<code>TLS_RX</code>。</p>
+<pre><code class="language-c">struct tls12_crypto_info_sm4_gcm crypto_info;
+
+crypto_info.info.version = TLS_1_3_VERSION;
+crypto_info.info.cipher_type = TLS_CIPHER_SM4_GCM;
+memcpy(crypto_info.iv, iv_write, TLS_CIPHER_SM4_GCM_IV_SIZE);
+memcpy(crypto_info.rec_seq, seq_number_write, TLS_CIPHER_SM4_GCM_REC_SEQ_SIZE);
+memcpy(crypto_info.key, cipher_key_write, TLS_CIPHER_SM4_GCM_KEY_SIZE);
+memcpy(crypto_info.salt, implicit_iv_write, TLS_CIPHER_SM4_GCM_SALT_SIZE);
+
+setsockopt(sock, SOL_TLS, TLS_TX, &amp;crypto_info, sizeof(crypto_info));
+</code></pre>
+<blockquote>
+<p>🟢 <strong>发送 TLS 负载数据</strong></p>
+</blockquote>
+<p>设置了 <code>TLS_TX</code> 套接字选项后，通过该套接字发送的所有应用程序数据都使用 TLS 和套接字选项中提供的参数进行加密。 例如，我们可以发送一条加密的 hello world 记录，如下所示：</p>
+<pre><code class="language-c">const char *msg = &quot;hello world\n&quot;;
+send(sock, msg, strlen(msg));
+</code></pre>
+<p>如果可能的话，内核会使用用户态提供的缓冲区直接加密后发送。</p>
+<p>同样可以顺滑的使用sendfile通过TLS发送文件数据：</p>
+<pre><code class="language-c">file = open(filename, O_RDONLY);
+fstat(file, &amp;stat);
+sendfile(sock, file, &amp;offset, stat.st_size);
+</code></pre>
+<blockquote>
+<p>🟢 <strong>接收 TLS 负载数据</strong></p>
+</blockquote>
+<p>与发送相似，设置 <code>TLS_RX</code> 套接字选项后，所有类 recv 的调用都使用提供的 TLS 参数进行解密。 在解密发生之前必须收到完整的 TLS 记录。</p>
+<pre><code class="language-c">char buffer[16384];
+recv(sock, buffer, sizeof(buffer));
+</code></pre>
+<p>如果接收到的数据足够大，则直接将其解密到用户缓冲区中，并且不会发生额外的分配。 如果用户空间缓冲区太小，数据在内核中解密并复制到用户空间。</p>
+<blockquote>
+<p>🟢 <strong>TLS 控制消息</strong></p>
+</blockquote>
+<p>除了应用程序数据，TLS 还具有控制消息，例如警报消息（记录类型 21）和握手消息（记录类型 22）等。这些消息可以通过 CMSG 提供 TLS 记录类型通过套接字发送。 控制消息是完全符合TLS协议规范的，关于如何通过 KTLS 来发送或者接收 TLS 控制消息，可以参考<a href="https://www.kernel.org/doc/html/latest/networking/tls.html">内核文档</a>。</p>
+<footer>
+<span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
+<pre><code class="footer-code">作者: OpenAnolis
+链接: https://gitee.com/anolis/whitebook-shangmi
+来源: OpenAnolis
+本文原创发布于「OpenAnolis」,转载请注明出处,谢谢合作!
+</code></pre>
+</footer>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="kernel_modsign.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="tongsuo.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="kernel_modsign.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="tongsuo.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>内核国密算法 - 商用密码技术最佳实践白皮书</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="custom.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="overview.html">前言</a></li><li class="chapter-item expanded "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item expanded "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item expanded "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item expanded "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item expanded "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item expanded "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item expanded "><a href="linux_kernel.html">Linux 内核国密支持</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="kernel_shangmi.html" class="active">内核国密算法</a></li><li class="chapter-item expanded "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item expanded "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item expanded "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item expanded "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item expanded "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item expanded "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item expanded "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item expanded "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item expanded "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item expanded "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item expanded "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item expanded "><a href="crypto_lib.html">OpenAnolis 国密算法库</a></li><li class="chapter-item expanded "><a href="dev_practices.html">国密应用开发实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item expanded "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li></ol></li><li class="chapter-item expanded "><a href="optimization.html">国密硬件加速与优化</a></li><li class="chapter-item expanded affix "><a href="contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">商用密码技术最佳实践白皮书</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="内核国密算法"><a class="header" href="#内核国密算法">内核国密算法</a></h1>
+<p>Linux 内核上游社区从 5.10 版本开始已经陆续支持了国密算法，到目前为止，x86和arm64架构上的国密的指令集优化也陆续得到内核的支持。</p>
+<p>内核作为操作系统最重要的组件，对于国密的支持已经比较完善，就国密算法 SM3、 SM4 的优化来说，也仅仅略差于老牌的国际主流算法，在最近发布的 Linux 6.2 中，龙蜥社区对 arm64 架构的国密支持了众多的模式优化，成为 6.2 版本 Top 20 的活跃开发者：<a href="https://lwn.net/Articles/923410">https://lwn.net/Articles/923410</a>。</p>
+<p>龙蜥社区 ANCK 5.10 内核已经全部支持了上游的这些国密和算法优化，通过 Anolis OS 提供给用户。</p>
+<p>以下几张表格总结了目前内核已经实现的国密相关算法的一些具体情况，包括算法优先级（优先级越大性能越高，同一个算法内核会优先选择优先级高的实现），依赖指令（具体架构上依赖的CPU SIMD指令），内部驱动（可以认为是更详细的算法名称，可以通过这个名称引用该实现）。</p>
+<p>类型字段是算法的类型，目前跟国密相关的几个类型如下：</p>
+<ul>
+<li>akcipher：非对称算法</li>
+<li>shash：哈希算法</li>
+<li>cipher：对称算法，只支持单个分组的加解密</li>
+<li>skcipher：对称算法，与模式相结合的算法</li>
+<li>aead：带认证的对称算法</li>
+</ul>
+<h2 id="软件实现"><a class="header" href="#软件实现">软件实现</a></h2>
+<p>国密的软件实现是最早被引用内核的国密算法实现，软件实现不依赖任何特殊指令，适用于任何架构，但效率较低，在不支持优化的平台上可以选择使用软件实现的国密方案。</p>
+<p>SM2 是非对称算法，目前在内核中主要用于验签和完整性检查，由于算法自身输入数据量小且调用频度不高，优化带来的收益不大，因此，Linux 内核中的SM2算法目前只有软件实现。</p>
+<div class="table-wrapper"><table><thead><tr><th>算法</th><th>类型</th><th>内部驱动</th><th style="text-align: right">优先级</th><th>模块名</th></tr></thead><tbody>
+<tr><td>SM2</td><td>akcipher</td><td>sm2-generic</td><td style="text-align: right">100</td><td>sm2-generic</td></tr>
+<tr><td>SM3</td><td>shash</td><td>sm3-generic</td><td style="text-align: right">100</td><td>sm3-generic</td></tr>
+<tr><td>SM4</td><td>cipher</td><td>sm4-generic</td><td style="text-align: right">100</td><td>sm4-generic</td></tr>
+</tbody></table>
+</div>
+<h2 id="x86-架构指令集优化"><a class="header" href="#x86-架构指令集优化">x86 架构指令集优化</a></h2>
+<p>在x86架构上，主要是使用 AVX/AVX2 指令集对国密算法做的优化。</p>
+<div class="table-wrapper"><table><thead><tr><th>算法</th><th>类型</th><th>内部驱动</th><th style="text-align: right">优先级</th><th>模块名</th><th>依赖指令</th></tr></thead><tbody>
+<tr><td>SM3</td><td>shash</td><td>sm3-avx</td><td style="text-align: right">300</td><td>sm3-avx-x86_64</td><td>avx/bmi2</td></tr>
+<tr><td>SM4-ECB</td><td>skcipher</td><td>ecb-sm4-aesni-avx</td><td style="text-align: right">400</td><td>sm4-aesni-avx-x86_64</td><td>avx/aesni</td></tr>
+<tr><td>SM4-CBC</td><td>skcipher</td><td>cbc-sm4-aesni-avx</td><td style="text-align: right">400</td><td>sm4-aesni-avx-x86_64</td><td>avx/aesni</td></tr>
+<tr><td>SM4-CFB</td><td>skcipher</td><td>cfb-sm4-aesni-avx</td><td style="text-align: right">400</td><td>sm4-aesni-avx-x86_64</td><td>avx/aesni</td></tr>
+<tr><td>SM4-CTR</td><td>skcipher</td><td>ctr-sm4-aesni-avx</td><td style="text-align: right">400</td><td>sm4-aesni-avx-x86_64</td><td>avx/aesni</td></tr>
+<tr><td>SM4-ECB</td><td>skcipher</td><td>ecb-sm4-aesni-avx2</td><td style="text-align: right">500</td><td>sm4-aesni-avx2-x86_64</td><td>avx2/aesni</td></tr>
+<tr><td>SM4-CBC</td><td>skcipher</td><td>cbc-sm4-aesni-avx2</td><td style="text-align: right">500</td><td>sm4-aesni-avx2-x86_64</td><td>avx2/aesni</td></tr>
+<tr><td>SM4-CFB</td><td>skcipher</td><td>cfb-sm4-aesni-avx2</td><td style="text-align: right">500</td><td>sm4-aesni-avx2-x86_64</td><td>avx2/aesni</td></tr>
+<tr><td>SM4-CTR</td><td>skcipher</td><td>ctr-sm4-aesni-avx2</td><td style="text-align: right">500</td><td>sm4-aesni-avx2-x86_64</td><td>avx2/aesni</td></tr>
+</tbody></table>
+</div>
+<blockquote>
+<p>🟢 <strong>性能数据</strong></p>
+</blockquote>
+<p>x86 上的性能数据来自<code>Intel i5-6200U 2.30GHz</code>环境，横坐标是输入的数据块大小（单位是字节），性能数据的单位是 Mbyte/s。</p>
+<p>下表是 SM3 算法的性能数据，对比了纯软件实现和AVX优化的差异：</p>
+<pre><code>update-size |     16      64     256    1024    2048    4096    8192
+------------+-------------------------------------------------------
+sm3-generic | 105.97  129.60  182.12  189.62  188.06  193.66  194.88
+sm3-avx     | 119.87  163.05  244.44  260.92  257.60  264.87  265.88
+</code></pre>
+<p>下表是SM4算法的性能数据，分别是纯软件实现，AVX实现和AVX2实现的性能：</p>
+<pre><code>block-size  |    16      64     128     256    1024    1420    4096
+------------+------------------------------------------------------
+sm4-generic
+    ECB enc | 60.94   70.41   72.27   73.02   73.87   73.58   73.59
+    ECB dec | 61.87   70.53   72.15   73.09   73.89   73.92   73.86
+    CBC enc | 56.71   66.31   68.05   69.84   70.02   70.12   70.24
+    CBC dec | 54.54   65.91   68.22   69.51   70.63   70.79   70.82
+    CFB enc | 57.21   67.24   69.10   70.25   70.73   70.52   71.42
+    CFB dec | 57.22   64.74   66.31   67.24   67.40   67.64   67.58
+    CTR enc | 59.47   68.64   69.91   71.02   71.86   71.61   71.95
+    CTR dec | 59.94   68.77   69.95   71.00   71.84   71.55   71.95
+sm4-aesni-avx
+    ECB enc | 44.95  177.35  292.06  316.98  339.48  322.27  330.59
+    ECB dec | 45.28  178.66  292.31  317.52  339.59  322.52  331.16
+    CBC enc | 57.75   67.68   69.72   70.60   71.48   71.63   71.74
+    CBC dec | 44.32  176.83  284.32  307.24  328.61  312.61  325.82
+    CFB enc | 57.81   67.64   69.63   70.55   71.40   71.35   71.70
+    CFB dec | 43.14  167.78  282.03  307.20  328.35  318.24  325.95
+    CTR enc | 42.35  163.32  279.11  302.93  320.86  310.56  317.93
+    CTR dec | 42.39  162.81  278.49  302.37  321.11  310.33  318.37
+sm4-aesni-avx2
+    ECB enc | 45.19  177.41  292.42  316.12  339.90  322.53  330.54
+    ECB dec | 44.83  178.90  291.45  317.31  339.85  322.55  331.07
+    CBC enc | 57.66   67.62   69.73   70.55   71.58   71.66   71.77
+    CBC dec | 44.34  176.86  286.10  501.68  559.58  483.87  527.46
+    CFB enc | 57.43   67.60   69.61   70.52   71.43   71.28   71.65
+    CFB dec | 43.12  167.75  268.09  499.33  558.35  490.36  524.73
+    CTR enc | 42.42  163.39  256.17  493.95  552.45  481.58  517.19
+    CTR dec | 42.49  163.11  256.36  493.34  552.62  481.49  516.83
+</code></pre>
+<h2 id="arm64-架构指令集优化"><a class="header" href="#arm64-架构指令集优化">arm64 架构指令集优化</a></h2>
+<p>arm64架构上的国密优化最完整，效果也最明显，比如SM4算法，除了x86架构上的四个模式外，还对 CTS/XTS 模式，AEAD模式 CCM/GCM 以及带密钥的哈希算法做了深度优化，这主要得益于armv8开始支持了SM3/SM4算法的Crypto Extensions扩展。</p>
+<div class="table-wrapper"><table><thead><tr><th>算法</th><th>类型</th><th>内部驱动</th><th style="text-align: right">优先级</th><th>模块名</th><th>依赖指令</th></tr></thead><tbody>
+<tr><td>SM3</td><td>shash</td><td>sm3-neon</td><td style="text-align: right">200</td><td>sm3-neon</td><td>NEON</td></tr>
+<tr><td>SM3</td><td>shash</td><td>sm3-ce</td><td style="text-align: right">400</td><td>sm3-ce</td><td>CE-SM3</td></tr>
+<tr><td>SM4</td><td>cipher</td><td>sm4-ce</td><td style="text-align: right">300</td><td>sm4-ce-cipher</td><td>CE-SM4</td></tr>
+<tr><td>SM4-ECB</td><td>skcipher</td><td>ecb-sm4-neon</td><td style="text-align: right">200</td><td>sm4-neon</td><td>NEON</td></tr>
+<tr><td>SM4-CBC</td><td>skcipher</td><td>cbc-sm4-neon</td><td style="text-align: right">200</td><td>sm4-neon</td><td>NEON</td></tr>
+<tr><td>SM4-CFB</td><td>skcipher</td><td>cfb-sm4-neon</td><td style="text-align: right">200</td><td>sm4-neon</td><td>NEON</td></tr>
+<tr><td>SM4-CTR</td><td>skcipher</td><td>ctr-sm4-neon</td><td style="text-align: right">200</td><td>sm4-neon</td><td>NEON</td></tr>
+<tr><td>SM4-ECB</td><td>skcipher</td><td>ecb-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce</td><td>CE-SM4</td></tr>
+<tr><td>SM4-CBC</td><td>skcipher</td><td>cbc-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce</td><td>CE-SM4</td></tr>
+<tr><td>SM4-CFB</td><td>skcipher</td><td>cfb-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce</td><td>CE-SM4</td></tr>
+<tr><td>SM4-CTR</td><td>skcipher</td><td>ctr-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce</td><td>CE-SM4</td></tr>
+<tr><td>SM4-CTS</td><td>skcipher</td><td>cts-cbc-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce</td><td>CE-SM4</td></tr>
+<tr><td>SM4-XTS</td><td>skcipher</td><td>xts-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce</td><td>CE-SM4</td></tr>
+<tr><td>CMAC-SM4</td><td>shash</td><td>cmac-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce</td><td>CE-SM4</td></tr>
+<tr><td>XCBC-SM4</td><td>shash</td><td>xcbc-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce</td><td>CE-SM4</td></tr>
+<tr><td>CBCMAC-SM4</td><td>shash</td><td>cbcmac-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce</td><td>CE-SM4</td></tr>
+<tr><td>SM4-CCM</td><td>aead</td><td>ccm-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce-ccm</td><td>CE-SM4</td></tr>
+<tr><td>SM4-GCM</td><td>aead</td><td>gcm-sm4-ce</td><td style="text-align: right">400</td><td>sm4-ce-gcm</td><td>CE-SM4/PMULL</td></tr>
+</tbody></table>
+</div>
+<blockquote>
+<p>🟢 <strong>性能数据</strong></p>
+</blockquote>
+<p>arm 上的性能数据来自<code>T-Head Yitian-710 2.75 GHz</code>环境，横坐标是输入的数据块大小（单位是字节），性能数据的单位是 Mbyte/s。</p>
+<p>下表是 SM3 算法的性能数据，对比了纯软件实现，NEON优化实现和Crypto Extension优化实现的差异：</p>
+<pre><code>update-size    |      16      64     256    1024    2048    4096    8192
+---------------+--------------------------------------------------------
+sm3-generic    |  185.24  221.28  301.26  307.43  300.83  308.82  308.91
+sm3-neon       |  171.81  220.20  322.94  339.28  334.09  343.61  343.87
+sm3-ce         |  227.48  333.48  502.62  527.87  520.45  534.91  535.40
+</code></pre>
+<p>下表是SM4算法的性能数据，分别是纯软件实现，NEON优化实现和Crypto Extension优化实现的性能：</p>
+<pre><code>block-size    |     16       64      128      256     1024     1420     4096
+--------------+-------------------------------------------------------------
+sm4-generic
+      ECB enc |  80.05    91.42    93.66    94.77    95.69    95.77    95.86
+      ECB dec |  79.98    91.41    93.64    94.76    95.66    95.77    95.85
+      CBC enc |  78.55    86.50    88.02    88.77    89.36    89.42    89.48
+      CBC dec |  76.82    89.06    91.52    92.77    93.75    93.83    93.96
+      CFB enc |  77.64    86.13    87.62    88.42    89.08    88.83    89.18
+      CFB dec |  77.57    88.34    90.36    91.45    92.34    92.00    92.44
+      CTR enc |  77.80    88.28    90.23    91.22    92.11    91.81    92.25
+      CTR dec |  77.83    88.22    90.22    91.22    92.04    91.82    92.28
+sm4-neon
+      ECB enc |  28.31   112.77   203.03   209.89   215.49   202.11   210.59
+      ECB dec |  28.36   113.45   203.23   210.00   215.52   202.13   210.65
+      CBC enc |  79.32    87.02    88.51    89.28    89.85    89.89    89.97
+      CBC dec |  28.29   112.20   203.30   209.82   214.99   201.51   209.95
+      CFB enc |  79.59    87.16    88.54    89.30    89.83    89.62    89.92
+      CFB dec |  28.12   111.05   202.47   209.02   214.21   210.90   209.12
+      CTR enc |  28.04   108.81   200.62   206.65   211.78   208.78   206.74
+      CTR dec |  28.02   108.82   200.45   206.62   211.78   208.74   206.70
+sm4-ce
+      ECB enc | 366.96  1329.81  2024.29  2755.50  3790.07  3861.91  4051.40
+      ECB dec | 367.30  1323.93  2018.72  2747.43  3787.39  3862.55  4052.62
+      CBC enc | 358.09   682.68   807.24   885.35   958.29   963.60   973.73
+      CBC dec | 366.51  1303.63  1978.64  2667.93  3624.53  3683.41  3856.08
+      CFB enc | 351.51   681.26   807.81   893.10   968.54   969.17   985.83
+      CFB dec | 354.98  1266.61  1929.63  2634.81  3614.23  3611.59  3841.68
+      CTR enc | 324.23  1121.25  1689.44  2256.70  2981.90  3007.79  3060.74
+      CTR dec | 324.18  1120.44  1694.31  2258.32  2982.01  3010.09  3060.99
+  CTS-CBC enc | 288.19   428.80   593.57   741.04   911.73   931.80   950.00
+  CTS-CBC dec | 292.22   468.99   838.23  1380.76  2741.17  3036.42  3409.62
+      XTS enc | 224.68   798.91  1248.08  1714.60  2413.73  2467.84  2612.62
+      XTS dec | 229.85   791.34  1237.79  1720.00  2413.30  2473.84  2611.95
+</code></pre>
+<p>下表是基于SM4算法的带认证哈希的Crypto Extension优化的性能数据：</p>
+<pre><code>update-size    |      16      64     256    1024    2048    4096    8192
+---------------+--------------------------------------------------------
+cmac-sm4-ce    |  371.99  675.28  903.56  971.65  980.57  990.40  991.04
+xcbc-sm4-ce    |  372.11  674.55  903.47  971.61  980.96  990.42  991.10
+cbcmac-sm4-ce  |  371.63  675.33  903.23  972.07  981.42  990.93  991.45
+</code></pre>
+<p>SM4 带认证的AEAD模式 CCM/GCM 在Crypto Extension优化后的性能数据：</p>
+<pre><code>block-size |     16      64      256      512     1024     1420     4096     8192
+-----------+---------------------------------------------------------------------
+  CCM enc  |  77.12  249.82   569.94   725.17   839.27   867.71   952.87   969.89
+  CCM dec  |  75.90  247.26   566.29   722.12   836.90   865.95   951.74   968.57
+  GCM enc  | 108.62  397.18   971.60  1283.92  1522.77  1513.39  1777.00  1806.96
+  GCM dec  | 116.36  398.14  1004.27  1319.11  1624.21  1635.43  1932.54  1974.20
+</code></pre>
+<p><a href="optimization.html"><strong>国密硬件加速与优化</strong></a>章节会重点介绍armv8下Crypto Extension的细节信息。</p>
+<footer>
+<span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
+<pre><code class="footer-code">作者: OpenAnolis
+链接: https://gitee.com/anolis/whitebook-shangmi
+来源: OpenAnolis
+本文原创发布于「OpenAnolis」,转载请注明出处,谢谢合作!
+</code></pre>
+</footer>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="linux_kernel.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="kernel_fscrypt.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="linux_kernel.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="kernel_fscrypt.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

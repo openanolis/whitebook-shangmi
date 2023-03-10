@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>磁盘加密（LUKS） - 商用密码技术最佳实践白皮书</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="custom.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="overview.html">前言</a></li><li class="chapter-item expanded "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item expanded "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item expanded "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item expanded "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item expanded "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item expanded "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item expanded "><a href="linux_kernel.html">Linux 内核国密支持</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item expanded "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item expanded "><a href="kernel_dmcrypt.html" class="active">磁盘加密（LUKS）</a></li><li class="chapter-item expanded "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item expanded "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item expanded "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item expanded "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item expanded "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item expanded "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item expanded "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item expanded "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item expanded "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item expanded "><a href="crypto_lib.html">OpenAnolis 国密算法库</a></li><li class="chapter-item expanded "><a href="dev_practices.html">国密应用开发实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item expanded "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li></ol></li><li class="chapter-item expanded "><a href="optimization.html">国密硬件加速与优化</a></li><li class="chapter-item expanded affix "><a href="contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">商用密码技术最佳实践白皮书</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="磁盘加密luks"><a class="header" href="#磁盘加密luks">磁盘加密（LUKS）</a></h1>
+<p>类似于文件加密，磁盘加密很重要的一点也是为了解决因存储介质丢失而导致的敏感数据泄露问题。磁盘加密是以磁盘为加密对象来保护重要数据，磁盘之上的文件甚至文件系统对磁盘加密来说是透明的。</p>
+<h2 id="dm-crypt-和-luks-简介"><a class="header" href="#dm-crypt-和-luks-简介">dm-crypt 和 LUKS 简介</a></h2>
+<p><code>dm-crypt</code>是 Linux 内核提供的一个磁盘加密功能，负责对块设备进行加解密操作。dm-crypt 是 device-mapper 构架中用于块设备加密的一个模块。dm-crypt 通过 dm 框架虚拟一个块设备，并在BIO转发的时候将数据加密后存储来实现块设备的加密，而这些对于应用层是透明的。</p>
+<blockquote>
+<p>🟢 <strong>dm-crypt 的特点</strong></p>
+</blockquote>
+<ul>
+<li>
+<p>支持多种加密格式</p>
+<p>目前 dm-crypt 支持如下几种加密模式：</p>
+<ol>
+<li>LUKS（Linux Unified Key Setup）：这是 dm-crypt 最常用的一种模式，本节也是以 LUKS 为主展开。</li>
+<li>Plain：Plain 模式使用单个无salt的哈希值逐个扇区进行加密。</li>
+<li>loop-AES：loop-AES 是一款比较陈旧的 Linux 磁盘加密工具。dm-crypt 提供了对它的支持。</li>
+<li>TCRYPT：在 cryptsetup 的 1.6.0 版本之后，开始提供对 TrueCrypt 加密盘的支持。<code>TCRYPT</code> 是 <code>TrueCrypt</code> 的缩写。在该模式下，可以打开 TrueCrypt 和 VeraCrypt 的加密盘，并对盘中的文件进行读写。</li>
+</ol>
+</li>
+<li>
+<p>无需额外安装软件</p>
+<p>由于 dm-crypt 早已被整合到 Linux Kernel 中。因此，无需额外安装它。至于它的命令行前端（cryptsetup），大部分主流的发行版都会内置 cryptsetup 的软件包。</p>
+</li>
+<li>
+<p>可以跟 LVM 无缝整合</p>
+<p>LVM（Logical Volume Manager）是 Linux 内核提供的另一个很有用的工具。比如用它来创建分区，将来可以随时调整分区大小；比如现有的硬盘空间用完了，可以另外加一块硬盘并且新加硬盘可以用来扩展现有分区。LVM 和 dm-crypt 都是基于 Linux 内核的 device mapper 机制。因此两者可以很好地整合。</p>
+</li>
+</ul>
+<blockquote>
+<p>🟢 <strong>cryptsetup</strong></p>
+</blockquote>
+<p><code>cryptsetup</code> 是与 dm-crypt 交互的命令行工具，用于创建、访问和管理加密设备，主流的发行版已经内置了该工具。</p>
+<p>从原理上来说，cryptsetup 其实是一种设备的映射关系，我们用它来把一个设备映射成另外一个设备，然后对这个新的设备进行操作，并进行加密，这样就不会使我们的原设备直接被使用，从而达到一种安全的效果。</p>
+<blockquote>
+<p>🟢 <strong>LUKS</strong></p>
+</blockquote>
+<p>LUKS （Linux Unified Key Setup）是 Linux 硬盘加密的标准。 通过提供标准的磁盘格式，它不仅可以促进发行版之间的兼容性，还可以提供对多个用户密码的安全管理。 与现有解决方案相比，LUKS 将所有必要的设置信息存储在分区信息首部中，使用户能够无缝传输或迁移其数据。</p>
+<h2 id="使用-sm4-算法加密-luks-磁盘"><a class="header" href="#使用-sm4-算法加密-luks-磁盘">使用 SM4 算法加密 LUKS 磁盘</a></h2>
+<p>⚠️  <strong>选择一个不用的磁盘或者磁盘分区，该操作会清空设备上的所有数据，请谨慎操作。</strong></p>
+<p>这里选择使用 vda4 作为实验分区，使用 LUKS 格式格式化要加密的磁盘分区，加密算法是SM4 XTS：</p>
+<pre><code class="language-sh"># 根据提示输入大写的 YES 和密码完成格式化操作
+&gt; cryptsetup --cipher sm4-xts-plain64 --key-size=256 \
+            --hash sm3 luksFormat /dev/vda4
+
+# 打开该加密分区，密码正确后，会创建代表该分区的透明设备 /dev/mapper/diskluks
+# 该设备展示给用户的是一个未加密的普通的分区设备，可以对它进行任何针对分区的操作
+&gt; cryptsetup luksOpen /dev/vda4 diskluks
+
+# 使用status子命令可以看到加密分区的状态信息
+&gt; cryptsetup status diskluks
+/dev/mapper/diskluks is active.
+  type:    LUKS2
+  cipher:  sm4-xts-plain64
+  keysize: 256 bits
+  key location: keyring
+  device:  /dev/vda4
+  sector size:  512
+  offset:  32768 sectors
+  size:    14645248 sectors
+  mode:    read/write
+
+# 此时，diskluks表现为一个普通分区，我们可以格式化为任意支持的文件系统，并挂载它
+&gt; mkfs.ext4 /dev/mapper/diskluks
+&gt; mount /dev/mapper/diskluks /mnt/
+
+# 在磁盘树中可以观察到加密的设备和代表它的透明未加密设备diskluks
+&gt; lsblk -f
+NAME         FSTYPE      FSVER LABEL   UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+vda
+├─vda1
+├─vda2       ext4        1.0   rootfs  e958d21c-63aa-46d7-a215-be264ccb02d5   23.2G    16% /
+├─vda3       ext4        1.0   fscrypt 0463916b-cd52-40f3-9c95-290bf4839d8e
+└─vda4       crypto_LUKS 2             b5338a30-6974-45f4-81da-98f1cb0cab72
+  └─diskluks ext4        1.0           683a0dc2-0755-4759-b94c-54687c706dd5    6.4G     0% /mnt
+
+# 取消挂载
+&gt; umount /mnt
+
+# 锁定加密分区，diskluks设备被删除，此时没有密码的用户看不到明文数据
+&gt; cryptsetup close diskluks
+</code></pre>
+<h2 id="后记"><a class="header" href="#后记">后记</a></h2>
+<p>SM4 的密钥长度是 128 位，因为 XTS 模式使用两个密钥，所以这里需要显式指定密钥长度是 256 位。</p>
+<p>除了密码之外，还可以选择使用密钥文件解密硬盘，也就是相当于一个密钥，当然也可以只使用密钥文件或者同时使用密码与密钥文件，用户需要使用子命令 <code>cryptsetup luksAddKey</code> 和 <code>cryptsetup luksRemoveKey</code> 来管理密钥。</p>
+<footer>
+<span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
+<pre><code class="footer-code">作者: OpenAnolis
+链接: https://gitee.com/anolis/whitebook-shangmi
+来源: OpenAnolis
+本文原创发布于「OpenAnolis」,转载请注明出处,谢谢合作!
+</code></pre>
+</footer>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="kernel_fscrypt.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="kernel_ima.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="kernel_fscrypt.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="kernel_ima.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

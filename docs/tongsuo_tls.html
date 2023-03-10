@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>TLS 1.3 使用商密套件 - 商用密码技术最佳实践白皮书</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="custom.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="overview.html">前言</a></li><li class="chapter-item expanded "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item expanded "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item expanded "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item expanded "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item expanded "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item expanded "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item expanded "><a href="linux_kernel.html">Linux 内核国密支持</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item expanded "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item expanded "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item expanded "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item expanded "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item expanded "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item expanded "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tongsuo_tls.html" class="active">TLS 1.3 使用商密套件</a></li><li class="chapter-item expanded "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item expanded "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item expanded "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item expanded "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item expanded "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item expanded "><a href="crypto_lib.html">OpenAnolis 国密算法库</a></li><li class="chapter-item expanded "><a href="dev_practices.html">国密应用开发实践</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item expanded "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li></ol></li><li class="chapter-item expanded "><a href="optimization.html">国密硬件加速与优化</a></li><li class="chapter-item expanded affix "><a href="contributors.html">Contributors</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">商用密码技术最佳实践白皮书</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="tls-13-使用商密套件rfc-8998"><a class="header" href="#tls-13-使用商密套件rfc-8998">TLS 1.3 使用商密套件（RFC 8998）</a></h1>
+<p>TLS 1.3 协议在 <code>RFC 8998</code> 规范中定义：<a href="https://datatracker.ietf.org/doc/html/rfc8998">https://datatracker.ietf.org/doc/html/rfc8998</a></p>
+<h2 id="重要说明"><a class="header" href="#重要说明">重要说明</a></h2>
+<p>在tls1.3的标准中，现有的任意算法套件均不强制使用某一个签名算法，而为了国密算法的统一性，我们在RFC8998的定义中明确要求了tls1.3+国密的两个套件：<code>TLS_SM4_GCM_SM3</code> 和 <code>TLS_SM4_CCM_SM3</code>，需要强制使用SM2作为签名算法(即server端需要配置国密证书)。 然而出于兼容性考虑，现有的大量软件和设备并没有部署国密证书，为保证大家能尽快体验到更快更便捷的国密流程，我们的实现中并不完全强制签名算法为SM2，而是提供了一个开关来由用户选择是否要开启这种强制措施(默认关闭)，在本手册后续会介绍相关用法。</p>
+<h2 id="签发-sm2-证书"><a class="header" href="#签发-sm2-证书">签发 SM2 证书</a></h2>
+<p>此例使用Tongsuo签发一个自签名的证书：</p>
+<pre><code class="language-sh"># 生成 SM2 私钥
+openssl ecparam -genkey -name SM2 -out sm2.key
+
+# 生成证书签名请求
+openssl req -new -key sm2.key -out sm2.csr \
+    -sm3 -sigopt &quot;sm2_id:1234567812345678&quot;
+
+# 签名证书
+openssl x509 -req -in sm2.csr -signkey sm2.key \
+    -out sm2.crt -sm3 -sm2-id 1234567812345678 \
+    -sigopt &quot;sm2_id:1234567812345678&quot;
+</code></pre>
+<h2 id="特性使用s_clients_server-工具验证"><a class="header" href="#特性使用s_clients_server-工具验证">特性使用（s_client/s_server 工具验证）</a></h2>
+<p>server端：命令行输入</p>
+<pre><code class="language-sh">openssl s_server \
+    -cert test_certs/sm2_cert/sm2-second.crt \
+    -key test_certs/sm2_cert/sm2-second.key \
+    -accept 127.0.0.1:4433
+</code></pre>
+<p>client端：命令行输入</p>
+<pre><code class="language-sh">openssl s_client -connect 127.0.0.1:4433 \
+    -tls1_3 -ciphersuites TLS_SM4_GCM_SM3
+</code></pre>
+<h2 id="在你的clientserver中使用相关api使用"><a class="header" href="#在你的clientserver中使用相关api使用">在你的client/server中使用（相关api使用）</a></h2>
+<p>server端： 和标准tls的server一样，无需做任何修改，仅需要注意是否强制签名算法使用SM2(虽然我们在标准中定义了tls1.3+国密的算法套件必须强制使用sm2签名算法，但由于国密证书还不够普及，所以我们在实现上暂时放宽了这个限制，而是提供了一个开关)，通过下面的代码开启/关闭：</p>
+<pre><code class="language-c">/* enable */
+SSL_CTX_enable_sm_tls13_strict(ctx);
+
+/* disable */
+SSL_CTX_disable_sm_tls13_strict(ctx);
+</code></pre>
+<p>client端 client无需做修改，只需要强制指定算法套件为<strong>TLS_SM4_GCM_SM3/TLS_SM4_CCM_SM3</strong>（国密套件的默认优先级低于现有的tls1.3算法套件），通过这种方式设定：</p>
+<pre><code class="language-c">SSL_CTX_set_ciphersuites(ctx, &quot;TLS_SM4_GCM_SM3&quot;);
+</code></pre>
+<footer>
+<span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
+<pre><code class="footer-code">作者: OpenAnolis
+链接: https://gitee.com/anolis/whitebook-shangmi
+来源: OpenAnolis
+本文原创发布于「OpenAnolis」,转载请注明出处,谢谢合作!
+</code></pre>
+</footer>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="tongsuo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="tongsuo_dc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="tongsuo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="tongsuo_dc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

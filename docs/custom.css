@@ -1,0 +1,85 @@
+html {
+    color: #333;
+    letter-spacing: .2px;
+}
+
+/* chapter */
+
+.chapter-item {
+    padding: 5px 10px;
+    padding-left: 25px;
+    font-size: 15px;
+}
+
+.chapter li a {
+    color: #364149;
+}
+
+.chapter li a:hover {
+    color: #988cff;
+}
+
+.chapter li a.active {
+    color: #008cff;
+}
+
+/* content */
+
+.content p {
+    line-height: 32px;
+}
+
+.content blockquote {
+    color: #50af51;
+    border: 0;
+    border-left: 4px solid #e5e5e5;
+    background: #f3f8f3;
+}
+
+.content li {
+    line-height: 30px;
+}
+
+/* table */
+
+/*
+table {
+    width: 100%;
+}
+*/
+
+table thead {
+    background: #ffedca;
+}
+
+table thead th {
+    padding: 10px 12px;
+}
+
+table td {
+    padding: 10px 12px;
+}
+
+table tbody tr:nth-child(2n) {
+    background: #fcffeb;
+}
+
+/* footer */
+
+footer .copyright {
+    margin-top: 50px;
+    padding: 10px 0;
+    color: #606060;
+    font-size: 12px;
+    border-top: 1px solid #ccc;
+    display: block;
+}
+
+footer pre {
+    margin: 5px 0;
+}
+
+footer .footer-code {
+    color: #505050;
+    font-size: 14px;
+}
