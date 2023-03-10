@@ -5,8 +5,14 @@ multilingual = false
 src = "src"
 title = "商用密码技术最佳实践白皮书"
 
+[build]
+build-dir = "docs"
+
 [preprocessor.template]
 
 [output.html]
 no-section-label = true
 additional-css = ["custom.css"]
+
+[output.html.fold]
+enable = true
