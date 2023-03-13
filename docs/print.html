@@ -545,11 +545,15 @@ Please Input the Corresponding Operations.
 </code></pre>
 <p>其次使用iTrustMidware提供的策略管理工具也可以查看到详细的度量日志。</p>
 <h2 id="tpm-国密证书部署与远程证明"><a class="header" href="#tpm-国密证书部署与远程证明">TPM 国密证书部署与远程证明</a></h2>
-<p>远程证明是可信计算中实现节点可信认证的关键设施，是实现可信节点之间可信互联的依据。KOS（Anolis 衍生发行版）在RSA+ SHA256+ AES和ECDSA+SHA256+AES的基础上拓展支持了基于TPM2.0国密的远程证明特性。</p>
-<p>1）在KOS部署可信代理端之后、配置后可在可信管理端识别到响应的节点、之后通过可信管理端部署相应节点的国密远程认证证书（Attestation Certification)。</p>
-<p><img src="images/tpm_7.png" alt="TPM" /></p>
-<p>2）部署可信证书后、节点即可以远程证明的方式向可信管理端发送报告进行可信证明。</p>
-<p><img src="images/tpm_8.png" alt="TPM" /></p>
+<p>远程证明是可信计算中实现节点可信认证的关键设施，是实现可信节点之间可信互联的依据。KOS（Anolis 衍生发行版）在<code>RSA + SHA256 + AES</code> 和 <code>ECDSA + SHA256 + AES</code> 的基础上拓展支持了基于 TPM 2.0 国密的远程证明特性。</p>
+<ol>
+<li>
+<p>在 KOS 部署可信代理端之后、配置后可在可信管理端识别到响应的节点、之后通过可信管理端可以部署相应节点的国密远程认证证书（Attestation Certification)。</p>
+</li>
+<li>
+<p>部署可信证书后、节点即可以用远程证明的方式向可信管理端发送报告进行可信证明。</p>
+</li>
+</ol>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
 <pre><code class="footer-code">作者: OpenAnolis
