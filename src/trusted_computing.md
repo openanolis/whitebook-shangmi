@@ -101,14 +101,10 @@ Please Input the Corresponding Operations.
 
 ## TPM 国密证书部署与远程证明
 
-远程证明是可信计算中实现节点可信认证的关键设施，是实现可信节点之间可信互联的依据。KOS（Anolis 衍生发行版）在RSA+ SHA256+ AES和ECDSA+SHA256+AES的基础上拓展支持了基于TPM2.0国密的远程证明特性。
+远程证明是可信计算中实现节点可信认证的关键设施，是实现可信节点之间可信互联的依据。KOS（Anolis 衍生发行版）在`RSA + SHA256 + AES` 和 `ECDSA + SHA256 + AES` 的基础上拓展支持了基于 TPM 2.0 国密的远程证明特性。
 
-1）在KOS部署可信代理端之后、配置后可在可信管理端识别到响应的节点、之后通过可信管理端部署相应节点的国密远程认证证书（Attestation Certification)。
+1. 在 KOS 部署可信代理端之后、配置后可在可信管理端识别到响应的节点、之后通过可信管理端可以部署相应节点的国密远程认证证书（Attestation Certification)。
 
-![TPM](images/tpm_7.png)
-
-2）部署可信证书后、节点即可以远程证明的方式向可信管理端发送报告进行可信证明。
-
-![TPM](images/tpm_8.png)
+2. 部署可信证书后、节点即可以用远程证明的方式向可信管理端发送报告进行可信证明。
 
 {{#template template/footer.md}}
