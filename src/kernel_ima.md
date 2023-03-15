@@ -2,7 +2,7 @@
 
 ## IMA 简介
 
-IMA是`Integrity Measurement Architecture`的缩写，它是Linux内核中完整性子系统的一部分。目前Linux内核的完整性子系统支持EVM和IMA，前者用于保护文件的扩展属性。这篇文章讨论的是后者。
+IMA是`Integrity Measurement Architecture`的缩写，它是Linux内核中完整性子系统的一部分。目前Linux内核的完整性子系统支持EVM和IMA，前者用于保护文件的扩展属性。本小节讨论的是后者。
 
 IMA所能做到的事情包括：
 
@@ -244,7 +244,7 @@ su imatest
 10 26bf0fc75828... ima-sig sm3:18781f4c9104... /usr/lib64/libtinfo.so.5.9
 ... ...
 ```
-注意期中第一条日志，boot_aggregate是系统启动阶段TPM PCR的汇聚值，这个值是汇聚TPM设备对应PCR bank的值做一个digest，所使用的摘要算法是根据TPM设备版本以及支持的PCR bank决定，默认是SHA1，当然这个摘要也可以通过配置为默认优先SM3算法，例子中没有TPM设备，所以这里值是0。
+注意其中第一条日志，boot_aggregate是系统启动阶段TPM PCR的汇聚值，这个值是汇聚TPM设备对应PCR bank的值做一个digest，所使用的摘要算法是根据TPM设备版本以及支持的PCR bank决定，默认是SHA1，当然这个摘要也可以通过配置为默认优先SM3算法，例子中没有TPM设备，所以这里值是0。
 
 接下来，我们再构造一个没有经过签名的可执行文件并执行：
 

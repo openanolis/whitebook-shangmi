@@ -49,114 +49,51 @@ openssl s_client -connect 127.0.0.1:4433 \
     -enable_ntls -ntls
 ```
 
-## 在你的 client/server 中使用（相关 api 使用）
+## NTLS API 使用
 
 server 端示例代码如下：
 
 ```c
-int main()
-{
-    //变量定义
-    const SSL_METHOD *meth = NULL;
-    SSL_CTX *ctx = NULL;
-    const char *sign_key_file = "/path/to/sign_key_file";
-    const char *sign_cert_file = "/path/to/sign_cert_file";
-    const char *enc_key_file = "/path/to/enc_key_file";
-    const char *enc_cert_file = "/path/to/enc_cert_file";
+SSL_CTX *ctx;
+const char *sign_key_file = "/path/to/sign_key_file";
+const char *sign_cert_file = "/path/to/sign_cert_file";
+const char *enc_key_file = "/path/to/enc_key_file";
+const char *enc_cert_file = "/path/to/enc_cert_file";
 
-    //双证书相关server的各种定义
-    meth = NTLS_server_method();
-    //生成上下文
-    ctx = SSL_CTX_new(meth);
-    //允许使用国密双证书功能
-    SSL_CTX_enable_ntls(ctx);
+/* 生成上下文 */
+ctx = SSL_CTX_new(NTLS_server_method());
 
-    //加载签名证书，加密证书
-    if (sign_key_file) {
-        if (!SSL_CTX_use_sign_PrivateKey_file(cctx->ctx,
-                        sign_key_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
+/* 允许使用国密双证书功能 */
+SSL_CTX_enable_ntls(ctx);
 
-    if (sign_cert_file) {
-        if (!SSL_CTX_use_sign_certificate_file(cctx->ctx,
-                        sign_cert_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
+/* 设置签名证书 */
+SSL_CTX_use_sign_PrivateKey_file(ctx, sign_key_file, SSL_FILETYPE_PEM);
+SSL_CTX_use_sign_certificate_file(ctx, sign_cert_file, SSL_FILETYPE_PEM);
 
-    if (enc_key_file) {
-        if (!SSL_CTX_use_enc_PrivateKey_file(cctx->ctx,
-                        enc_key_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
+/* 设置加密证书 */
+SSL_CTX_use_enc_PrivateKey_file(ctx, enc_key_file, SSL_FILETYPE_PEM);
+SSL_CTX_use_enc_certificate_file(ctx, enc_cert_file, SSL_FILETYPE_PEM);
 
-    if (enc_cert_file) {
-        if (!SSL_CTX_use_enc_certificate_file(cctx->ctx,
-                        enc_cert_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-
-    //...后续同标准tls流程
-    con = SSL_new(ctx);
-}
+/* 后续同标准 tls 流程 */
+con = SSL_new(ctx);
 ```
 
 client端示例代码如下：
 
 ```c
-int main()
-{
-    //变量定义
-    const SSL_METHOD *meth = NULL;
-    SSL_CTX *ctx = NULL;
-    const char *sign_key_file = "/path/to/sign_key_file";
-    const char *sign_cert_file = "/path/to/sign_cert_file";
-    const char *enc_key_file = "/path/to/enc_key_file";
-    const char *enc_cert_file = "/path/to/enc_cert_file";
+SSL_CTX *ctx = NULL;
 
-    //双证书相关client的各种定义
-    meth = NTLS_client_method();
-    //生成上下文
-    ctx = SSL_CTX_new(meth);
-    //允许使用国密双证书功能
-    SSL_CTX_enable_ntls(ctx);
+/* 生成上下文 */
+ctx = SSL_CTX_new(NTLS_client_method());
 
-    //设置算法套件为ECC-SM2-WITH-SM4-SM3或者ECDHE-SM2-WITH-SM4-SM3
-    //这一步并不强制编写，默认ECC-SM2-WITH-SM4-SM3优先
-    if(SSL_CTX_set_cipher_list(ctx, "ECC-SM2-WITH-SM4-SM3") <= 0)
-        goto err;
+/* 设置算法套件为 ECC-SM2-WITH-SM4-SM3 或者 ECDHE-SM2-WITH-SM4-SM3
+ * 这一步并不强制，默认 ECC-SM2-WITH-SM4-SM3 优先
+ */
+SSL_CTX_set_cipher_list(ctx, "ECC-SM2-WITH-SM4-SM3");
 
-    //加载签名证书，加密证书，仅ECDHE-SM2-WITH-SM4-SM3套件需要这一步,
-    //该部分流程用...begin...和...end...注明
-    // ...begin...
-    if (sign_key_file) {
-        if (!SSL_CTX_use_sign_PrivateKey_file(cctx->ctx,
-                    sign_key_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-
-    if (sign_cert_file) {
-        if (!SSL_CTX_use_sign_certificate_file(cctx->ctx,
-                    sign_cert_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-
-    if (enc_key_file) {
-        if (!SSL_CTX_use_enc_PrivateKey_file(cctx->ctx,
-                    enc_key_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-
-    if (enc_cert_file) {
-        if (!SSL_CTX_use_enc_certificate_file(cctx->ctx,
-                    enc_cert_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-    // ...end...
-
-    //...后续同标准tls流程
-    con = SSL_new(ctx);
-}
+/* 设置签名证书，加密证书，这一步参考服务端相关代码
+ * 仅ECDHE-SM2-WITH-SM4-SM3套件需要这一步
+ */
 ```
 
 ## 说明

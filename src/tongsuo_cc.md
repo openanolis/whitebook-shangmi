@@ -70,7 +70,7 @@ int main()
     
     /* 例如：设置压缩算法为zlib */
     SSL_CTX_add_cert_compression_alg(ctx, TLSEXT_cert_compression_zlib,
-                                    zlib_compress, zlib_decompress);
+                                     zlib_compress, zlib_decompress);
     SSL *con = SSL_new(ctx);
     
     /* 握手... */
@@ -83,14 +83,12 @@ int main()
 
 ```sh
 # 服务端
-openssl s_server \
-    -accept 127.0.0.1:34567 \
+openssl s_server -accept 127.0.0.1:34567 \
     -cert server.crt -key server.key \
     -tls1_3 -cert_comp zlib -www -quiet
 
 # 客户端
-openssl s_client \
-    -connect 127.0.0.1:34567 \
+openssl s_client -connect 127.0.0.1:34567 \
     -tls1_3 -cert_comp zlib -ign_eof -trace
 ```
 
@@ -107,7 +105,7 @@ openssl s_client \
 
 有些压缩算法是支持设置字典的，比如 brotli、zstd。可以提前计算好字典内容，预埋到客户端和服务端，然后在压缩和解压的时候使用该字典，可以让证书链完美“消失”。例如上表中使用 zstd + 字典时，压缩前的 Certficate 消息为 2666 字节，压缩后只有 18 字节。
 
-开启证书压缩功能后，可以大大降低握手时的传输，尤其是使用字典时，例如 zstd + 字典时数据如下：
+开启证书压缩功能后，可以大大减少握手时传输的数据，尤其是使用字典时，例如 zstd + 字典时数据如下：
 
 关闭证书压缩，握手共传输：3331 字节
 
@@ -117,6 +115,6 @@ openssl s_client \
 
 ## 结语
 
-TLS 会话复用时不需要发送证书，所以，在完整握手时，就可以通过证书压缩来优化。在双向认证的场景下，即服务端开启了客户端认证，如果客户端和服务端都开启 TLS 证书压缩功能，压缩效果更明显，可以节省 TLS 握手中 80% 以上的带宽。后面 Tongsuo 还会支持 Compact TLS 1.3，即 TLS 1.3 的袖珍版，保持协议同构的前提下，占用最小的带宽。
+TLS 会话复用时不需要发送证书，所以，在完整握手时，就可以通过证书压缩来优化。在双向认证的场景下，即服务端开启了客户端认证，如果客户端和服务端都开启 TLS 证书压缩功能，压缩效果更明显，可以节省 TLS 握手中 80% 以上的带宽。后面 Tongsuo 还会支持 Compact TLS 1.3，即 TLS 1.3 的袖珍版，在保持协议同构的前提下，占用最小的带宽。
 
 {{#template template/footer.md}}

@@ -34,13 +34,13 @@
 
 ## 商密 SIG 现状
 
-龙蜥社区在众多的常用基础软件中实现了商密的支持，极大的丰富了商密的软件生态，并且把这些技术全部回馈到了上游社区，以下是相关的基础软件对于商密算法的支持情况以及社区回馈统计：
+龙蜥社区在众多的常用基础软件中实现了商密的支持，极大的丰富了商密的软件生态，并且把这些技术全部回馈到了上游社区，以下是相关的基础软件对于商密算法的支持情况以及社区回馈统计（截止2022年12月）：
 
 | 开源软件                                                                                              | SM2 | SM3 | SM4 | PKCS#7 | X509 | commits | 修改行数 |
 | :--------------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :--: | :-: | --: | ---------: |
 | [gnulib](http://git.savannah.gnu.org/cgit/gnulib.git/log/?qt=author&q=Jia+Zhang)                           | -  | ✅ | -  | -      | -  |   5 |     -5/+1046 |
 | [libgcrypt](https://git.gnupg.org/cgi-bin/gitweb.cgi?p=libgcrypt.git;a=search;s=Tianjia+Zhang;st=author)   | ✅ | ✅ | ✅ | -      | -  |  22 |   -155/+4202 |
-| [linux](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=Tianjia+Zhang) | ✅ | Y | Y | ✅ | ✅ | 68 | -1536/+15478 |
+| [linux](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=Tianjia+Zhang) | ✅ | Y  | Y  | ✅     | ✅ | 68  | -1536/+15478 |
 | [RustCrypto](https://github.com/RustCrypto/hashes/commits?author=uudiin)                                   | ❌ | ✅ | Y  | -      | -  |   1 |      -0/+851 |
 | [ima-evm-utils](https://github.com/mimizohar/ima-evm-utils/commits?author=uudiin)                          | ✅ | ✅ | -  | -      | -  |   5 |      -13/+97 |
 | [ltp](https://github.com/linux-test-project/ltp/commits?author=hustliyilin)                                | ❌ | ✅ | ✅ | -      | -  |   2 |       -7/+30 |

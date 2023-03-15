@@ -45,7 +45,7 @@ Anolis OS 23 系列的发行版已率先集成 OpenSSL 3.0 作为默认的密码
         -config genkey.conf -key ca.key -out ca.cert
     ```
 
-* 从证书生成SM2算法的证书请求并验证
+* 从私钥生成SM2算法的证书请求并验证
 
     ```bash
     # Generate a certificate request from private key and verify it

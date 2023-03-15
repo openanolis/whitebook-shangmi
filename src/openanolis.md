@@ -44,8 +44,8 @@
 
 OpenAnolis是一个开放包容的社区，因此我们也欢迎志同道合之士参与我们的文档修订。
 
-对于文档中您认为不足之处，欢迎到我们的官方仓库 [Whitebook ShangMi](https://gitee.com/anolis/whitebook-shangmi) 新开issue，我们会第一时间进行响应。
+对于文档中您认为不足之处，欢迎到我们的官方仓库 [Whitebook ShangMi](https://github.com/openanolis/whitebook-shangmi) 新开issue，我们会第一时间进行响应。
 
-另外，若您想更新文档，也同样欢迎在 [Whitebook ShangMi](https://gitee.com/anolis/whitebook-shangmi) 提PR。
+另外，若您想更新文档，也同样欢迎在 [Whitebook ShangMi](https://github.com/openanolis/whitebook-shangmi) 提PR。
 
 {{#template template/footer.md}}

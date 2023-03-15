@@ -69,17 +69,16 @@ echo '01' > serial
 
 ## 生成国密证书
 
+TLCP 是双证书协议，因此需要生成根证书，服务端和客户端要分别生成签名证书和加密证书，可以参考如下命令来完成证书生成。
+
 生成根证书：
 
 ```sh
-# 生成私钥key
 gmssl ecparam -genkey -name sm2p256v1 -text \
     -out CA.key -config /usr/local/gmssl/ssl/openssl.cnf
 
-# 生成证书签名请求
 gmssl req -new -key CA.key -out Root.req
 
-# 生成根证书
 gmssl x509 -req -days 3650 -sm3 -in Root.req \
     -signkey Root.key -out RootCA.crt
 ```
@@ -87,151 +86,29 @@ gmssl x509 -req -days 3650 -sm3 -in Root.req \
 生成服务端证书：
 
 ```sh
-# 生成私钥
 gmssl ecparam -genkey -name sm2p256v1 -text -out Server.key
 
-# 证书请求
 gmssl req -new -key Server.key -out Server.csr \
     -subj /C=CN/ST=Beijing/L=Beijing/O=CSG/OU=WangAn (GM)/CN=*.vpn.test.cn \
     -config /usr/local/gmssl/ssl/openssl.cnf
 
-# 签发证书
 gmssl x509 -req -sm3 -days 3650 -CA RootCA.crt -CAkey Root.key \
     -CAcreateserial -in Server.req -out ServerCA.crt
-
-# 证书验证
-gmssl verify -CAfile RootCA.crt ServerCA.crt
 ```
 
 生成客户端证书：
 
 ```sh
-# 生成私钥
 gmssl ecparam -genkey -name sm2p256v1 -text \
     -out Client.key -config /usr/local/gmssl/ssl/openssl.cnf
 
-# 生成客户证书请求
 gmssl req -new -key Client.key -out Client.req \
     -subj /C=CN/ST=Beijing/L=Beijing/O=CSG/OU=WangAn (GM)/CN=*.vpn.test.cn \
     -config /usr/local/gmssl/ssl/openssl.cnf
 
-# 签发证书
 gmssl x509 -req -sm3 -days 3650 -CA RootCA.crt \
     -CAkey demoCA/private/Root.key \
     -CAcreateserial -in Client.req -out Client.crt
-
-# 证书验证
-gmssl verify -CAfile RootCA.crt Client.crt
-```
-
-生成国密双证书的完整脚本：
-
-```sh
-GmsslRootPath=/usr/local/gmssl
-CONF_FILE=${GmsslRootPath}/apps/openssl.cnf
-DemoCaDir=${GmsslRootPath}/apps/demoCA/
-
-CertDir=${DemoCaDir}/certs/
-KeyDir=${CertDir}/keys/
-ReqDir=${DemoCaDir}/reqs/
-
-SUBJ_STR="/C=CN/ST=Beijing/L=Beijing/O=CSG/OU=WangAn (GM)/CN=*.vpn.test.cn"
-
-CACert=${CertDir}/CA.cert.pem
-CAKey=${KeyDir}/CA.key.pem
-CAReq=${ReqDir}/CA.req
-
-export LD_LIBRARY_PATH=/usr/local/gmssl/lib
-
-rm -rf ${GmsslRootPath}/apps/demoCA/
-
-mkdir -p ${CertDir} ${KeyDir} ${ReqDir}
-
-# 生成 CA 证书文件
-
-gmssl ecparam -name sm2p256v1 -out ${DemoCaDir}/SM2.pem
-
-gmssl req -new -config ${CONF_FILE} -nodes -subj ${SUBJ_STR} \
-    -keyout ${CAKey} -newkey ec:${DemoCaDir}/SM2.pem -out ${CAReq}
-
-gmssl x509 -sm3 -req -days 1000 -in ${CAReq} -extfile ${CONF_FILE} \
-    -extensions v3_ca -signkey ${CAKey} -CAcreateserial -out ${CACert}
-
-# 生成服务端和客户端证书
-for tt in SS SE CS CE; do
-    gmssl req -new -config ${CONF_FILE} -nodes -subj ${SUBJ_STR} \
-        -keyout ${KeyDir}/${tt}.key.pem \
-        -newkey ec:${DemoCaDir}/SM2.pem -out ${ReqDir}/${tt}.req
-
-    gmssl x509 -sm3 -req -days 1000 -in ${ReqDir}/${tt}.req \
-        -CA ${CACert} -CAkey ${CAKey} \
-        -extfile ${CONF_FILE} -extensions v3_req \
-        -CAcreateserial -out ${CertDir}/${tt}.cert.pem
-done
-```
-
-生成证书注销列表的脚本代码：
-
-```sh
-GmsslRootPath=/usr/local/gmssl
-DemoCaDir=${GmsslRootPath}/apps/demoCA
-CertDir=${DemoCaDir}/certs
-
-if [ -z "$1" ]; then
-    echo "Usage: "`basename "$0"`" cert0 [cert1 cert2 ...]"
-fi
-
-touch ${DemoCaDir}/index.txt
-touch ${DemoCaDir}/index.txt.attr
-
-echo 01 > "${DemoCaDir}/crlnumber"
-
-cd ${DemoCaDir}/..
-
-until [ $# -eq 0 ] do
-    gmssl ca -revoke ${CertDir}/$1 \
-        -keyfile ${CertDir}/keys/CA.key.pem \
-        -cert ${CertDir}/CA.cert.pem
-
-    shift
-done
-
-gmssl ca -gencrl -keyfile ${CertDir}/keys/CA.key.pem \
-    -cert ${CertDir}/CA.cert.pem -out ${DemoCaDir}/crl/gm_cert.crl
-```
-
-下面是最终在`/usr/local/gmssl/apps`下生成的目录结构：
-
-```shell
-$ tree
-.
-|-- demoCA
-|   |-- certs
-|   |   |-- CA.cert.pem
-|   |   |-- CA.srl
-|   |   |-- CE.cert.pem
-|   |   |-- CS.cert.pem
-|   |   |-- keys
-|   |   |   |-- CA.key.pem
-|   |   |   |-- CE.key.pem
-|   |   |   |-- CS.key.pem
-|   |   |   |-- SE.key.pem
-|   |   |   `-- SS.key.pem
-|   |   |-- SE.cert.pem
-|   |   `-- SS.cert.pem
-|   |-- crl
-|   |   `-- gm_cert.crl
-|   |-- crlnumber
-|   |-- index.txt
-|   |-- index.txt.attr
-|   |-- reqs
-|   |   |-- CA.req
-|   |   |-- CE.req
-|   |   |-- CS.req
-|   |   |-- SE.req
-|   |   `-- SS.req
-|   `-- SM2.pem
-`-- openssl.cnf
 ```
 
 ## 配置 Nginx 支持双证书协议
