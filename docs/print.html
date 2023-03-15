@@ -194,8 +194,8 @@
 <p>2021 年 12 月 31 日，龙蜥开源社区（OpenAnolis）上线<a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247489838&amp;idx=1&amp;sn=80b18635611f36a4fcda127c9f680ef7&amp;chksm=cf66ea5cf811634a72158c21e62c67071d1ca696a49ebfc5ea4f85f0ec1029ce01a94b42ad49&amp;scene=21#wechat_redirect">「CentOS 停服专区」</a>，为受 CentOS 停服影响的用户提供迁移方案及长期稳定支持。此次停服，龙蜥操作系统（Anolis OS）产品<strong>优势包括</strong>：打造系统化解决方案 AOMS、提供多款配套工具、承诺10年技术支持、兼容 CentOS 生态、具备差异化核心技术优势、历经丰富场景验证、沉淀用户迁移案例实践。<br /></p>
 <h2 id="反馈与共创"><a class="header" href="#反馈与共创">反馈与共创</a></h2>
 <p>OpenAnolis是一个开放包容的社区，因此我们也欢迎志同道合之士参与我们的文档修订。</p>
-<p>对于文档中您认为不足之处，欢迎到我们的官方仓库 <a href="https://gitee.com/anolis/whitebook-shangmi">Whitebook ShangMi</a> 新开issue，我们会第一时间进行响应。</p>
-<p>另外，若您想更新文档，也同样欢迎在 <a href="https://gitee.com/anolis/whitebook-shangmi">Whitebook ShangMi</a> 提PR。</p>
+<p>对于文档中您认为不足之处，欢迎到我们的官方仓库 <a href="https://github.com/openanolis/whitebook-shangmi">Whitebook ShangMi</a> 新开issue，我们会第一时间进行响应。</p>
+<p>另外，若您想更新文档，也同样欢迎在 <a href="https://github.com/openanolis/whitebook-shangmi">Whitebook ShangMi</a> 提PR。</p>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
 <pre><code class="footer-code">作者: OpenAnolis
@@ -290,7 +290,7 @@
 <p>此外，Anolis社区相关团队积极投入，支持在TLS v1.3协议中使用商密算法套件，目前这个技术已经被国际标准承认，并且以RFC8998标准发布，这意味着我们可以选择在TLS v1.3协议中使用完整的商密套件，这极大的扩充了商密的应用范围，为了应用这些技术标准，同时为商密标准量身打造了Tongsuo密码算法库，在兼容OpenSSL的基础上支持了商密的标准，为用户提供一个基于商密的应用开发及运行环境。</p>
 <p><img src="images/shangmi_arch.png" alt="商密基础设施架构" /></p>
 <h2 id="商密-sig-现状"><a class="header" href="#商密-sig-现状">商密 SIG 现状</a></h2>
-<p>龙蜥社区在众多的常用基础软件中实现了商密的支持，极大的丰富了商密的软件生态，并且把这些技术全部回馈到了上游社区，以下是相关的基础软件对于商密算法的支持情况以及社区回馈统计：</p>
+<p>龙蜥社区在众多的常用基础软件中实现了商密的支持，极大的丰富了商密的软件生态，并且把这些技术全部回馈到了上游社区，以下是相关的基础软件对于商密算法的支持情况以及社区回馈统计（截止2022年12月）：</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">开源软件</th><th style="text-align: center">SM2</th><th style="text-align: center">SM3</th><th style="text-align: center">SM4</th><th style="text-align: center">PKCS#7</th><th style="text-align: center">X509</th><th style="text-align: right">commits</th><th style="text-align: right">修改行数</th></tr></thead><tbody>
 <tr><td style="text-align: left"><a href="http://git.savannah.gnu.org/cgit/gnulib.git/log/?qt=author&amp;q=Jia+Zhang">gnulib</a></td><td style="text-align: center">-</td><td style="text-align: center">✅</td><td style="text-align: center">-</td><td style="text-align: center">-</td><td style="text-align: center">-</td><td style="text-align: right">5</td><td style="text-align: right">-5/+1046</td></tr>
 <tr><td style="text-align: left"><a href="https://git.gnupg.org/cgi-bin/gitweb.cgi?p=libgcrypt.git;a=search;s=Tianjia+Zhang;st=author">libgcrypt</a></td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td style="text-align: center">-</td><td style="text-align: center">-</td><td style="text-align: right">22</td><td style="text-align: right">-155/+4202</td></tr>
@@ -393,7 +393,7 @@ openssl req -verbose -new -days 10000 -x509 -sm3 \
 </code></pre>
 </li>
 <li>
-<p>从证书生成SM2算法的证书请求并验证</p>
+<p>从私钥生成SM2算法的证书请求并验证</p>
 <pre><code class="language-bash"># Generate a certificate request from private key and verify it
 
 openssl ecparam -genkey -name SM2 -text -out sm2.key
@@ -477,7 +477,7 @@ int X509_REQ_verify_ctx(X509_REQ *a, EVP_PKEY *r, EVP_MD_CTX *ctx);
 <h2 id="tpm-20"><a class="header" href="#tpm-20">TPM 2.0</a></h2>
 <p>TPM (Trusted Platform Module) 2.0是遵循 ISO/IEC 11889 系列标准的可信根、由国际可信计算组织 TCG（Trusted Computing Group）维护。如下图所示，密码学系统是TPM2.0核心、其所有安全功能均以密码学系统为基础。</p>
 <p><img src="images/tpm_1.png" alt="TPM" /></p>
-<p>目前TPM2.0支持SM2.SM3、SM4特性，具体包括基于SM3的Hash算法、支持SM3 bank的PCR extend；支持SM4加解密；支持SM2加解密、SM2签名验签、SM2+SM3证书签名验签。</p>
+<p>目前TPM2.0支持SM2、SM3、SM4特性，具体包括基于SM3的Hash算法、支持SM3 bank的PCR extend；支持SM4加解密；支持SM2加解密、SM2签名验签、SM2+SM3证书签名验签。</p>
 <p>龙蜥OS为客户提供了两种使用TPM国密算法引擎的途径：TSS(TrustedSoftwareStack)提供的API访问TPM国密算法、TPMtools中的密码指令使用TPM提供的国密算法</p>
 <p>以下示例为使用tpmtools创建基于SM2+SM3-256的认证密钥。</p>
 <pre><code class="language-sh">h_ek_persistent_ecc=0x81010002
@@ -583,7 +583,7 @@ Please Input the Corresponding Operations.
 </li>
 </ol>
 <h2 id="uefi安全启动存在的问题"><a class="header" href="#uefi安全启动存在的问题">UEFI安全启动存在的问题</a></h2>
-<p>UEFI 安全启动从设计上补齐了系统启动的安全短板，能够解决固件启动中扩展执行第三方模块、OS启动项时的安全隐患；同时支持灵活的安全策略配置；能够从源头构建完整的安全链路。自UEFI2.3.1 正式引入功能以来，UEFI安全启动已然成为各类系统的标准安全配置，广泛应用于个人电脑，笔记本，HPC，云服务器，网络存储和路由等各种应用场景。尽管UEFI安全启动具备很多优良的特性，作为国外科技企业主导定义的安全标准，它在标准定义、实现和实际部署中，仍然存在诸多不可忽视问题:</p>
+<p>UEFI 安全启动从设计上补齐了系统启动的安全短板，能够解决固件启动中扩展执行第三方模块、OS启动项时的安全隐患；同时支持灵活的安全策略配置；能够从源头构建完整的安全链路。自UEFI2.3.1 正式引入功能以来，UEFI安全启动已然成为各类系统的标准安全配置，广泛应用于个人电脑，笔记本，HPC，云服务器，网络存储和路由等各种应用场景。尽管UEFI安全启动具备很多优良的特性，作为国外科技企业主导定义的安全标准，它在标准定义、实现和实际部署中，仍然存在诸多不可忽视的问题:</p>
 <ol>
 <li>
 <p>UEFI安全启动设计标准限定了密码学算法的选用，如Hash算法仅支持SHA-2 256, 384, 512 等，数字签名校验算法仅支持EMSA-PKCS1-v1_5 。</p>
@@ -716,12 +716,12 @@ Please Input the Corresponding Operations.
 <ul>
 <li>akcipher：非对称算法</li>
 <li>shash：哈希算法</li>
-<li>cipher：对称算法，只支持单个分组的加解密</li>
+<li>cipher：对称算法，只实现了单个分组的加解密</li>
 <li>skcipher：对称算法，与模式相结合的算法</li>
 <li>aead：带认证的对称算法</li>
 </ul>
 <h2 id="软件实现"><a class="header" href="#软件实现">软件实现</a></h2>
-<p>国密的软件实现是最早被引用内核的国密算法实现，软件实现不依赖任何特殊指令，适用于任何架构，但效率较低，在不支持优化的平台上可以选择使用软件实现的国密方案。</p>
+<p>国密的软件实现是最早被引入内核的国密算法实现，软件实现不依赖任何特殊指令，适用于任何架构，但效率较低，在不支持优化的平台上可以选择使用软件实现的国密方案。</p>
 <p>SM2 是非对称算法，目前在内核中主要用于验签和完整性检查，由于算法自身输入数据量小且调用频度不高，优化带来的收益不大，因此，Linux 内核中的SM2算法目前只有软件实现。</p>
 <div class="table-wrapper"><table><thead><tr><th>算法</th><th>类型</th><th>内部驱动</th><th style="text-align: right">优先级</th><th>模块名</th></tr></thead><tbody>
 <tr><td>SM2</td><td>akcipher</td><td>sm2-generic</td><td style="text-align: right">100</td><td>sm2-generic</td></tr>
@@ -868,7 +868,7 @@ cbcmac-sm4-ce  |  371.63  675.33  903.23  972.07  981.42  990.93  991.45
   GCM enc  | 108.62  397.18   971.60  1283.92  1522.77  1513.39  1777.00  1806.96
   GCM dec  | 116.36  398.14  1004.27  1319.11  1624.21  1635.43  1932.54  1974.20
 </code></pre>
-<p><a href="optimization.html"><strong>国密硬件加速与优化</strong></a>章节会重点介绍armv8下Crypto Extension的细节信息。</p>
+<p><a href="optimization.html"><strong>国密硬件加速与优化</strong></a>章节会重点介绍armv8下使用Crypto Extension指令优化的细节信息。</p>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
 <pre><code class="footer-code">作者: OpenAnolis
@@ -878,11 +878,11 @@ cbcmac-sm4-ce  |  371.63  675.33  903.23  972.07  981.42  990.93  991.45
 </code></pre>
 </footer>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="文件加密fscrypt"><a class="header" href="#文件加密fscrypt">文件加密（fscrypt）</a></h1>
-<p>通常我们文件作为数据载体，使用磁盘，USB 闪存，SD 卡等存储介质进行数据存储，即便我们已经离线存储，仍然不能保证该存储介质不会丢失，如果丢失那么对于我们来说有可能是灾难性的事件。因此对这些离线存储的重要数据文件进行加密是非常有必要的，本节将介绍如何使用国密算法加密文件系统中的文件。</p>
+<p>通常我们会以文件作为数据载体，使用磁盘，USB 闪存，SD 卡等存储介质进行数据存储，即便数据已经离线存储，仍然不能保证该存储介质不会丢失，如果丢失那么对于我们来说有可能是灾难性的事件。因此对这些离线存储的重要数据文件进行加密是非常有必要的，本节将介绍如何使用国密算法加密文件系统中的文件。</p>
 <h2 id="fscrypt-简介"><a class="header" href="#fscrypt-简介">fscrypt 简介</a></h2>
-<p>内核中的 fscrypt 是一个库，文件系统可以挂钩它以支持文件和目录的透明加密。</p>
+<p>内核中的 fscrypt 是一个库，文件系统可以使用它以支持文件和目录的透明加密。</p>
 <p>与 dm-crypt 不同，fscrypt 在文件系统级别而不是块设备级别运行。 这允许它使用不同的密钥加密不同的文件，并在同一文件系统上拥有未加密的文件。 这对于多用户系统非常有用，在该系统中，每个用户的静态数据都需要与其他用户进行加密隔离。 除了文件名，fscrypt 不加密文件系统的元数据。</p>
-<p>与作为堆栈文件系统的 eCryptfs 不同，fscrypt 直接集成到支持的文件系统中，目前是 ext4、F2FS 和 UBIFS。fscrypt 允许读取和写入加密文件，而无需在页面缓存中同时缓存解密和加密页面，从而将使用的内存几乎减半并使其与未加密文件保持一致。 同样，需要一半的 dentry 和 inode。 eCryptfs 还将加密文件名限制为 143 字节，从而导致应用程序兼容性问题； fscrypt 允许完整的 255 个字节 (NAME_MAX)长度的文件名。 最后，与 eCryptfs 不同，fscrypt API 可以由非特权用户使用，无需依赖任何组件。</p>
+<p>与作为栈式文件系统的 eCryptfs 不同，fscrypt 是直接集成到支持的文件系统中，目前支持 fscrypt 的文件系统是 ext4、F2FS 和 UBIFS。fscrypt 允许读取和写入加密文件，而无需在页面缓存中同时缓存解密和加密页面，从而将使用的内存几乎减半并使其与未加密文件保持一致。 同样，需要一半的 dentry 和 inode。 eCryptfs 还将加密文件名限制为 143 字节，从而导致应用程序兼容性问题； fscrypt 允许完整的 255 个字节 (NAME_MAX)长度的文件名。 最后，与 eCryptfs 不同，fscrypt API 可以由非特权用户使用，而无需依赖其它任何组件。</p>
 <p>fscrypt 不支持就地加密文件。 相反，它支持将空目录标记为已加密。 然后，在用户空间提供密钥后，在该目录树中创建的所有常规文件、目录和符号链接都将被透明地加密。</p>
 <h2 id="支持的加密模式和用法"><a class="header" href="#支持的加密模式和用法">支持的加密模式和用法</a></h2>
 <p>fscrypt 允许为文件内容指定一种加密模式，为文件名指定一种加密模式。 不同的目录树允许使用不同的加密方式。 目前支持以下几种加密方式对：</p>
@@ -913,9 +913,9 @@ make
 make install
 </code></pre>
 <p>其次，选择一块未用到的磁盘格式化为支持 fscrypt 的文件系统 ext4，并挂载。</p>
-<pre><code class="language-sh">mkfs.ext4 -O encrypt /dev/vdb
+<pre><code class="language-sh">mkfs.ext4 -O encrypt /dev/vda3
 
-mount /dev/vdb /mnt
+mount /dev/vda3 /mnt
 </code></pre>
 <blockquote>
 <p>🟢 <strong>透明加密文件</strong></p>
@@ -956,21 +956,10 @@ Encryption policy for /mnt/endir:
 &gt; tree /mnt/endir
 /mnt/endir
 ├── curl.h
-├── curlver.h
 ├── easy.h
 ├── foo
 │   └── hello
-├── header.h
-├── mprintf.h
-├── multi.h
-├── options.h
-├── stdcheaders.h
-├── system.h
-├── typecheck-gcc.h
-├── urlapi.h
 └── websockets.h
-
-1 directories, 13 files
 </code></pre>
 <blockquote>
 <p>🟢 <strong>锁定加密目录</strong></p>
@@ -986,21 +975,10 @@ Absent
 &gt; tree /mnt/endir
 /mnt/endir
 ├── 1H2e0BbS4MGZKAKEu6NVXniaYMWIrWDwbyzX6EVEWEN8tfWcWNgDyw
-├── 2otRhm5-MDOSKyICcSyBWdKghJIsrsAl5xMCsCX0nCWQN2mC3gKBCg
-├── 5MJXflC0Pf81ZlnV2YKmDg01tkRdKXPsmwZEesS-Q8gCLu-nuGRnSg
-├── 5vPk9fvei-vU2RQp3tub8v3uZf_hOKje5kpGMn-qoTDkfhtU9C4Y5g
-├── 7F6rs2Zf-ogIMXwQdOi0sKtT2vtq2d7XKOkXJ4PPfx1pAKNXDjYHkw
 ├── LvYw6Jl0a1jImKKOFPjtpG3hEDxjjuM6YIYqcMeXaWdzKUdaX0YCNQ
 ├── QBBz8_qGE4MJY6YVzfqVUkr6YeCSqtoQmbvG04BsR0lAr2oLwO0b2g
 │   └── wOYdFlMRACjeBa-eSo3LuO4sE55q1YuFv-S_lVU-n498jdMjAt06JA
-├── WBtjWd12dIHLd1XQ2fN_VnN8EGP1CrMJgqQLQ6Zt9No34mbNibCGSA
-├── cHGhd03URFdNl19DExe26X6w2NsQC2ixUspPNdhU-1nrgKDDwPTMWg
-├── eBGQnXyUMzPEOY3sHWVZNSeWKGm6C1NYCyEkO9Nm_dqNI15JAi6MzQ
-├── mkzb9jZ5jk8A259-k8U34_4qi64SpJBKQOhwdTEIIiaHG7aLryMOGQ
-├── tE1hArEQub5O88_prGmdVoj73W7eb-iqaQ4GEetgI8nEDyVIK4K08Q
 └── zoiobWxVG2DLjg8uMXfsVP11159zqQUjozJ8gmt1zyjayJlZ4awOhA
-
-1 directory, 13 files
 
 # 目录被锁定，无法进行常规文件操作，即便拔盘，也不能得到明文内容
 &gt; cat /mnt/endir/1H2e0BbS4MGZKAKEu6NVXniaYMWIrWDwbyzX6EVEWEN8tfWcWNgDyw
@@ -1123,7 +1101,7 @@ vda
 </footer>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="内核完整性度量架构ima"><a class="header" href="#内核完整性度量架构ima">内核完整性度量架构（IMA）</a></h1>
 <h2 id="ima-简介"><a class="header" href="#ima-简介">IMA 简介</a></h2>
-<p>IMA是<code>Integrity Measurement Architecture</code>的缩写，它是Linux内核中完整性子系统的一部分。目前Linux内核的完整性子系统支持EVM和IMA，前者用于保护文件的扩展属性。这篇文章讨论的是后者。</p>
+<p>IMA是<code>Integrity Measurement Architecture</code>的缩写，它是Linux内核中完整性子系统的一部分。目前Linux内核的完整性子系统支持EVM和IMA，前者用于保护文件的扩展属性。本小节讨论的是后者。</p>
 <p>IMA所能做到的事情包括：</p>
 <ul>
 <li>能够对正在打开的文件进行完整性评估。</li>
@@ -1324,7 +1302,7 @@ measure uid=1001 func=MMAP_CHECK
 10 26bf0fc75828... ima-sig sm3:18781f4c9104... /usr/lib64/libtinfo.so.5.9
 ... ...
 </code></pre>
-<p>注意期中第一条日志，boot_aggregate是系统启动阶段TPM PCR的汇聚值，这个值是汇聚TPM设备对应PCR bank的值做一个digest，所使用的摘要算法是根据TPM设备版本以及支持的PCR bank决定，默认是SHA1，当然这个摘要也可以通过配置为默认优先SM3算法，例子中没有TPM设备，所以这里值是0。</p>
+<p>注意其中第一条日志，boot_aggregate是系统启动阶段TPM PCR的汇聚值，这个值是汇聚TPM设备对应PCR bank的值做一个digest，所使用的摘要算法是根据TPM设备版本以及支持的PCR bank决定，默认是SHA1，当然这个摘要也可以通过配置为默认优先SM3算法，例子中没有TPM设备，所以这里值是0。</p>
 <p>接下来，我们再构造一个没有经过签名的可执行文件并执行：</p>
 <pre><code class="language-sh">su imatest
 cd ~
@@ -1409,12 +1387,12 @@ TLS（KTLS）从名字可以看到，是把TLS协议的数据平面（相对于�
 <blockquote>
 <p>🟢 <strong>优势</strong></p>
 </blockquote>
-<p>众所周知，<code>sendfile</code>在内核提供的重要的优化网络服务的手段，但完全实现在用户态的TLS库是不支持<code>sendfile</code>的，因为要把文件内容读入用户态，加密后再交给内核发送到网络设备。</p>
+<p>众所周知，<code>sendfile</code>是内核提供的重要的优化网络服务的手段，但完全实现在用户态的TLS库是不支持<code>sendfile</code>的，因为要把文件内容读入用户态，加密后再交给内核发送到网络设备。</p>
 <p>在使用Kernel TLS 时，一定程度上是解决了在TLS中使用<code>sendfile</code>的问题，KTLS 是内核提供的又一个重要的优化TLS协议的手段。尤其是在静态文件服务的场景下，对TLS协议的性能提升明显，对基于TLS协议的https流量的性能提升非常有帮助，因为在内核加解密数据会减少数据在内核态和用户态的两次数据拷贝。</p>
 <h2 id="ktls-国密实践"><a class="header" href="#ktls-国密实践">KTLS 国密实践</a></h2>
 <p><a href="https://datatracker.ietf.org/doc/html/rfc8998">RFC 8998</a>定义了在TLS 1.3协议中使用国密算法套件的规范，KTLS 也支持使用 SM4 CCM/GCM AEAD 算法加密数据。</p>
 <p>内核的KTLS跟应用是通过sockopt来交互的，开发者需要明确告诉内核某个套接字要使用KTLS并且传递加密所需要的各种信息，比如密钥，记录序号等。</p>
-<p>以下示例演示了在网络应用中使用 SM4 GCM 算法在内核加密数据。注意，内核KTLS依赖TLS协议握手之后得到的密钥数据，但不必实现完整的TLS协议，即便这个密钥不是TLS握手得到的。</p>
+<p>以下示例演示了在网络应用中使用 SM4 GCM 算法在内核加密数据。注意，内核KTLS依赖密钥数据，但不必实现完整的TLS协议，即便这个密钥不是TLS握手得到的。</p>
 <blockquote>
 <p>🟢 <strong>准备套接字</strong></p>
 </blockquote>
@@ -1623,7 +1601,7 @@ SSL_CTX_disable_sm_tls13_strict(ctx);
 </footer>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="委托凭证delegated-credentials"><a class="header" href="#委托凭证delegated-credentials">委托凭证（Delegated Credentials）</a></h1>
 <h2 id="前言-1"><a class="header" href="#前言-1">前言</a></h2>
-<p>在HTTPS通信的场景下，通常在Web服务器上部署证书和密钥，用于身份认证，同时保证消息的完整性。而加密通信的安全性主要取决于加密算法的安全性和密钥的安全性。如果使用了不安全的加密算法，即使攻击者不知道密钥，在只知道密文的前提下，依然可以通过对密文进行分析来实现攻击。例如2020年3月底，研究者公开了Zoom的重大安全漏洞，其中包括，Zoom使用了不安全的加密模式（ECB加密模式），导致了多个知名的公司、教育机构和政府组织宣布，出于信息安全的考虑，禁止使用Zoom，转而使用其他替代产品。</p>
+<p>在HTTPS通信的场景下，通常在Web服务器上部署证书和密钥，用于身份认证，同时保证消息的完整性。而加密通信的安全性主要取决于加密算法的安全性和密钥的安全性。如果使用了不安全的加密算法，即使攻击者不知道密钥，在只知道密文的前提下，依然可以通过对密文进行分析来实现攻击。例如2020年3月底，研究者公开了Zoom的重大安全漏洞，其中包括，Zoom使用了不安全的加密模式（ECB加密模式），导致了多个知名的公司、教育机构和政府组织出于信息安全的考虑，禁止使用Zoom，转而使用其他替代产品。</p>
 <p>同时，随着近些年量子计算的快速发展，对现代密码学的安全性提出了新的挑战。目前广泛使用的公钥加密算法以RSA和基于椭圆曲线的密码算法为主，而这些算法所基于的数学难题对于经典计算机来说很难，但是对于一个功能足够强大的量子计算机来说可以轻松解决。后量子密码学（PQC）标准化组织致力于研究新的加密算法，以抵抗量子计算，在不久的未来，当新的算法来临时，我们该如何快速迁移？</p>
 <p>在加密算法安全的前提下，如何保证密钥的安全性，就成为了关键。尤其是对于部署大量边缘服务器的企业或云计算厂商，将密钥部署在每一台边缘服务器上，如果有一台服务器被黑客入侵，就会导致服务所有站点的密钥泄露，影响范围大，后果非常严重。</p>
 <h2 id="delegated-credentials介绍"><a class="header" href="#delegated-credentials介绍">Delegated Credentials介绍</a></h2>
@@ -1642,12 +1620,12 @@ SSL_CTX_disable_sm_tls13_strict(ctx);
 <h2 id="对比-keyless-和-delegated-credentials-方案"><a class="header" href="#对比-keyless-和-delegated-credentials-方案">对比 keyless 和 Delegated Credentials 方案</a></h2>
 <p>keyless方案，通过将密钥部署在远程的Back-End（例如KeyServer），在TLS握手的时候，请求Back-End使用密钥进行签名。通过将密钥和边缘服务器隔离，提升密钥的安全性，降低密钥泄露风险。</p>
 <pre><code>Client            Front-End            Back-End
-     |----ClientHello---&gt;|                    |
-     |&lt;---ServerHello----|                    |
-     |&lt;---Certificate----|                    |
-     |                   |&lt;---remote sign----&gt;|
-     |&lt;---CertVerify-----|                    |
-     |        ...        |                    |
+  |----ClientHello---&gt;|                    |
+  |&lt;---ServerHello----|                    |
+  |&lt;---Certificate----|                    |
+  |                   |&lt;---remote sign----&gt;|
+  |&lt;---CertVerify-----|                    |
+  |        ...        |                    |
 </code></pre>
 <p>而DC方案，同样在Back-End上部署证书和密钥，提前签发DC后并部署在边缘服务器上（Front-End）。</p>
 <p>和keyless相比的优点：</p>
@@ -1656,16 +1634,16 @@ SSL_CTX_disable_sm_tls13_strict(ctx);
 <li>keyless在TLS握手时请求Back-End服务器，增加了握手的延时，而DC签发、部署可以异步离线执行</li>
 </ul>
 <pre><code>Client            Front-End            Back-End
-     |                   |&lt;--DC distribution-&gt;|
-     |----ClientHello---&gt;|                    |
-     |&lt;---ServerHello----|                    |
-     |&lt;---Certificate----|                    |
-     |&lt;---CertVerify-----|                    |
-     |        ...        |                    |
+  |                   |&lt;--DC distribution-&gt;|
+  |----ClientHello---&gt;|                    |
+  |&lt;---ServerHello----|                    |
+  |&lt;---Certificate----|                    |
+  |&lt;---CertVerify-----|                    |
+  |        ...        |                    |
 </code></pre>
 <h2 id="delegated-credentials优势"><a class="header" href="#delegated-credentials优势">Delegated Credentials优势</a></h2>
 <h3 id="自主签发"><a class="header" href="#自主签发">自主签发</a></h3>
-<p>通常，服务端证书或客户端证书是由证书认证机构（CA）来签发，一般有效期不超过1年，在证书过期之前需要找CA重新签发证书。如果想要签发短期的证书，意味着要与CA机构进行频繁的交互，等待CA审核通过后，下载证书重新部署。而短期的证书意味着证书的有效期更短，如果CA相应不及时，可能导致证书过期的风险。</p>
+<p>通常，服务端证书或客户端证书是由证书认证机构（CA）来签发，一般有效期不超过1年，在证书过期之前需要找CA重新签发证书。如果想要签发短期的证书，意味着要与CA机构进行频繁的交互，等待CA审核通过后，下载证书重新部署。而短期的证书意味着证书的有效期更短，如果 CA 响应不及时，可能导致证书过期的风险。</p>
 <p>引入Delegated Credentials后，就可以使用服务端（或客户端）证书来签发DC，而不需要依赖于外部CA。通过DC来代理终端实体证书，完成TLS通信。</p>
 <h3 id="使用更安全的算法"><a class="header" href="#使用更安全的算法">使用更安全的算法</a></h3>
 <p>正是因为自主签发，我们可以选择更安全的签名算法，例如Ed25519，而CA通常不支持。</p>
@@ -1676,7 +1654,7 @@ SSL_CTX_disable_sm_tls13_strict(ctx);
 <h2 id="delegated-credentials支持现状"><a class="header" href="#delegated-credentials支持现状">Delegated Credentials支持现状</a></h2>
 <p>DC既需要服务端支持，也需要客户端支持，目前支持DC的浏览器并不多，以Firefox为主。</p>
 <p>支持DC的开源密码库包括 Google 的 BoringSSL、Firefox 的 NSS、国内的 Tongsuo，目前OpenSSL还不支持DC。</p>
-<p>Tongsuo 发布的 8.2.0 版本支持 Delegated Credentials，且已经合并到开源 Tongsuo，欢迎大家使用内部RPM包或开源版本。</p>
+<p>Tongsuo 发布的 8.2.0 版本开始支持 Delegated Credentials。</p>
 <h2 id="实战delegated-credentials"><a class="header" href="#实战delegated-credentials">实战Delegated Credentials</a></h2>
 <h3 id="签发dc-1"><a class="header" href="#签发dc-1">签发DC</a></h3>
 <p>注意：需要使用 Tongsuo 才能签发dc，开源OpenSSL并不支持。</p>
@@ -1727,39 +1705,28 @@ openssl s_client -connect 127.0.0.1:4433 \
     -verifyCAfile dc-ecc-chain-ca.crt \
     -verify_return_error
 </code></pre>
-<h3 id="应用基于-tongsuo-集成dc"><a class="header" href="#应用基于-tongsuo-集成dc">应用基于 Tongsuo 集成DC</a></h3>
+<h3 id="集成-dc-代码示例"><a class="header" href="#集成-dc-代码示例">集成 DC 代码示例</a></h3>
 <pre><code class="language-c">SSL *s;
-SSL_CTX *ctx;
-DELEGATED_CREDENTIAL *dc = NULL;
-ctx = SSL_CTX_new(TLS_server_method());
-if (ctx == NULL) {
-    // error
-}
+SSL_CTX *ctx = SSL_CTX_new(TLS_server_method());
 
-// 设置证书
-if (!SSL_CTX_use_certificate_file(ctx, cert_file, SSL_FILETYPE_PEM)) {
-    // error
-}
-// 设置证书的密钥
-if (!SSL_CTX_use_PrivateKey_file(ctx, key_file, SSL_FILETYPE_PEM)) {
-    // error
-}
 
-// 加载DC文件，注意：必须先加载服务端（或客户端）证书，再加载DC
-if (!SSL_CTX_use_dc_file(ctx, cert_file, 0)) {
-    // error
-}
+/* 设置证书 */
+SSL_CTX_use_certificate_file(ctx, cert_file, SSL_FILETYPE_PEM);
 
-// 加载DC的密钥
-if (!SSL_CTX_use_dc_PrivateKey_file(ctx, key_file, SSL_FILETYPE_PEM)) {
-    // error
-}
+/* 设置证书的密钥 */
+SSL_CTX_use_PrivateKey_file(ctx, key_file, SSL_FILETYPE_PEM);
 
-// 功能：开启dc签名功能
-// server在开启该功能并收到dc请求时才会选择使用dc进行签名
+/* 加载DC文件，注意：必须先加载服务端（或客户端）证书，再加载DC */
+SSL_CTX_use_dc_file(ctx, cert_file, 0);
+
+/* 加载DC的密钥 */
+SSL_CTX_use_dc_PrivateKey_file(ctx, key_file, SSL_FILETYPE_PEM);
+
+/* 功能：开启dc签名功能
+ * server 在开启该功能并收到dc请求时才会选择使用dc进行签名
+ */
 SSL_CTX_enable_sign_by_dc(ctx);
-...
-    
+
 s = SSL_new(ctx);
 
 ...
@@ -1832,7 +1799,7 @@ int main()
     
     /* 例如：设置压缩算法为zlib */
     SSL_CTX_add_cert_compression_alg(ctx, TLSEXT_cert_compression_zlib,
-                                    zlib_compress, zlib_decompress);
+                                     zlib_compress, zlib_decompress);
     SSL *con = SSL_new(ctx);
     
     /* 握手... */
@@ -1842,14 +1809,12 @@ int main()
 </code></pre>
 <p>也可以使用 Tongsuo 提供的 s_client 和 s_server 来使用 TLS 证书压缩功能：</p>
 <pre><code class="language-sh"># 服务端
-openssl s_server \
-    -accept 127.0.0.1:34567 \
+openssl s_server -accept 127.0.0.1:34567 \
     -cert server.crt -key server.key \
     -tls1_3 -cert_comp zlib -www -quiet
 
 # 客户端
-openssl s_client \
-    -connect 127.0.0.1:34567 \
+openssl s_client -connect 127.0.0.1:34567 \
     -tls1_3 -cert_comp zlib -ign_eof -trace
 </code></pre>
 <h2 id="测试压缩算法和压缩率"><a class="header" href="#测试压缩算法和压缩率">测试压缩算法和压缩率</a></h2>
@@ -1862,12 +1827,12 @@ openssl s_client \
 </tbody></table>
 </div>
 <p>有些压缩算法是支持设置字典的，比如 brotli、zstd。可以提前计算好字典内容，预埋到客户端和服务端，然后在压缩和解压的时候使用该字典，可以让证书链完美“消失”。例如上表中使用 zstd + 字典时，压缩前的 Certficate 消息为 2666 字节，压缩后只有 18 字节。</p>
-<p>开启证书压缩功能后，可以大大降低握手时的传输，尤其是使用字典时，例如 zstd + 字典时数据如下：</p>
+<p>开启证书压缩功能后，可以大大减少握手时传输的数据，尤其是使用字典时，例如 zstd + 字典时数据如下：</p>
 <p>关闭证书压缩，握手共传输：3331 字节</p>
 <p>开启证书压缩：握手共传输：698 字节</p>
 <p>压缩率：698/3331 * 100% = 20.95%，握手带宽降低接近 80%。</p>
 <h2 id="结语"><a class="header" href="#结语">结语</a></h2>
-<p>TLS 会话复用时不需要发送证书，所以，在完整握手时，就可以通过证书压缩来优化。在双向认证的场景下，即服务端开启了客户端认证，如果客户端和服务端都开启 TLS 证书压缩功能，压缩效果更明显，可以节省 TLS 握手中 80% 以上的带宽。后面 Tongsuo 还会支持 Compact TLS 1.3，即 TLS 1.3 的袖珍版，保持协议同构的前提下，占用最小的带宽。</p>
+<p>TLS 会话复用时不需要发送证书，所以，在完整握手时，就可以通过证书压缩来优化。在双向认证的场景下，即服务端开启了客户端认证，如果客户端和服务端都开启 TLS 证书压缩功能，压缩效果更明显，可以节省 TLS 握手中 80% 以上的带宽。后面 Tongsuo 还会支持 Compact TLS 1.3，即 TLS 1.3 的袖珍版，在保持协议同构的前提下，占用最小的带宽。</p>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
 <pre><code class="footer-code">作者: OpenAnolis
@@ -1908,108 +1873,45 @@ openssl s_client \
     -enc_key test_certs/double_cert/CE.key.pem \
     -enable_ntls -ntls
 </code></pre>
-<h2 id="在你的-clientserver-中使用相关-api-使用"><a class="header" href="#在你的-clientserver-中使用相关-api-使用">在你的 client/server 中使用（相关 api 使用）</a></h2>
+<h2 id="ntls-api-使用"><a class="header" href="#ntls-api-使用">NTLS API 使用</a></h2>
 <p>server 端示例代码如下：</p>
-<pre><code class="language-c">int main()
-{
-    //变量定义
-    const SSL_METHOD *meth = NULL;
-    SSL_CTX *ctx = NULL;
-    const char *sign_key_file = &quot;/path/to/sign_key_file&quot;;
-    const char *sign_cert_file = &quot;/path/to/sign_cert_file&quot;;
-    const char *enc_key_file = &quot;/path/to/enc_key_file&quot;;
-    const char *enc_cert_file = &quot;/path/to/enc_cert_file&quot;;
+<pre><code class="language-c">SSL_CTX *ctx;
+const char *sign_key_file = &quot;/path/to/sign_key_file&quot;;
+const char *sign_cert_file = &quot;/path/to/sign_cert_file&quot;;
+const char *enc_key_file = &quot;/path/to/enc_key_file&quot;;
+const char *enc_cert_file = &quot;/path/to/enc_cert_file&quot;;
 
-    //双证书相关server的各种定义
-    meth = NTLS_server_method();
-    //生成上下文
-    ctx = SSL_CTX_new(meth);
-    //允许使用国密双证书功能
-    SSL_CTX_enable_ntls(ctx);
+/* 生成上下文 */
+ctx = SSL_CTX_new(NTLS_server_method());
 
-    //加载签名证书，加密证书
-    if (sign_key_file) {
-        if (!SSL_CTX_use_sign_PrivateKey_file(cctx-&gt;ctx,
-                        sign_key_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
+/* 允许使用国密双证书功能 */
+SSL_CTX_enable_ntls(ctx);
 
-    if (sign_cert_file) {
-        if (!SSL_CTX_use_sign_certificate_file(cctx-&gt;ctx,
-                        sign_cert_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
+/* 设置签名证书 */
+SSL_CTX_use_sign_PrivateKey_file(ctx, sign_key_file, SSL_FILETYPE_PEM);
+SSL_CTX_use_sign_certificate_file(ctx, sign_cert_file, SSL_FILETYPE_PEM);
 
-    if (enc_key_file) {
-        if (!SSL_CTX_use_enc_PrivateKey_file(cctx-&gt;ctx,
-                        enc_key_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
+/* 设置加密证书 */
+SSL_CTX_use_enc_PrivateKey_file(ctx, enc_key_file, SSL_FILETYPE_PEM);
+SSL_CTX_use_enc_certificate_file(ctx, enc_cert_file, SSL_FILETYPE_PEM);
 
-    if (enc_cert_file) {
-        if (!SSL_CTX_use_enc_certificate_file(cctx-&gt;ctx,
-                        enc_cert_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-
-    //...后续同标准tls流程
-    con = SSL_new(ctx);
-}
+/* 后续同标准 tls 流程 */
+con = SSL_new(ctx);
 </code></pre>
 <p>client端示例代码如下：</p>
-<pre><code class="language-c">int main()
-{
-    //变量定义
-    const SSL_METHOD *meth = NULL;
-    SSL_CTX *ctx = NULL;
-    const char *sign_key_file = &quot;/path/to/sign_key_file&quot;;
-    const char *sign_cert_file = &quot;/path/to/sign_cert_file&quot;;
-    const char *enc_key_file = &quot;/path/to/enc_key_file&quot;;
-    const char *enc_cert_file = &quot;/path/to/enc_cert_file&quot;;
+<pre><code class="language-c">SSL_CTX *ctx = NULL;
 
-    //双证书相关client的各种定义
-    meth = NTLS_client_method();
-    //生成上下文
-    ctx = SSL_CTX_new(meth);
-    //允许使用国密双证书功能
-    SSL_CTX_enable_ntls(ctx);
+/* 生成上下文 */
+ctx = SSL_CTX_new(NTLS_client_method());
 
-    //设置算法套件为ECC-SM2-WITH-SM4-SM3或者ECDHE-SM2-WITH-SM4-SM3
-    //这一步并不强制编写，默认ECC-SM2-WITH-SM4-SM3优先
-    if(SSL_CTX_set_cipher_list(ctx, &quot;ECC-SM2-WITH-SM4-SM3&quot;) &lt;= 0)
-        goto err;
+/* 设置算法套件为 ECC-SM2-WITH-SM4-SM3 或者 ECDHE-SM2-WITH-SM4-SM3
+ * 这一步并不强制，默认 ECC-SM2-WITH-SM4-SM3 优先
+ */
+SSL_CTX_set_cipher_list(ctx, &quot;ECC-SM2-WITH-SM4-SM3&quot;);
 
-    //加载签名证书，加密证书，仅ECDHE-SM2-WITH-SM4-SM3套件需要这一步,
-    //该部分流程用...begin...和...end...注明
-    // ...begin...
-    if (sign_key_file) {
-        if (!SSL_CTX_use_sign_PrivateKey_file(cctx-&gt;ctx,
-                    sign_key_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-
-    if (sign_cert_file) {
-        if (!SSL_CTX_use_sign_certificate_file(cctx-&gt;ctx,
-                    sign_cert_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-
-    if (enc_key_file) {
-        if (!SSL_CTX_use_enc_PrivateKey_file(cctx-&gt;ctx,
-                    enc_key_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-
-    if (enc_cert_file) {
-        if (!SSL_CTX_use_enc_certificate_file(cctx-&gt;ctx,
-                    enc_cert_file, SSL_FILETYPE_PEM))
-            goto err;
-    }
-    // ...end...
-
-    //...后续同标准tls流程
-    con = SSL_new(ctx);
-}
+/* 设置签名证书，加密证书，这一步参考服务端相关代码
+ * 仅ECDHE-SM2-WITH-SM4-SM3套件需要这一步
+ */
 </code></pre>
 <h2 id="说明"><a class="header" href="#说明">说明</a></h2>
 <p>由于国密双证书的握手流程和协议版本号与标准tls流程存在一定的不同，因此我们选择将双证书的实现(代码里命名为 ntls )同现有的 tls 状态机拆分开来，然后在入口处通过对请求的版本号进行识别，然后使其进入正确的状态机。</p>
@@ -2080,92 +1982,15 @@ openssl s_client \
 </ul>
 <h2 id="半同态算法-ec-elgamal"><a class="header" href="#半同态算法-ec-elgamal">半同态算法 EC-ElGamal</a></h2>
 <p>ElGamal 加密算法是基于 Diffie-Hellman 密钥交换的非对称加密算法，EC-ElGamal 是 ECC 的一种，是把 ElGamal 移植到椭圆曲线上来的实现，主要计算有：椭圆曲线点加、点减、点乘、模逆和离散对数。</p>
-<p>以下是铜锁中实现的相关接口：</p>
-<blockquote>
-<p>🟢 <strong>上下文对象</strong></p>
-</blockquote>
-<p>EC_ELGAMAL_CTX，该对象用来保存公私钥以及一些其他内部用到的信息，是 EC-ElGamal 算法其他接口的第一个参数。</p>
-<p>接口如下：</p>
-<pre><code class="language-c">//创建 EC_ELGAMAL_CTX 对象，key 为 ECC 公钥或者私钥的 EC_KEY 对象
-EC_ELGAMAL_CTX *EC_ELGAMAL_CTX_new(EC_KEY *key);
-
-//释放 EC_ELGAMAL_CTX 对象
-void EC_ELGAMAL_CTX_free(EC_ELGAMAL_CTX *ctx);
-</code></pre>
-<blockquote>
-<p>🟢 <strong>解密表对象</strong></p>
-</blockquote>
-<p>EC_ELGAMAL_DECRYPT_TABLE，该对象用来保存解密表的内部信息。椭圆曲线离散对数问题（ECDLP）只有爆力破解的方法可求解，而爆力破解的速度比较慢，通常的做法是使用小步大步算法（Baby-Step，Giant-Step，BSGS）。总体思想是提前将所有可能的明文结果提前运算后，保存到 hash 表中，下次只需要进行少量的运算和 hash 表查找就可以得到结果，大大提高 ECDLP 的解密效率。但解密表的初始化可能比较慢，而且解密表的实现事关解密速度，后面考虑可以开放接口的实现给上层应用，所以这里先定义了一个解密表的对象和默认实现。</p>
-<p>接口如下：</p>
-<pre><code class="language-c">//创建 EC_ELGAMAL_DECRYPT_TABLE 对象
-//decrypt_negative 为 1 时表示该解密表可以解密负数，
-//初始化解密表时将可能的负数运算后插入到 hash 中。
-EC_ELGAMAL_DECRYPT_TABLE *
-EC_ELGAMAL_DECRYPT_TABLE_new(EC_ELGAMAL_CTX *ctx, int32_t decrypt_negative);
-
-//释放 EC_ELGAMAL_DECRYPT_TABLE 对象
-void EC_ELGAMAL_DECRYPT_TABLE_free(EC_ELGAMAL_DECRYPT_TABLE *table);
-
-//设置 EC_ELGAMAL_DECRYPT_TABLE 对象到上下文对象中
-//解密时如果存在解密表则使用解密表进行求解，否则直接爆力破解，速度会很慢
-void EC_ELGAMAL_CTX_set_decrypt_table(EC_ELGAMAL_CTX *ctx,
-                                      EC_ELGAMAL_DECRYPT_TABLE *table);
-</code></pre>
-<blockquote>
-<p>🟢 <strong>密文对象</strong></p>
-</blockquote>
-<p>EC_ELGAMAL_CIPHERTEXT，由上面原理可知，加密之后得到的结果是两个点，该对象是用来保存加密后的密文信息（两个点），加密/解密和。</p>
-<p>接口如下：</p>
-<pre><code class="language-c">//创建 EC_ELGAMAL_CIPHERTEXT 对象
-EC_ELGAMAL_CIPHERTEXT *EC_ELGAMAL_CIPHERTEXT_new(EC_ELGAMAL_CTX *ctx);
-
-//释放 EC_ELGAMAL_CIPHERTEXT 对象
-void EC_ELGAMAL_CIPHERTEXT_free(EC_ELGAMAL_CIPHERTEXT *ciphertext);
-</code></pre>
-<blockquote>
-<p>🟢 <strong>加密/解密接口</strong></p>
-</blockquote>
-<pre><code class="language-c">//加密，将明文 plaintext 进行加密，结果保存到 EC_ELGAMAL_CIPHERTEXT 对象指针 r 中
-int EC_ELGAMAL_encrypt(EC_ELGAMAL_CTX *ctx,
-        EC_ELGAMAL_CIPHERTEXT *r, int32_t plaintext);
-
-//解密，将密文 ciphertext 进行解密，结果保存到 int32_t 指针 r 中
-int EC_ELGAMAL_decrypt(EC_ELGAMAL_CTX *ctx,
-        int32_t *r, EC_ELGAMAL_CIPHERTEXT *ciphertext);
-</code></pre>
-<blockquote>
-<p>🟢 <strong>密文加/减/标量乘运算接口</strong></p>
-</blockquote>
-<pre><code class="language-c">//密文加，r = c1 + c2
-int EC_ELGAMAL_add(EC_ELGAMAL_CTX *ctx, EC_ELGAMAL_CIPHERTEXT *r,
-                   EC_ELGAMAL_CIPHERTEXT *c1, EC_ELGAMAL_CIPHERTEXT *c2);
-
-//密文减，r = c1 - c2
-int EC_ELGAMAL_sub(EC_ELGAMAL_CTX *ctx, EC_ELGAMAL_CIPHERTEXT *r,
-                   EC_ELGAMAL_CIPHERTEXT *c1, EC_ELGAMAL_CIPHERTEXT *c2);
-
-//标量密文乘，r = m * c
-int EC_ELGAMAL_mul(EC_ELGAMAL_CTX *ctx, EC_ELGAMAL_CIPHERTEXT *r,
-                   EC_ELGAMAL_CIPHERTEXT *c, int32_t m);
-</code></pre>
-<blockquote>
-<p>🟢 <strong>编码/解码接口</strong></p>
-</blockquote>
-<p>同态加密涉及到多方参与，可能会需要网络传输，这就将密文对象 EC_ELGAMAL_CIPHERTEXT 编码后才能传递给对方，对方也需要解码得到 EC_ELGAMAL_CIPHERTEXT 对象后才能调用其他接口进行运算。</p>
-<p>接口如下：</p>
-<pre><code class="language-c">//编码，将密文 ciphertext 编码后保存到 out 指针中，out 指针的内存需要提前分配好；
-//如果 out 为 NULL，则返回编码所需的内存大小；
-//compressed 为是否采用压缩方式编码
-//  1 为压缩编码（编码结果长度较小）
-//  0 为正常编码（编码结果长度较大）
-size_t EC_ELGAMAL_CIPHERTEXT_encode(EC_ELGAMAL_CTX *ctx,
-        unsigned char *out, size_t size,
-        EC_ELGAMAL_CIPHERTEXT *ciphertext, int compressed);
-
-//解码，将长度为 size 的内存数据 in 解码后保存到密文对象 r 中
-int EC_ELGAMAL_CIPHERTEXT_decode(EC_ELGAMAL_CTX *ctx,
-        EC_ELGAMAL_CIPHERTEXT *r, unsigned char *in, size_t size);
-</code></pre>
+<p>铜锁中为 EC-ElGamal 算法实现了以下对象和接口（相关函数原型可参考头文件）：</p>
+<ul>
+<li>上下文对象：EC_ELGAMAL_CTX，该对象用来保存公私钥以及一些其他内部用到的信息，是 EC-ElGamal 算法其他接口的第一个参数。</li>
+<li>解密表对象：EC_ELGAMAL_DECRYPT_TABLE，该对象用来保存解密表的内部信息。椭圆曲线离散对数问题（ECDLP）只有爆力破解的方法可求解，而爆力破解的速度比较慢，通常的做法是使用小步大步算法（Baby-Step，Giant-Step，BSGS）。总体思想是提前将所有可能的明文结果提前运算后，保存到 hash 表中，下次只需要进行少量的运算和 hash 表查找就可以得到结果，大大提高 ECDLP 的解密效率。但解密表的初始化可能比较慢，而且解密表的实现事关解密速度，后面考虑可以开放接口的实现给上层应用，所以这里先定义了一个解密表的对象和默认实现。</li>
+<li>密文对象：EC_ELGAMAL_CIPHERTEXT，由上面原理可知，加密之后得到的结果是两个点，该对象是用来保存加密后的密文信息（两个点），加密/解密和。</li>
+<li>加密/解密接口</li>
+<li>密文加/减/标量乘运算接口</li>
+<li>编码/解码接口：同态加密涉及到多方参与，可能会需要网络传输，这就将密文对象 EC_ELGAMAL_CIPHERTEXT 编码后才能传递给对方，对方也需要解码得到 EC_ELGAMAL_CIPHERTEXT 对象后才能调用其他接口进行运算。</li>
+</ul>
 <h3 id="核心实现"><a class="header" href="#核心实现">核心实现</a></h3>
 <p>Tongsuo 是 OpenSSL 的衍生版，内部支持了很多椭圆曲线算法的实现。</p>
 <p>比如，已支持国际（prime256v1、secp384r1 等）和国密（SM2）的大部分椭圆曲线，天生实现了椭圆曲线点运算、公私钥生成等基础算法，所以在 Tongsuo 实现 EC-ElGamal 算法的核心实现主要是 EC-ElGamal 原理的实现和 ECDLP 求解算法的实现。</p>
@@ -2175,102 +2000,15 @@ int EC_ELGAMAL_CIPHERTEXT_decode(EC_ELGAMAL_CTX *ctx,
 <p><strong>原理方面</strong>，Paillier 是基于复合剩余类的困难性问题 （大数分解难题） 的公钥加密算法，有点类似 RSA；而 EC-ElGamal 是基于椭圆曲线数学理论的公钥加密算法，其安全性理论上要比 Paillier 要更好。</p>
 <p><strong>性能方面</strong>，EC-ElGamal 的加密和密文加法性能要比 Paillier 好；而 Paillier 的解密和密文标量乘法性能要比起 EC-ElGamal 要更好更稳定 （EC-ElGamal 的解密性能与解密的数字大小有关系，数字越大可能需要解密的时间越长，这与 EC-ElGamal 解密用到的解密表有关系，而 Paillier 的解密就没有这个问题。） 。</p>
 <p>所以这两个算法各有优劣，大家可以根据自己的业务特点选择使用 Paillier 还是 EC-ElGamal。</p>
-<p>以下是铜锁中实现的相关接口：</p>
-<blockquote>
-<p>🟢 <strong>对象相关接口</strong></p>
-</blockquote>
-<p><strong>公/私钥对象</strong>：PAILLIER_KEY ，该对象用来保存 Paillier 公钥和私钥的基本信息，比如 p、q、n、g、λ、μ 等信息，私钥保存所有字段，公钥只保存 n、g，其他字段为空或者 0。相关接口如下：</p>
-<pre><code class="language-c">// 创建 PAILLIER_KEY 对象
-PAILLIER_KEY *PAILLIER_KEY_new(void);
-
-// 释放 PAILLIER_KEY 对象
-void PAILLIER_KEY_free(PAILLIER_KEY *key);
-
-// 拷贝 PAILLIER_KEY 对象，将 src 拷贝到 dest 中
-PAILLIER_KEY *PAILLIER_KEY_copy(PAILLIER_KEY *dest, PAILLIER_KEY *src);
-
-// 复制 PAILLIER_KEY 对象
-PAILLIER_KEY *PAILLIER_KEY_dup(PAILLIER_KEY *key);
-
-// 将 PAILLIER_KEY 对象引用计数加1，释放 PAILLIER_KEY 对象时若引用计数不为0则不能释放其内存
-intPAILLIER_KEY_up_ref(PAILLIER_KEY *key);
-
-// 生成 PAILLIER_KEY 对象中的参数，bits 为随机大素数 p、q 的二进制位长度
-int PAILLIER_KEY_generate_key(PAILLIER_KEY *key, int bits);
-
-// 获取 key 的类型：公钥 or 私钥
-// PAILLIER_KEY_TYPE_PUBLIC 为私钥，PAILLIER_KEY_TYPE_PRIVATE 为私钥
-int PAILLIER_KEY_type(PAILLIER_KEY *key);
-</code></pre>
-<p><strong>上下文对象</strong>：PAILLIER_CTX，该对象用来保存公私钥对象以及一些其他内部用到的信息，是 Paillier 算法其他接口的第一个参数。相关接口如下：</p>
-<pre><code class="language-c">// 创建 PAILLIER_CTX 对象，key 为 paillier 公钥或者私钥，
-// threshold 为支持最大的数字阈值，加密场景可设置为 0，解密场景可使用默认值：
-PAILLIER_MAX_THRESHOLDPAILLIER_CTX *
-PAILLIER_CTX_new(PAILLIER_KEY *key, int64_t threshold);
-
-// 释放 PAILLIER_CTX 对象
-void PAILLIER_CTX_free(PAILLIER_CTX *ctx);
-
-// 拷贝 PAILLIER_CTX 对象，将 src 拷贝到 dest 中
-PAILLIER_CTX *PAILLIER_CTX_copy(PAILLIER_CTX *dest, PAILLIER_CTX *src);
-
-// 复制 PAILLIER_CTX 对象
-PAILLIER_CTX *PAILLIER_CTX_dup(PAILLIER_CTX *src);
-</code></pre>
-<p><strong>密文对象</strong>：PAILLIER_CIPHERTEXT ，该对象是用来保存 Paillier 加密后的结果信息，用到 PAILLIER_CIPHERTEXT 的地方，可调用如下接口：</p>
-<pre><code class="language-c">// 创建 PAILLIER_CIPHERTEXT 对象
-PAILLIER_CIPHERTEXT *PAILLIER_CIPHERTEXT_new(PAILLIER_CTX *ctx);
-
-// 释放 PAILLIER_CIPHERTEXT 对象
-void PAILLIER_CIPHERTEXT_free(PAILLIER_CIPHERTEXT *ciphertext);
-</code></pre>
-<blockquote>
-<p>🟢 <strong>加密/解密接口</strong></p>
-</blockquote>
-<pre><code class="language-c">// 加密，将明文 m 进行加密，结果保存到 PAILLIER_CIPHERTEXT 对象指针 out 中
-int PAILLIER_encrypt(PAILLIER_CTX *ctx,
-        PAILLIER_CIPHERTEXT *out, int32_t m);
-
-// 解密，将密文 c 进行解密，结果保存到 int32_t 指针 out 中
-int PAILLIER_decrypt(PAILLIER_CTX *ctx,
-        int32_t *out, PAILLIER_CIPHERTEXT *c);
-</code></pre>
-<blockquote>
-<p>🟢 <strong>密文加/减/标量乘运算接口</strong></p>
-</blockquote>
-<pre><code class="language-c">// 密文加，r = c1 + c2
-int PAILLIER_add(PAILLIER_CTX *ctx, PAILLIER_CIPHERTEXT *r,
-                 PAILLIER_CIPHERTEXT *c1, PAILLIER_CIPHERTEXT *c2);
-
-// 密文标量加，r = c1 * m
-int PAILLIER_add_plain(PAILLIER_CTX *ctx, PAILLIER_CIPHERTEXT *r,
-                       PAILLIER_CIPHERTEXT *c1, int32_t m);
-
-// 密文减，r = c1 - c2
-int PAILLIER_sub(PAILLIER_CTX *ctx, PAILLIER_CIPHERTEXT *r,
-                 PAILLIER_CIPHERTEXT *c1, PAILLIER_CIPHERTEXT *c2);
-
-// 密文标量乘，r = c * m
-int PAILLIER_mul(PAILLIER_CTX *ctx, PAILLIER_CIPHERTEXT *r,
-                 PAILLIER_CIPHERTEXT *c, int32_t m);
-</code></pre>
-<blockquote>
-<p>🟢 <strong>编码/解码接口</strong></p>
-</blockquote>
-<p>同态加密涉及到多方参与，可能会需要网络传输，这就需要将密文对象 PAILLIER_CIPHERTEXT 编码后才能传递给对方，对方也需要解码得到 PAILLIER_CIPHERTEXT 对象后才能调用其他接口进行运算。</p>
-<p>接口如下：</p>
-<pre><code class="language-c">// 编码，将密文 ciphertext 编码后保存到 out 指针中，out 指针的内存需要提前分配好；
-// 如果 out 为 NULL，则返回编码所需的内存大小；
-// flag：标志位，预留，暂时没有用
-size_t PAILLIER_CIPHERTEXT_encode(PAILLIER_CTX *ctx, unsigned char *out, 
-                                  size_t size,
-                                  const PAILLIER_CIPHERTEXT *ciphertext,
-                                  int flag);
-
-// 解码，将长度为 size 的内存数据 in 解码后保存到密文对象 r 中
-int PAILLIER_CIPHERTEXT_decode(PAILLIER_CTX *ctx, PAILLIER_CIPHERTEXT *r,
-                               unsigned char *in, size_t size);
-</code></pre>
+<p>铜锁中为 Paillier 算法实现了以下对象和接口（相关函数原型可参考头文件）：</p>
+<ul>
+<li>公/私钥对象：PAILLIER_KEY ，该对象用来保存 Paillier 公钥和私钥的基本信息，比如 p、q、n、g、λ、μ 等信息，私钥保存所有字段，公钥只保存 n、g，其他字段为空或者 0。</li>
+<li>上下文对象：PAILLIER_CTX，该对象用来保存公私钥对象以及一些其他内部用到的信息，是 Paillier 算法其他接口的第一个参数。</li>
+<li>密文对象：PAILLIER_CIPHERTEXT ，该对象是用来保存 Paillier 加密后的结果信息，用到 PAILLIER_CIPHERTEXT 的地方。</li>
+<li>加密/解密接口</li>
+<li>密文加/减/标量乘运算接口</li>
+<li>编码/解码接口：同态加密涉及到多方参与，可能会需要网络传输，这就需要将密文对象 PAILLIER_CIPHERTEXT 编码后才能传递给对方，对方也需要解码得到 PAILLIER_CIPHERTEXT 对象后才能调用其他接口进行运算。</li>
+</ul>
 <h3 id="paillier-命令行"><a class="header" href="#paillier-命令行">Paillier 命令行</a></h3>
 <p>为了提高 Paillier 的易用性，Tongsuo 实现了如下 Paillier 子命令：</p>
 <pre><code class="language-shell">$ /opt/tongsuo-debug/bin/openssl paillier -help
@@ -2316,9 +2054,10 @@ arg2          The second argument of a homomorphic operation
 </footer>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tongsuo-java-sdk"><a class="header" href="#tongsuo-java-sdk">Tongsuo-Java-SDK</a></h1>
 <h2 id="简介"><a class="header" href="#简介">简介</a></h2>
-<p>Tongsuo-Java-SDK 提供了一个面向Java生态的现代密码学算法和安全通信协议的开源基础密码库. 该库在实现上完全遵循 <code>OpenJDK Security Provider</code> 所定义的 <code>JCA/JCE/JSSE</code> 框架与接口, 因此具备良好的兼容性与可插件化. 此外, Tongsuo-Java-SDK 基于 Tongsuo 作为底层实现进行开发, 采用Native方式实现加解密与安全通信握手协议等核心逻辑。一方面可提升加解密的性能，降低系统 CPU 利用率; 另一方面增强对不同架构芯片的适配和性能优化能力(比如ARM架构倚天).</p>
+<p>Tongsuo-Java-SDK 提供了一个面向Java生态的现代密码学算法和安全通信协议的开源基础密码库。该库在实现上完全遵循 <code>OpenJDK Security Provider</code> 所定义的 <code>JCA/JCE/JSSE</code> 框架与接口，因此具备良好的兼容性与可插件化。</p>
+<p>此外，Tongsuo-Java-SDK 基于 Tongsuo 作为底层实现进行开发，采用Native方式实现加解密与安全通信握手协议等核心逻辑。一方面可提升加解密的性能，降低系统 CPU 利用率；另一方面增强对不同架构芯片的适配和性能优化能力(比如ARM架构倚天)。</p>
 <h2 id="核心特性"><a class="header" href="#核心特性">核心特性</a></h2>
-<p>Tongsuo-Java-SDK 支持以下核心特性:</p>
+<p>Tongsuo-Java-SDK 支持以下核心特性：</p>
 <ol>
 <li>常规的国际标准加解密算法和 <code>SSL/TLS</code> 协议</li>
 <li>支持 <code>RFC 8998</code>，即在 TLS 1.3 中使用商用密码算法</li>
@@ -2326,9 +2065,9 @@ arg2          The second argument of a homomorphic operation
 <li>符合 <code>JCA/JCE/JSSE</code> 接口标准</li>
 </ol>
 <h2 id="密码认证"><a class="header" href="#密码认证">密码认证</a></h2>
-<p>由于加解密和安全通信握手协议均由Tongsuo实现, 得益于Tongsuo获得了国家密码管理局商用密码检测中心颁发的商用密码产品认证证书, <code>Tongsuo-Java-SDK</code> 也能满足我国商用密码技术合规的要求.</p>
+<p>由于加解密和安全通信握手协议均由Tongsuo实现，得益于Tongsuo获得了国家密码管理局商用密码检测中心颁发的商用密码产品认证证书，<code>Tongsuo-Java-SDK</code> 也能满足我国商用密码技术合规的要求。</p>
 <h2 id="项目社区"><a class="header" href="#项目社区">项目社区</a></h2>
-<p>项目地址: <a href="https://github.com/Tongsuo-Project/tongsuo-java-sdk">https://github.com/Tongsuo-Project/tongsuo-java-sdk</a></p>
+<p>项目地址：<a href="https://github.com/Tongsuo-Project/tongsuo-java-sdk">https://github.com/Tongsuo-Project/tongsuo-java-sdk</a></p>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
 <pre><code class="footer-code">作者: OpenAnolis
@@ -2408,10 +2147,10 @@ arg2          The second argument of a homomorphic operation
 <p>ECDSA、RSA、AES、SHA-1 等 OpenSSL 算法在 GmSSL 中仍然可用。</p>
 <h2 id="nettle"><a class="header" href="#nettle">nettle</a></h2>
 <p>官网：<a href="http://www.lysator.liu.se/~nisse/nettle">http://www.lysator.liu.se/~nisse/nettle</a></p>
-<p>Nettle 是一个相对低层的加密库，旨在轻松适应各种工具包和应用程序。它开始于2001年的lsh的低级加密函数的集合。自2009年6月以来，Nettle是GNU软件包。</p>
+<p>Nettle 是一个相对低层的加密库，旨在轻松适应各种工具包和应用程序。它开始于2001年的lsh的低级加密函数的集合。自2009年6月以来，Nettle 成为 GNU 软件包。</p>
 <p>Nettle 的定位跟 libgcrypt 有点类似，是很多基础组件选择依赖的一个密码学库。</p>
 <p>从提供的 API 上来看，Nettle 没有对算法做更高层次的抽象，每个不同的算法都有一套更易理解的接口，开发者也会更容易上手。</p>
-<p>Nettle 从 3.8 版本开始支持了 SM3 算法，最新的开发分支已经合入了 SM4 算法，会在下一个 release 版本会发布。</p>
+<p>Nettle 从 3.8 版本开始支持了 SM3 算法，最新的开发分支已经合入了 SM4 算法，会在下一个 release 版本发布。</p>
 <h2 id="gnulib"><a class="header" href="#gnulib">gnulib</a></h2>
 <p>官网：<a href="https://www.gnu.org/software/gnulib">https://www.gnu.org/software/gnulib</a></p>
 <p>从名字可以看出，gnulib 并不是一个纯密码算法的库，它的定位是 GNU 的公共代码库，旨在 GNU 包的源代码级别之间共享。</p>
@@ -2419,7 +2158,7 @@ arg2          The second argument of a homomorphic operation
 <p>gnulib 是在 2017 年 10 月支持了 SM3 算法，由阿里巴巴张佳贡献。</p>
 <h2 id="coreutils"><a class="header" href="#coreutils">coreutils</a></h2>
 <p>coreutils 支持了大量的计算哈希的工具，比如 cksum，md5sum，b2sum，sha*sum 等，这些工具是紧密依赖于 gnulib 库的。</p>
-<p>2017 年 10 月，在 gnulib 库支持了 SM3 之后，我们便向 coreutils 社区提交了 sm3sum 工具的支持，coreutils 社区却迟迟不愿接收，因为 SM3 算法的IV向量没有明确的来历说明，社区对算法的安全性有质疑，虽然披时 SM3 已经是 ISO 的国际标准算法。社区人员认为 SM3 在 gnulib 中作为库提供给开发者是没有问题的，因为开发者具备也应该具备判断一个算法是否安全的能力，但是在 coreutils 中提供一个 sm3sum 的工具提供给终端用户会引起用户的误导，用户可能误认为算法安全性是得到保证的，尤其是在 SM3 算法安全性被质疑的前提下。</p>
+<p>2017 年 10 月，在 gnulib 库支持了 SM3 之后，我们便向 coreutils 社区提交了 sm3sum 工具的支持，coreutils 社区却迟迟不愿接收，因为 SM3 算法的IV向量没有明确的来历说明，社区对算法的安全性有质疑，虽然彼时 SM3 已经是 ISO 的国际标准算法。社区人员认为 SM3 在 gnulib 中作为库提供给开发者是没有问题的，因为开发者具备也应该具备判断一个算法是否安全的能力，但是在 coreutils 中提供一个 sm3sum 的工具提供给终端用户会引起用户的误导，用户可能误认为算法安全性是得到保证的，尤其是在 SM3 算法安全性被质疑的前提下。</p>
 <p>直到四年后的 2021 年 9 月，在包括Linux 内核，libgcrypt，OpenSSL 等主流的密码算法社区都支持了SM3算法后，在龙蜥的几次推动下，coreutils 社区终于不再质疑 SM3 的安全性问题，但是社区也不愿意再多引入一个工具，应该把这个哈希算法整合为一个工具，因为类似 *sum 的工具太多了。</p>
 <p>因此，社区提出一个 <code>cksum -a [algo]</code> 的方案，通过给 cksum 工具添加一个算法参数，整合了目前 coreutils 中支持的所有哈希算法，为了兼容考虑，之前的 *sum 工具也继续保留了，SM3 是唯一仅在 cksum 工具中支持的算法，当然这并不是优点，使用习惯上也会有一些差异，用户需要通过 <code>cksum -a sm3</code> 来计算 SM3
 哈希，除这个区别外，其它用法跟 md5sum 类似。</p>
@@ -2519,155 +2258,21 @@ arg2          The second argument of a homomorphic operation
 本文原创发布于「OpenAnolis」,转载请注明出处,谢谢合作!
 </code></pre>
 </footer>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="python国密签名实践pyopenssl--cryptography--openssl"><a class="header" href="#python国密签名实践pyopenssl--cryptography--openssl">Python国密签名实践（pyopenssl + cryptography + OpenSSL）</a></h1>
-<h2 id="pyopenssl与cryptography-python库介绍"><a class="header" href="#pyopenssl与cryptography-python库介绍">pyopenssl与cryptography python库介绍</a></h2>
-<h3 id="pyopenssl"><a class="header" href="#pyopenssl">pyopenssl</a></h3>
-<p><a href="https://github.com/pyca/pyopenssl">pyopenssl</a>是一个基于OpenSSL库的Python wrapper。</p>
-<ul>
-<li>其中源码目录下crypto.py是<a href="https://github.com/openssl/openssl/tree/master/crypto">OpenSSL crypto密码学库</a>的wrapper，通过调用crypto.py的函数来实现对应的OpenSSL crypto API的调用 </li>
-</ul>
-<pre><code>├── src
-│   └── OpenSSL
-│       ├── crypto.py
-│       ├── debug.py
-│       ├── __init__.py
-│       ├── rand.py
-│       ├── SSL.py
-│       ├── _util.py
-│       └── version.py
-</code></pre>
-<p>以crypto.sign(位于pyopenssl/src/OpenSSL/crypto.py中)为例：会调用OpenSSL._util（位于pyopenssl/src/OpenSSL/_util.py中）里面的lib API完成签名</p>
-<pre><code class="language-python">from OpenSSL._util import (
-    ffi as _ffi,
-    lib as _lib,
-    exception_from_error_queue as _exception_from_error_queue,
-    byte_string as _byte_string,
-    native as _native,
-    path_string as _path_string,
-    UNSPECIFIED as _UNSPECIFIED,
-    text_to_bytes_and_warn as _text_to_bytes_and_warn,
-    make_assert as _make_assert,
-)
-
-def sign(pkey, data, digest):
-    &quot;&quot;&quot;
-    Sign a data string using the given key and message digest.
-
-    :param pkey: PKey to sign with
-    :param data: data to be signed
-    :param digest: message digest to use
-    :return: signature
-
-    .. versionadded:: 0.11
-    &quot;&quot;&quot;
-    data = _text_to_bytes_and_warn(&quot;data&quot;, data)
-
-    digest_obj = _lib.EVP_get_digestbyname(_byte_string(digest))
-    if digest_obj == _ffi.NULL:
-        raise ValueError(&quot;No such digest method&quot;)
-
-    if _lib.OPENSSL_VERSION_NUMBER &lt; 0x30000000 and _lib.EVP_PKEY_id(pkey._pkey) == _lib.EVP_PKEY_EC :
-        if _lib.EC_GROUP_get_curve_name(_lib.EC_KEY_get0_group(_lib.EVP_PKEY_get1_EC_KEY(pkey._pkey))) == NID_sm2 :
-            _lib.EVP_PKEY_set_alias_type(pkey._pkey, EVP_PKEY_SM2)
-    md_ctx = _lib.Cryptography_EVP_MD_CTX_new()
-    md_ctx = _ffi.gc(md_ctx, _lib.Cryptography_EVP_MD_CTX_free)
-
-    _lib.EVP_SignInit(md_ctx, digest_obj)
-    _lib.EVP_SignUpdate(md_ctx, data, len(data))
-
-    length = _lib.EVP_PKEY_size(pkey._pkey)
-    _openssl_assert(length &gt; 0)
-    signature_buffer = _ffi.new(&quot;unsigned char[]&quot;, length)
-    signature_length = _ffi.new(&quot;unsigned int *&quot;)
-    final_result = _lib.EVP_SignFinal(
-        md_ctx, signature_buffer, signature_length, pkey._pkey
-    )
-    _openssl_assert(final_result == 1)
-
-    return _ffi.buffer(signature_buffer, signature_length[0])[:]
-</code></pre>
-<p>而OpenSSL._util（位于pyopenssl/src/OpenSSL/_util.py中）的lib来源: <a href="https://github.com/pyca/cryptography">cryptography</a>这个python密码学库</p>
-<pre><code class="language-python">from cryptography.hazmat.bindings.openssl.binding import Binding
-
-binding = Binding()
-binding.init_static_locks()
-ffi = binding.ffi
-lib = binding.lib
-</code></pre>
-<p>由此可见，pyopenssl借助于<a href="https://github.com/pyca/cryptography">cryptography</a>这个python密码学库完成了签名。关于cryptography的介绍详见下问</p>
-<h3 id="cryptography"><a class="header" href="#cryptography">cryptography</a></h3>
-<p>接着上文的pyopenssl的crypto.sign的调用进行分析，可以看到在cryptography中binding.py的Binding类会调用lib库（cryptography.hazmat.bindings._openssl即<code>_openssl.so</code>）</p>
-<pre><code class="language-python">from cryptography.hazmat.bindings._openssl import ffi, lib
-
-class Binding(object):
-    &quot;&quot;&quot;
-    OpenSSL API wrapper.
-    &quot;&quot;&quot;
-
-    lib = None
-    ffi = ffi
-    _lib_loaded = False
-    _init_lock = threading.Lock()
-
-    def __init__(self):
-        self._ensure_ffi_initialized()
-
-    @classmethod
-    def _register_osrandom_engine(cls):
-        # Clear any errors extant in the queue before we start. In many
-        # scenarios other things may be interacting with OpenSSL in the same
-        # process space and it has proven untenable to assume that they will
-        # reliably clear the error queue. Once we clear it here we will
-        # error on any subsequent unexpected item in the stack.
-        cls.lib.ERR_clear_error()
-        if cls.lib.CRYPTOGRAPHY_NEEDS_OSRANDOM_ENGINE:
-            result = cls.lib.Cryptography_add_osrandom_engine()
-            _openssl_assert(cls.lib, result in (1, 2))
-
-    @classmethod
-    def _ensure_ffi_initialized(cls):
-        with cls._init_lock:
-            if not cls._lib_loaded:
-                cls.lib = build_conditional_library(lib, CONDITIONAL_NAMES)
-                cls._lib_loaded = True
-                # initialize the SSL library
-                cls.lib.SSL_library_init()
-                # adds all ciphers/digests for EVP
-                cls.lib.OpenSSL_add_all_algorithms()
-                                                       
-</code></pre>
-<p>除了阅读源码（这里不再继续详细展开，感兴趣的可以阅读对应的源码）看到cryptography调用OpenSSL完成一些密码学操作（比如签名外），还可以通过ldd可以看到这个cryptography.hazmat.bindings._openssl（即<code>_openssl.so</code>）对OpenSSL的依赖</p>
-<pre><code class="language-shell"># pwd
-/usr/lib64/python2.7/site-packages/cryptography/hazmat/bindings
-# ldd _openssl.so
-        linux-vdso.so.1 (0x00007fffc81f7000)
-        libssl.so.1.1 =&gt; /lib64/libssl.so.1.1 (0x00007fccbc400000)
-        libcrypto.so.1.1 =&gt; /lib64/libcrypto.so.1.1 (0x00007fccbbe00000)
-        libpthread.so.0 =&gt; /lib64/libpthread.so.0 (0x00007fccbba00000)
-        libpython2.7.so.1.0 =&gt; /lib64/libpython2.7.so.1.0 (0x00007fccbb600000)
-        libc.so.6 =&gt; /lib64/libc.so.6 (0x00007fccbb200000)
-        libz.so.1 =&gt; /lib64/libz.so.1 (0x00007fccbae00000)
-        libdl.so.2 =&gt; /lib64/libdl.so.2 (0x00007fccbaa00000)
-        /lib64/ld-linux-x86-64.so.2 (0x00007fccbcb49000)
-        libutil.so.1 =&gt; /lib64/libutil.so.1 (0x00007fccba600000)
-        libm.so.6 =&gt; /lib64/libm.so.6 (0x00007fccba200000)
-</code></pre>
-<h2 id="python-的商密签名实践"><a class="header" href="#python-的商密签名实践">python 的商密签名实践</a></h2>
-<p>结合上文介绍，可以看到在签名上，</p>
-<ul>
-<li>python的基础密码学库cryptography依赖OpenSSL</li>
-<li>pyopenssl又在cryptography上进行封装，使得python的签名变得简单</li>
-</ul>
-<p>龙蜥社区不仅在OpenSSL社区参与SM2/3/4等国密算法的优化，而且也在cryptography和pyopenssl仓库导出OpenSSL的国密签名来保障python的用户能够正常使用。接下来我们分别以OpenSSL 3.x和OpenSSL 1.1.x两个支持国密版本的OpenSSL为例阐述python的商密签名实践。</p>
-<h3 id="基于openssl-3x-的-python-的商密签名sm2-with-sm3实践"><a class="header" href="#基于openssl-3x-的-python-的商密签名sm2-with-sm3实践">基于OpenSSL 3.x 的 python 的商密签名(SM2-with-SM3)实践</a></h3>
-<p>正常安装OpenSSL 3.x和pyopenssl以及cryptography后（无需修改）后，生成SM2-with-SM3所需要的商密密钥与证书</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="python国密签名实践"><a class="header" href="#python国密签名实践">Python国密签名实践</a></h1>
+<h2 id="cryptography-和-pyopenssl"><a class="header" href="#cryptography-和-pyopenssl">cryptography 和 pyopenssl</a></h2>
+<p><a href="https://github.com/pyca/cryptography">cryptography</a> 是使用 Python 开发的 OpenSSL wrapper，依赖于 OpenSSL C 库来进行所有密码操作。</p>
+<p><a href="https://github.com/pyca/pyopenssl">pyopenssl</a> 是另一个 OpenSSL wrapper，它提供更高层次的抽象，主要用于操作 SSL/TLS 协议，其它算法部分主要通过调用 cryptography 库来实现功能。</p>
+<h2 id="python-商密签名实践"><a class="header" href="#python-商密签名实践">python 商密签名实践</a></h2>
+<p>龙蜥社区不仅在OpenSSL社区参与SM2/3/4等国密算法的优化，而且也在cryptography和pyopenssl项目支持OpenSSL的国密签名来保障python的用户能够正常使用国密。接下来分别以 OpenSSL 3.x 和 OpenSSL 1.1.x 两个支持国密版本的OpenSSL为例阐述python的商密签名实践。</p>
+<h3 id="基于-openssl-3x-的-python-的商密签名"><a class="header" href="#基于-openssl-3x-的-python-的商密签名">基于 OpenSSL 3.x 的 python 的商密签名</a></h3>
+<p>正常安装 OpenSSL 3.x 和 pyopenssl 以及 cryptography 后（无需修改）后，生成SM2-with-SM3所需要的商密密钥与证书</p>
 <pre><code class="language-sh">openssl ecparam -genkey -name SM2 -out private.pem
 
 openssl req -new -x509 -days 36500 \
     -key private.pem -out cert.crt -sm3 \
     -subj &quot;/C=CN/ST=Zhejiang/L=Hangzhou/O=Alibaba/OU=OS/CN=CA/emailAddress=ca@foo.com&quot;
 </code></pre>
-<p>开发商密签名测试程序test_shangmi.py（以python 3为例），注意上文的pyopenssl与cryptography编译安装时与测试程序的python大版本号（同是python 2或者同是python 3）保持一致, 该测试程序功能主要是：</p>
+<p>开发商密签名测试程序test_shangmi.py（以python 3为例），注意上文的 pyopenssl 与 cryptography 编译安装时与测试程序的python大版本号（同是python 2或者同是python 3）保持一致, 该测试程序功能主要是：</p>
 <ul>
 <li>加载之前生成好的SM2-with-SM3的私钥和证书</li>
 <li>调用pyopenssl的sign和verify函数进行SM2-with-SM3的商密签名和验签</li>
@@ -2717,38 +2322,24 @@ if __name__ == &quot;__main__&quot;:
     print(&quot;len(sig)&quot;, len(sig))
     verify(cert, sig, content, &quot;sm3&quot;) 
 </code></pre>
-<p>执行测试程序即可(无报错则验签成功，详见pyopenssl对应的验签函数逻辑)</p>
+<p>执行测试程序即可 (无报错则验签成功，详见pyopenssl对应的验签函数逻辑)</p>
 <pre><code class="language-sh">./test_shangmi.py private.pem cert.crt
 </code></pre>
-<h3 id="基于-openssl-11x-的-python-的商密签名实践"><a class="header" href="#基于-openssl-11x-的-python-的商密签名实践">基于 OpenSSL 1.1.x 的 python 的商密签名实践</a></h3>
+<h3 id="基于-openssl-11x-的-python-的商密签名"><a class="header" href="#基于-openssl-11x-的-python-的商密签名">基于 OpenSSL 1.1.x 的 python 的商密签名</a></h3>
 <h4 id="openssl-11x-的选择"><a class="header" href="#openssl-11x-的选择">OpenSSL 1.1.x 的选择</a></h4>
-<p>OpenSSL社区1.1.x版本对国密算法的支持能力有限且不支持SM2-with-SM3这种组合算法。龙蜥社区移植了部分国密能力（包括SM2-with-SM3这种组合算法）到对应的<a href="https://gitee.com/anolis/openssl/tree/anolis_sm234/">龙蜥openssl仓库</a>以及<a href="https://gitee.com/src-anolis-os/openssl/tree/a8">龙蜥RPM仓库</a>，未来Anolis 8.8镜像可以默认安装龙蜥移植后的OpenSSL。当然你也可以使用 <a href="https://github.com/Tongsuo-Project/Tongsuo">Tongsuo</a> 作为支持国密算法且兼容OpenSSL 1.1.x的密码库。</p>
-<p>除了对国密的支持外，在<a href="https://github.com/openssl/openssl/blob/OpenSSL_1_1_1/doc/man3/EVP_PKEY_set1_RSA.pod">OpenSSL社区官方文档</a>中指出, 需要使用<code>EVP_PKEY_set_alias_type(pkey, EVP_PKEY_SM2)</code> 函数将ECCkey其转换为SM2 算法。所以基于OpenSSL 1.1.x的python的商密签名实践中，也需要对python库cryptography和pyopenssl库进行改造来导出<code>EVP_PKEY_set_alias_type</code>函数以及添加对应的逻辑（原有的cryptography和pyopenssl库并不支持这一能力）。</p>
-<h4 id="cryptography-1"><a class="header" href="#cryptography-1">cryptography</a></h4>
-<p>龙蜥社区经过一些开发和测试在cryptography中提交并合入了导出<code>EVP_PKEY_set_alias_type</code>函数的代码，详见https://github.com/pyca/cryptography/pull/7935 ，以便用户使用SM2算法，因此用户在使用cryptography仓库时无需修改。可以看到在安装cryptography（这里以python2为例）后可以在<code>_openssl.so</code>（上文已经详细介绍）里看到对应的<code>EVP_PKEY_set_alias_type</code>函数符号</p>
-<pre><code class="language-shell"># strings /usr/lib64/python2.7/site-packages/cryptography/hazmat/bindings/_openssl.so \
-    | grep EVP_PKEY_set_alias_type
-EVP_PKEY_set_alias_type
-EVP_PKEY_set_alias_type
-_cffi_d_EVP_PKEY_set_alias_type
-_cffi_f_EVP_PKEY_set_alias_type
-.annobin__cffi_d_EVP_PKEY_set_alias_type.start
-.annobin__cffi_d_EVP_PKEY_set_alias_type.end
-_cffi_d_EVP_PKEY_set_alias_type
-.annobin__cffi_f_EVP_PKEY_set_alias_type.start
-.annobin__cffi_f_EVP_PKEY_set_alias_type.end
-_cffi_f_EVP_PKEY_set_alias_type
-EVP_PKEY_set_alias_type@@OPENSSL_1_1_1
-</code></pre>
+<p>这里选择使用 <a href="anolisos_guide.html"><strong>Anolis OS 国密开发指南</strong></a> 章节描述的OpenSSL 1.1.1版本，当然也可以选择使用 <a href="https://github.com/Tongsuo-Project/Tongsuo">Tongsuo</a> 作为底层密码库。</p>
+<p>除了对国密的支持外，在<a href="https://github.com/openssl/openssl/blob/OpenSSL_1_1_1/doc/man3/EVP_PKEY_set1_RSA.pod">OpenSSL社区官方文档</a>中指出, 在检测到使用SM2密钥时，需要调用 <code>EVP_PKEY_set_alias_type(pkey, EVP_PKEY_SM2)</code> 函数显式使用 SM2 算法。所以在基于OpenSSL 1.1.x 的 python 库中，也需要做对应的支持，因此需要对 cryptography 和 pyopenssl 库进行改造，导出 <code>EVP_PKEY_set_alias_type</code> 函数以及添加对应的逻辑（原有的 cryptography 和 pyopenssl 库并不支持这一能力）。</p>
+<h4 id="cryptography"><a class="header" href="#cryptography">cryptography</a></h4>
+<p>龙蜥社区经过一些开发和测试在 cryptography 中提交并合入了导出 <code>EVP_PKEY_set_alias_type</code> 函数的<a href="https://github.com/pyca/cryptography/pull/7935">代码</a>，以便用户使用SM2算法，因此用户在使用 cryptography 仓库时无需修改。</p>
 <h4 id="pyopenssl-的修改"><a class="header" href="#pyopenssl-的修改">pyopenssl 的修改</a></h4>
-<p>至于也需要一些修改，目前龙蜥社区已经在pyopenssl发起了，正在review中，详见<a href="https://github.com/pyca/pyopenssl/pull/1172">https://github.com/pyca/pyopenssl/pull/1172</a> 。在代码合入之前仍需要用户手动打入patch，可参考如下步骤(以python 3为例)进行安装。</p>
+<p>pyopenssl 也需要一些修改，龙蜥社区已经在 pyopenssl 社区提交了<a href="https://github.com/pyca/pyopenssl/pull/1172">PR</a>。在代码合入之前仍需要用户手动打入patch，可参考如下步骤(以python 3为例)进行安装。</p>
 <pre><code class="language-sh">git clone https://github.com/hustliyilin/pyopenssl.git
 python3 setup.py sdist
 cd dist
 pip3 install pyOpenSSL-22.2.0.dev0.tar.gz
 </code></pre>
 <h4 id="测试步骤"><a class="header" href="#测试步骤">测试步骤</a></h4>
-<p>测试步骤跟基于OpenSSL 3.x的python的商密签名实践一样，在此不做赘述。</p>
+<p>测试步骤跟基于OpenSSL 3.x 的 python 的商密签名实践一样，在此不做赘述。</p>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
 <pre><code class="footer-code">作者: OpenAnolis
@@ -2813,152 +2404,37 @@ touch index.txt
 echo '01' &gt; serial
 </code></pre>
 <h2 id="生成国密证书"><a class="header" href="#生成国密证书">生成国密证书</a></h2>
+<p>TLCP 是双证书协议，因此需要生成根证书，服务端和客户端要分别生成签名证书和加密证书，可以参考如下命令来完成证书生成。</p>
 <p>生成根证书：</p>
-<pre><code class="language-sh"># 生成私钥key
-gmssl ecparam -genkey -name sm2p256v1 -text \
+<pre><code class="language-sh">gmssl ecparam -genkey -name sm2p256v1 -text \
     -out CA.key -config /usr/local/gmssl/ssl/openssl.cnf
 
-# 生成证书签名请求
 gmssl req -new -key CA.key -out Root.req
 
-# 生成根证书
 gmssl x509 -req -days 3650 -sm3 -in Root.req \
     -signkey Root.key -out RootCA.crt
 </code></pre>
 <p>生成服务端证书：</p>
-<pre><code class="language-sh"># 生成私钥
-gmssl ecparam -genkey -name sm2p256v1 -text -out Server.key
+<pre><code class="language-sh">gmssl ecparam -genkey -name sm2p256v1 -text -out Server.key
 
-# 证书请求
 gmssl req -new -key Server.key -out Server.csr \
     -subj /C=CN/ST=Beijing/L=Beijing/O=CSG/OU=WangAn (GM)/CN=*.vpn.test.cn \
     -config /usr/local/gmssl/ssl/openssl.cnf
 
-# 签发证书
 gmssl x509 -req -sm3 -days 3650 -CA RootCA.crt -CAkey Root.key \
     -CAcreateserial -in Server.req -out ServerCA.crt
-
-# 证书验证
-gmssl verify -CAfile RootCA.crt ServerCA.crt
 </code></pre>
 <p>生成客户端证书：</p>
-<pre><code class="language-sh"># 生成私钥
-gmssl ecparam -genkey -name sm2p256v1 -text \
+<pre><code class="language-sh">gmssl ecparam -genkey -name sm2p256v1 -text \
     -out Client.key -config /usr/local/gmssl/ssl/openssl.cnf
 
-# 生成客户证书请求
 gmssl req -new -key Client.key -out Client.req \
     -subj /C=CN/ST=Beijing/L=Beijing/O=CSG/OU=WangAn (GM)/CN=*.vpn.test.cn \
     -config /usr/local/gmssl/ssl/openssl.cnf
 
-# 签发证书
 gmssl x509 -req -sm3 -days 3650 -CA RootCA.crt \
     -CAkey demoCA/private/Root.key \
     -CAcreateserial -in Client.req -out Client.crt
-
-# 证书验证
-gmssl verify -CAfile RootCA.crt Client.crt
-</code></pre>
-<p>生成国密双证书的完整脚本：</p>
-<pre><code class="language-sh">GmsslRootPath=/usr/local/gmssl
-CONF_FILE=${GmsslRootPath}/apps/openssl.cnf
-DemoCaDir=${GmsslRootPath}/apps/demoCA/
-
-CertDir=${DemoCaDir}/certs/
-KeyDir=${CertDir}/keys/
-ReqDir=${DemoCaDir}/reqs/
-
-SUBJ_STR=&quot;/C=CN/ST=Beijing/L=Beijing/O=CSG/OU=WangAn (GM)/CN=*.vpn.test.cn&quot;
-
-CACert=${CertDir}/CA.cert.pem
-CAKey=${KeyDir}/CA.key.pem
-CAReq=${ReqDir}/CA.req
-
-export LD_LIBRARY_PATH=/usr/local/gmssl/lib
-
-rm -rf ${GmsslRootPath}/apps/demoCA/
-
-mkdir -p ${CertDir} ${KeyDir} ${ReqDir}
-
-# 生成 CA 证书文件
-
-gmssl ecparam -name sm2p256v1 -out ${DemoCaDir}/SM2.pem
-
-gmssl req -new -config ${CONF_FILE} -nodes -subj ${SUBJ_STR} \
-    -keyout ${CAKey} -newkey ec:${DemoCaDir}/SM2.pem -out ${CAReq}
-
-gmssl x509 -sm3 -req -days 1000 -in ${CAReq} -extfile ${CONF_FILE} \
-    -extensions v3_ca -signkey ${CAKey} -CAcreateserial -out ${CACert}
-
-# 生成服务端和客户端证书
-for tt in SS SE CS CE; do
-    gmssl req -new -config ${CONF_FILE} -nodes -subj ${SUBJ_STR} \
-        -keyout ${KeyDir}/${tt}.key.pem \
-        -newkey ec:${DemoCaDir}/SM2.pem -out ${ReqDir}/${tt}.req
-
-    gmssl x509 -sm3 -req -days 1000 -in ${ReqDir}/${tt}.req \
-        -CA ${CACert} -CAkey ${CAKey} \
-        -extfile ${CONF_FILE} -extensions v3_req \
-        -CAcreateserial -out ${CertDir}/${tt}.cert.pem
-done
-</code></pre>
-<p>生成证书注销列表的脚本代码：</p>
-<pre><code class="language-sh">GmsslRootPath=/usr/local/gmssl
-DemoCaDir=${GmsslRootPath}/apps/demoCA
-CertDir=${DemoCaDir}/certs
-
-if [ -z &quot;$1&quot; ]; then
-    echo &quot;Usage: &quot;`basename &quot;$0&quot;`&quot; cert0 [cert1 cert2 ...]&quot;
-fi
-
-touch ${DemoCaDir}/index.txt
-touch ${DemoCaDir}/index.txt.attr
-
-echo 01 &gt; &quot;${DemoCaDir}/crlnumber&quot;
-
-cd ${DemoCaDir}/..
-
-until [ $# -eq 0 ] do
-    gmssl ca -revoke ${CertDir}/$1 \
-        -keyfile ${CertDir}/keys/CA.key.pem \
-        -cert ${CertDir}/CA.cert.pem
-
-    shift
-done
-
-gmssl ca -gencrl -keyfile ${CertDir}/keys/CA.key.pem \
-    -cert ${CertDir}/CA.cert.pem -out ${DemoCaDir}/crl/gm_cert.crl
-</code></pre>
-<p>下面是最终在<code>/usr/local/gmssl/apps</code>下生成的目录结构：</p>
-<pre><code class="language-shell">$ tree
-.
-|-- demoCA
-|   |-- certs
-|   |   |-- CA.cert.pem
-|   |   |-- CA.srl
-|   |   |-- CE.cert.pem
-|   |   |-- CS.cert.pem
-|   |   |-- keys
-|   |   |   |-- CA.key.pem
-|   |   |   |-- CE.key.pem
-|   |   |   |-- CS.key.pem
-|   |   |   |-- SE.key.pem
-|   |   |   `-- SS.key.pem
-|   |   |-- SE.cert.pem
-|   |   `-- SS.cert.pem
-|   |-- crl
-|   |   `-- gm_cert.crl
-|   |-- crlnumber
-|   |-- index.txt
-|   |-- index.txt.attr
-|   |-- reqs
-|   |   |-- CA.req
-|   |   |-- CE.req
-|   |   |-- CS.req
-|   |   |-- SE.req
-|   |   `-- SS.req
-|   `-- SM2.pem
-`-- openssl.cnf
 </code></pre>
 <h2 id="配置-nginx-支持双证书协议"><a class="header" href="#配置-nginx-支持双证书协议">配置 Nginx 支持双证书协议</a></h2>
 <p>无缝 nginx 国密改造，支持 nginx 1.6+ 版本，本例以 nginx 1.8.0 为例说明。</p>
@@ -3062,10 +2538,10 @@ make install
 <p>性能是通用密码算法的一个重要工程指标，也是阻碍算法大规模应用的很重要一个衡量标准。</p>
 <p>常用的密码算法经过验证后，算法本身是经久不变的，有着固定的输入输出，因此很容易作为固定的程序片断被固化到CPU或者外部集成电路上，固化到CPU上的往往表现为CPU
 的扩展指令，比如x86上的AESNI指令，固化到外部集成电路上就成了支持算法加速的 PCIE 卡，比如QAT，CCP等。</p>
-<p>算法的性能优化作为社区重点突破的方向，在x86和ARM架构上使用SIMD指令中实现了SM3和SM4算法性能的极大突破，</p>
+<p>国密算法的性能优化作为社区重点突破的方向，在x86和ARM架构上使用SIMD指令实现了 SM3 和 SM4 算法性能的极大突破，以 SM4 算法为例，在 x86 架构上性能提升最大达到 8 倍，在 arm64 架构上性能提升最大达到 40 倍。</p>
 <h2 id="基于-cpu-指令集的国密算法优化"><a class="header" href="#基于-cpu-指令集的国密算法优化">基于 CPU 指令集的国密算法优化</a></h2>
 <p>现代CPU中SIMD指令集是标准配置，各架构的SIMD指令也是大同小异，主流的密码算法，比如哈希算法和对称加密算法都是结构化的，因此使用 SIMD 来优化通用密码算法就是很自然的一个事情，事实上也有不错的优化效果。</p>
-<p>可以认为AESNI是x86架构上专用用优化 AES 算法的SIMD指令，也常被用来间接优化其它算法，相比于通用的SIMD指令，专用指令能用更少的指令和时钟周期完成更多的操作，也会带来更大的性能提升。类似的，arm64架构上也提供了专用的 <code>Crypto Extension</code> 扩展，为主流的对称算法和哈希算法都提供了支持，也包括SM3和SM4算法。</p>
+<p>认为AESNI是x86架构上专用用优化 AES 算法的SIMD指令，也常被用来间接优化其它算法，相比于通用的SIMD指令，专用指令能用更少的指令和时钟周期完成更多的操作，也会带来更大的性能提升。类似的，arm64架构上也提供了专用的 <code>Crypto Extension</code> 扩展，为主流的对称算法和哈希算法都提供了支持，也包括SM3和SM4算法。</p>
 <p>本小节会以armv8架构为例来介绍国密算法的指令集优化。</p>
 <h3 id="arm-架构下国密算法的优化"><a class="header" href="#arm-架构下国密算法的优化">ARM 架构下国密算法的优化</a></h3>
 <p>为了提升国密算法的性能，Arm公司开发者基于Armv8.2中定义的<code>Cryptographic Extension</code>中的对国密SM3, SM4算法的硬件加速，实现了指令级的优化，获得了较好的性能提升。目前该优化在OpenSSL，libgcrypt和Linux内核中已经合入主线。</p>

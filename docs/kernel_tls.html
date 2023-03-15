@@ -153,12 +153,12 @@ TLS（KTLS）从名字可以看到，是把TLS协议的数据平面（相对于�
 <blockquote>
 <p>🟢 <strong>优势</strong></p>
 </blockquote>
-<p>众所周知，<code>sendfile</code>在内核提供的重要的优化网络服务的手段，但完全实现在用户态的TLS库是不支持<code>sendfile</code>的，因为要把文件内容读入用户态，加密后再交给内核发送到网络设备。</p>
+<p>众所周知，<code>sendfile</code>是内核提供的重要的优化网络服务的手段，但完全实现在用户态的TLS库是不支持<code>sendfile</code>的，因为要把文件内容读入用户态，加密后再交给内核发送到网络设备。</p>
 <p>在使用Kernel TLS 时，一定程度上是解决了在TLS中使用<code>sendfile</code>的问题，KTLS 是内核提供的又一个重要的优化TLS协议的手段。尤其是在静态文件服务的场景下，对TLS协议的性能提升明显，对基于TLS协议的https流量的性能提升非常有帮助，因为在内核加解密数据会减少数据在内核态和用户态的两次数据拷贝。</p>
 <h2 id="ktls-国密实践"><a class="header" href="#ktls-国密实践">KTLS 国密实践</a></h2>
 <p><a href="https://datatracker.ietf.org/doc/html/rfc8998">RFC 8998</a>定义了在TLS 1.3协议中使用国密算法套件的规范，KTLS 也支持使用 SM4 CCM/GCM AEAD 算法加密数据。</p>
 <p>内核的KTLS跟应用是通过sockopt来交互的，开发者需要明确告诉内核某个套接字要使用KTLS并且传递加密所需要的各种信息，比如密钥，记录序号等。</p>
-<p>以下示例演示了在网络应用中使用 SM4 GCM 算法在内核加密数据。注意，内核KTLS依赖TLS协议握手之后得到的密钥数据，但不必实现完整的TLS协议，即便这个密钥不是TLS握手得到的。</p>
+<p>以下示例演示了在网络应用中使用 SM4 GCM 算法在内核加密数据。注意，内核KTLS依赖密钥数据，但不必实现完整的TLS协议，即便这个密钥不是TLS握手得到的。</p>
 <blockquote>
 <p>🟢 <strong>准备套接字</strong></p>
 </blockquote>

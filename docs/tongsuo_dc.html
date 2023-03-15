@@ -145,7 +145,7 @@
                     <main>
                         <h1 id="委托凭证delegated-credentials"><a class="header" href="#委托凭证delegated-credentials">委托凭证（Delegated Credentials）</a></h1>
 <h2 id="前言"><a class="header" href="#前言">前言</a></h2>
-<p>在HTTPS通信的场景下，通常在Web服务器上部署证书和密钥，用于身份认证，同时保证消息的完整性。而加密通信的安全性主要取决于加密算法的安全性和密钥的安全性。如果使用了不安全的加密算法，即使攻击者不知道密钥，在只知道密文的前提下，依然可以通过对密文进行分析来实现攻击。例如2020年3月底，研究者公开了Zoom的重大安全漏洞，其中包括，Zoom使用了不安全的加密模式（ECB加密模式），导致了多个知名的公司、教育机构和政府组织宣布，出于信息安全的考虑，禁止使用Zoom，转而使用其他替代产品。</p>
+<p>在HTTPS通信的场景下，通常在Web服务器上部署证书和密钥，用于身份认证，同时保证消息的完整性。而加密通信的安全性主要取决于加密算法的安全性和密钥的安全性。如果使用了不安全的加密算法，即使攻击者不知道密钥，在只知道密文的前提下，依然可以通过对密文进行分析来实现攻击。例如2020年3月底，研究者公开了Zoom的重大安全漏洞，其中包括，Zoom使用了不安全的加密模式（ECB加密模式），导致了多个知名的公司、教育机构和政府组织出于信息安全的考虑，禁止使用Zoom，转而使用其他替代产品。</p>
 <p>同时，随着近些年量子计算的快速发展，对现代密码学的安全性提出了新的挑战。目前广泛使用的公钥加密算法以RSA和基于椭圆曲线的密码算法为主，而这些算法所基于的数学难题对于经典计算机来说很难，但是对于一个功能足够强大的量子计算机来说可以轻松解决。后量子密码学（PQC）标准化组织致力于研究新的加密算法，以抵抗量子计算，在不久的未来，当新的算法来临时，我们该如何快速迁移？</p>
 <p>在加密算法安全的前提下，如何保证密钥的安全性，就成为了关键。尤其是对于部署大量边缘服务器的企业或云计算厂商，将密钥部署在每一台边缘服务器上，如果有一台服务器被黑客入侵，就会导致服务所有站点的密钥泄露，影响范围大，后果非常严重。</p>
 <h2 id="delegated-credentials介绍"><a class="header" href="#delegated-credentials介绍">Delegated Credentials介绍</a></h2>
@@ -164,12 +164,12 @@
 <h2 id="对比-keyless-和-delegated-credentials-方案"><a class="header" href="#对比-keyless-和-delegated-credentials-方案">对比 keyless 和 Delegated Credentials 方案</a></h2>
 <p>keyless方案，通过将密钥部署在远程的Back-End（例如KeyServer），在TLS握手的时候，请求Back-End使用密钥进行签名。通过将密钥和边缘服务器隔离，提升密钥的安全性，降低密钥泄露风险。</p>
 <pre><code>Client            Front-End            Back-End
-     |----ClientHello---&gt;|                    |
-     |&lt;---ServerHello----|                    |
-     |&lt;---Certificate----|                    |
-     |                   |&lt;---remote sign----&gt;|
-     |&lt;---CertVerify-----|                    |
-     |        ...        |                    |
+  |----ClientHello---&gt;|                    |
+  |&lt;---ServerHello----|                    |
+  |&lt;---Certificate----|                    |
+  |                   |&lt;---remote sign----&gt;|
+  |&lt;---CertVerify-----|                    |
+  |        ...        |                    |
 </code></pre>
 <p>而DC方案，同样在Back-End上部署证书和密钥，提前签发DC后并部署在边缘服务器上（Front-End）。</p>
 <p>和keyless相比的优点：</p>
@@ -178,16 +178,16 @@
 <li>keyless在TLS握手时请求Back-End服务器，增加了握手的延时，而DC签发、部署可以异步离线执行</li>
 </ul>
 <pre><code>Client            Front-End            Back-End
-     |                   |&lt;--DC distribution-&gt;|
-     |----ClientHello---&gt;|                    |
-     |&lt;---ServerHello----|                    |
-     |&lt;---Certificate----|                    |
-     |&lt;---CertVerify-----|                    |
-     |        ...        |                    |
+  |                   |&lt;--DC distribution-&gt;|
+  |----ClientHello---&gt;|                    |
+  |&lt;---ServerHello----|                    |
+  |&lt;---Certificate----|                    |
+  |&lt;---CertVerify-----|                    |
+  |        ...        |                    |
 </code></pre>
 <h2 id="delegated-credentials优势"><a class="header" href="#delegated-credentials优势">Delegated Credentials优势</a></h2>
 <h3 id="自主签发"><a class="header" href="#自主签发">自主签发</a></h3>
-<p>通常，服务端证书或客户端证书是由证书认证机构（CA）来签发，一般有效期不超过1年，在证书过期之前需要找CA重新签发证书。如果想要签发短期的证书，意味着要与CA机构进行频繁的交互，等待CA审核通过后，下载证书重新部署。而短期的证书意味着证书的有效期更短，如果CA相应不及时，可能导致证书过期的风险。</p>
+<p>通常，服务端证书或客户端证书是由证书认证机构（CA）来签发，一般有效期不超过1年，在证书过期之前需要找CA重新签发证书。如果想要签发短期的证书，意味着要与CA机构进行频繁的交互，等待CA审核通过后，下载证书重新部署。而短期的证书意味着证书的有效期更短，如果 CA 响应不及时，可能导致证书过期的风险。</p>
 <p>引入Delegated Credentials后，就可以使用服务端（或客户端）证书来签发DC，而不需要依赖于外部CA。通过DC来代理终端实体证书，完成TLS通信。</p>
 <h3 id="使用更安全的算法"><a class="header" href="#使用更安全的算法">使用更安全的算法</a></h3>
 <p>正是因为自主签发，我们可以选择更安全的签名算法，例如Ed25519，而CA通常不支持。</p>
@@ -198,7 +198,7 @@
 <h2 id="delegated-credentials支持现状"><a class="header" href="#delegated-credentials支持现状">Delegated Credentials支持现状</a></h2>
 <p>DC既需要服务端支持，也需要客户端支持，目前支持DC的浏览器并不多，以Firefox为主。</p>
 <p>支持DC的开源密码库包括 Google 的 BoringSSL、Firefox 的 NSS、国内的 Tongsuo，目前OpenSSL还不支持DC。</p>
-<p>Tongsuo 发布的 8.2.0 版本支持 Delegated Credentials，且已经合并到开源 Tongsuo，欢迎大家使用内部RPM包或开源版本。</p>
+<p>Tongsuo 发布的 8.2.0 版本开始支持 Delegated Credentials。</p>
 <h2 id="实战delegated-credentials"><a class="header" href="#实战delegated-credentials">实战Delegated Credentials</a></h2>
 <h3 id="签发dc-1"><a class="header" href="#签发dc-1">签发DC</a></h3>
 <p>注意：需要使用 Tongsuo 才能签发dc，开源OpenSSL并不支持。</p>
@@ -249,39 +249,28 @@ openssl s_client -connect 127.0.0.1:4433 \
     -verifyCAfile dc-ecc-chain-ca.crt \
     -verify_return_error
 </code></pre>
-<h3 id="应用基于-tongsuo-集成dc"><a class="header" href="#应用基于-tongsuo-集成dc">应用基于 Tongsuo 集成DC</a></h3>
+<h3 id="集成-dc-代码示例"><a class="header" href="#集成-dc-代码示例">集成 DC 代码示例</a></h3>
 <pre><code class="language-c">SSL *s;
-SSL_CTX *ctx;
-DELEGATED_CREDENTIAL *dc = NULL;
-ctx = SSL_CTX_new(TLS_server_method());
-if (ctx == NULL) {
-    // error
-}
+SSL_CTX *ctx = SSL_CTX_new(TLS_server_method());
 
-// 设置证书
-if (!SSL_CTX_use_certificate_file(ctx, cert_file, SSL_FILETYPE_PEM)) {
-    // error
-}
-// 设置证书的密钥
-if (!SSL_CTX_use_PrivateKey_file(ctx, key_file, SSL_FILETYPE_PEM)) {
-    // error
-}
 
-// 加载DC文件，注意：必须先加载服务端（或客户端）证书，再加载DC
-if (!SSL_CTX_use_dc_file(ctx, cert_file, 0)) {
-    // error
-}
+/* 设置证书 */
+SSL_CTX_use_certificate_file(ctx, cert_file, SSL_FILETYPE_PEM);
 
-// 加载DC的密钥
-if (!SSL_CTX_use_dc_PrivateKey_file(ctx, key_file, SSL_FILETYPE_PEM)) {
-    // error
-}
+/* 设置证书的密钥 */
+SSL_CTX_use_PrivateKey_file(ctx, key_file, SSL_FILETYPE_PEM);
 
-// 功能：开启dc签名功能
-// server在开启该功能并收到dc请求时才会选择使用dc进行签名
+/* 加载DC文件，注意：必须先加载服务端（或客户端）证书，再加载DC */
+SSL_CTX_use_dc_file(ctx, cert_file, 0);
+
+/* 加载DC的密钥 */
+SSL_CTX_use_dc_PrivateKey_file(ctx, key_file, SSL_FILETYPE_PEM);
+
+/* 功能：开启dc签名功能
+ * server 在开启该功能并收到dc请求时才会选择使用dc进行签名
+ */
 SSL_CTX_enable_sign_by_dc(ctx);
-...
-    
+
 s = SSL_new(ctx);
 
 ...

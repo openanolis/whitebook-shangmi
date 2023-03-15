@@ -151,7 +151,7 @@
 <h2 id="tpm-20"><a class="header" href="#tpm-20">TPM 2.0</a></h2>
 <p>TPM (Trusted Platform Module) 2.0是遵循 ISO/IEC 11889 系列标准的可信根、由国际可信计算组织 TCG（Trusted Computing Group）维护。如下图所示，密码学系统是TPM2.0核心、其所有安全功能均以密码学系统为基础。</p>
 <p><img src="images/tpm_1.png" alt="TPM" /></p>
-<p>目前TPM2.0支持SM2.SM3、SM4特性，具体包括基于SM3的Hash算法、支持SM3 bank的PCR extend；支持SM4加解密；支持SM2加解密、SM2签名验签、SM2+SM3证书签名验签。</p>
+<p>目前TPM2.0支持SM2、SM3、SM4特性，具体包括基于SM3的Hash算法、支持SM3 bank的PCR extend；支持SM4加解密；支持SM2加解密、SM2签名验签、SM2+SM3证书签名验签。</p>
 <p>龙蜥OS为客户提供了两种使用TPM国密算法引擎的途径：TSS(TrustedSoftwareStack)提供的API访问TPM国密算法、TPMtools中的密码指令使用TPM提供的国密算法</p>
 <p>以下示例为使用tpmtools创建基于SM2+SM3-256的认证密钥。</p>
 <pre><code class="language-sh">h_ek_persistent_ecc=0x81010002

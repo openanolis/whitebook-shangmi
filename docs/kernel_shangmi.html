@@ -152,12 +152,12 @@
 <ul>
 <li>akcipher：非对称算法</li>
 <li>shash：哈希算法</li>
-<li>cipher：对称算法，只支持单个分组的加解密</li>
+<li>cipher：对称算法，只实现了单个分组的加解密</li>
 <li>skcipher：对称算法，与模式相结合的算法</li>
 <li>aead：带认证的对称算法</li>
 </ul>
 <h2 id="软件实现"><a class="header" href="#软件实现">软件实现</a></h2>
-<p>国密的软件实现是最早被引用内核的国密算法实现，软件实现不依赖任何特殊指令，适用于任何架构，但效率较低，在不支持优化的平台上可以选择使用软件实现的国密方案。</p>
+<p>国密的软件实现是最早被引入内核的国密算法实现，软件实现不依赖任何特殊指令，适用于任何架构，但效率较低，在不支持优化的平台上可以选择使用软件实现的国密方案。</p>
 <p>SM2 是非对称算法，目前在内核中主要用于验签和完整性检查，由于算法自身输入数据量小且调用频度不高，优化带来的收益不大，因此，Linux 内核中的SM2算法目前只有软件实现。</p>
 <div class="table-wrapper"><table><thead><tr><th>算法</th><th>类型</th><th>内部驱动</th><th style="text-align: right">优先级</th><th>模块名</th></tr></thead><tbody>
 <tr><td>SM2</td><td>akcipher</td><td>sm2-generic</td><td style="text-align: right">100</td><td>sm2-generic</td></tr>
@@ -304,7 +304,7 @@ cbcmac-sm4-ce  |  371.63  675.33  903.23  972.07  981.42  990.93  991.45
   GCM enc  | 108.62  397.18   971.60  1283.92  1522.77  1513.39  1777.00  1806.96
   GCM dec  | 116.36  398.14  1004.27  1319.11  1624.21  1635.43  1932.54  1974.20
 </code></pre>
-<p><a href="optimization.html"><strong>国密硬件加速与优化</strong></a>章节会重点介绍armv8下Crypto Extension的细节信息。</p>
+<p><a href="optimization.html"><strong>国密硬件加速与优化</strong></a>章节会重点介绍armv8下使用Crypto Extension指令优化的细节信息。</p>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
 <pre><code class="footer-code">作者: OpenAnolis

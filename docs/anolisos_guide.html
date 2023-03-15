@@ -180,7 +180,7 @@ openssl req -verbose -new -days 10000 -x509 -sm3 \
 </code></pre>
 </li>
 <li>
-<p>从证书生成SM2算法的证书请求并验证</p>
+<p>从私钥生成SM2算法的证书请求并验证</p>
 <pre><code class="language-bash"># Generate a certificate request from private key and verify it
 
 openssl ecparam -genkey -name SM2 -text -out sm2.key
