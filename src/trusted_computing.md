@@ -36,8 +36,8 @@ tpm2_createak -C ${h_ek_persistent_ecc} -G ecc -g sm3_256 \
 使用国密可信启动的条件如下：
 
 * 硬件要具备的特性：
-  - 服务器或计算机固件（UEFI）支持基于国密的可信度量特性
-  - 服务器集成了TPM2.0芯片（该芯片许支持SM3、PCR SM3 Bank等特性
+  - 服务器计算机固件（UEFI）支持基于国密的可信度量特性
+  - 服务器集成了TPM2.0芯片（该芯片许支持SM3、PCR SM3 Bank等特性）
 * OS 要具备的特性：
   - 部署支持基于国密可信启动的引导程序（grub）
   - 部署可信启动策略管理工具 (iTrustMidware)

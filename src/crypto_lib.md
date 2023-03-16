@@ -176,7 +176,7 @@ Intel Integrated Performance Primitives (Intel IPP) Cryptography 是一个安全
 * 大整数算术函数
 * PRNG/TRNG 和质数生成
 
-使用英特尔 IPP 密码术的原因：
+使用英特尔 IPP 密码库的原因：
 
 * 安全性（秘密处理功能的恒定时间执行）
 * 专为小尺寸设计
