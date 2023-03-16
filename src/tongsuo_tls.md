@@ -44,7 +44,7 @@ openssl s_client -connect 127.0.0.1:4433 \
 
 ## 在你的client/server中使用（相关api使用）
 
-server端： 和标准tls的server一样，无需做任何修改，仅需要注意是否强制签名算法使用SM2(虽然我们在标准中定义了tls1.3+国密的算法套件必须强制使用sm2签名算法，但由于国密证书还不够普及，所以我们在实现上暂时放宽了这个限制，而是提供了一个开关)，通过下面的代码开启/关闭：
+server端：和标准tls的server一样，无需做任何修改，仅需要注意是否强制签名算法使用SM2(虽然我们在标准中定义了tls1.3+国密的算法套件必须强制使用sm2签名算法，但由于国密证书还不够普及，所以我们在实现上暂时放宽了这个限制，而是提供了一个开关)，通过下面的代码开启/关闭：
 
 ```c
 /* enable */
@@ -54,7 +54,7 @@ SSL_CTX_enable_sm_tls13_strict(ctx);
 SSL_CTX_disable_sm_tls13_strict(ctx);
 ```
 
-client端 client无需做修改，只需要强制指定算法套件为**TLS_SM4_GCM_SM3/TLS_SM4_CCM_SM3**（国密套件的默认优先级低于现有的tls1.3算法套件），通过这种方式设定：
+client端：client无需做修改，只需要强制指定算法套件为**TLS_SM4_GCM_SM3/TLS_SM4_CCM_SM3**（国密套件的默认优先级低于现有的tls1.3算法套件），通过这种方式设定：
 
 ```c
 SSL_CTX_set_ciphersuites(ctx, "TLS_SM4_GCM_SM3");

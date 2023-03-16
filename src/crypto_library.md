@@ -34,7 +34,7 @@ OpenSSL 的重要性众所周知，这里重点强调一下版本问题。
 
 官网：<https://www.gnupg.org/software/libgcrypt/index.html>
 
-不像 OpenSSL 还包括了安全协议，libgcrypt 是一个纯粹的密码算法库，就国密算法的性能来说，libgcrypt 的国密算法优化是做的最充分的，是目前国密算法的天花板，Linux 内核国密算法的部分优化也是先在 libgcrypt 实现后才移植到内核的。
+不像 OpenSSL 还包括了安全协议，libgcrypt 是一个纯粹的密码算法库，就国密算法的性能来说，libgcrypt 的国密算法优化是做的比较充分的，Linux 内核国密算法的部分优化也是先在 libgcrypt 实现后才移植到内核的。
 
 Libgcrypt 是一个通用密码库，最初基于 GnuPG 的代码。 它为几乎所有的密码提供支持：
 
@@ -176,7 +176,7 @@ Intel Integrated Performance Primitives (Intel IPP) Cryptography 是一个安全
 * 大整数算术函数
 * PRNG/TRNG 和质数生成
 
-使用英特尔 IPP 密码术的原因：
+使用英特尔 IPP 密码库的原因：
 
 * 安全性（秘密处理功能的恒定时间执行）
 * 专为小尺寸设计

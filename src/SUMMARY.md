@@ -22,7 +22,7 @@
     - [TLCP 安全传输协议](tongsuo_tlcp.md)
     - [同态算法](tongsuo_he.md)
     - [Tongsuo-Java-SDK](tongsuo_java_sdk.md)
-- [OpenAnolis 国密算法库](crypto_lib.md)
+- [OpenAnolis 国密算法库](crypto_library.md)
 - [国密应用开发实践](dev_practices.md)
     - [Python 国密签名实践](python_shangmi.md)
     - [Web 服务国密双证书支持](nginx_tlcp.md)
