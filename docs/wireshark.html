@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>TLS 1.3 使用商密套件 - 商用密码技术最佳实践白皮书</title>
+        <title>Wireshark 国密调试实践 - 商用密码技术最佳实践白皮书</title>
 
 
         <!-- Custom HTML head -->
@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item expanded "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tongsuo_tls.html" class="active">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item "><a href="wireshark.html">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item "><a href="optimization.html">国密硬件加速与优化</a></li><li class="chapter-item affix "><a href="contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item expanded "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item expanded "><a href="wireshark.html" class="active">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item "><a href="optimization.html">国密硬件加速与优化</a></li><li class="chapter-item affix "><a href="contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,46 +143,23 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="tls-13-使用商密套件rfc-8998"><a class="header" href="#tls-13-使用商密套件rfc-8998">TLS 1.3 使用商密套件（RFC 8998）</a></h1>
-<p>TLS 1.3 协议在 <code>RFC 8998</code> 规范中定义：<a href="https://datatracker.ietf.org/doc/html/rfc8998">https://datatracker.ietf.org/doc/html/rfc8998</a></p>
-<h2 id="重要说明"><a class="header" href="#重要说明">重要说明</a></h2>
-<p>在tls1.3的标准中，现有的任意算法套件均不强制使用某一个签名算法，而为了国密算法的统一性，我们在RFC8998的定义中明确要求了tls1.3+国密的两个套件：<code>TLS_SM4_GCM_SM3</code> 和 <code>TLS_SM4_CCM_SM3</code>，需要强制使用SM2作为签名算法(即server端需要配置国密证书)。 然而出于兼容性考虑，现有的大量软件和设备并没有部署国密证书，为保证大家能尽快体验到更快更便捷的国密流程，我们的实现中并不完全强制签名算法为SM2，而是提供了一个开关来由用户选择是否要开启这种强制措施(默认关闭)，在本手册后续会介绍相关用法。</p>
-<h2 id="签发-sm2-证书"><a class="header" href="#签发-sm2-证书">签发 SM2 证书</a></h2>
-<p>此例使用Tongsuo签发一个自签名的证书：</p>
-<pre><code class="language-sh"># 生成 SM2 私钥
-openssl ecparam -genkey -name SM2 -out sm2.key
-
-# 生成证书签名请求
-openssl req -new -key sm2.key -out sm2.csr \
-    -sm3 -sigopt &quot;sm2_id:1234567812345678&quot;
-
-# 签名证书
-openssl x509 -req -in sm2.csr -signkey sm2.key \
-    -out sm2.crt -sm3 -sm2-id 1234567812345678 \
-    -sigopt &quot;sm2_id:1234567812345678&quot;
-</code></pre>
-<h2 id="特性使用s_clients_server-工具验证"><a class="header" href="#特性使用s_clients_server-工具验证">特性使用（s_client/s_server 工具验证）</a></h2>
-<p>server端：命令行输入</p>
-<pre><code class="language-sh">openssl s_server \
-    -cert test_certs/sm2_cert/sm2-second.crt \
-    -key test_certs/sm2_cert/sm2-second.key \
-    -accept 127.0.0.1:4433
-</code></pre>
-<p>client端：命令行输入</p>
-<pre><code class="language-sh">openssl s_client -connect 127.0.0.1:4433 \
-    -tls1_3 -ciphersuites TLS_SM4_GCM_SM3
-</code></pre>
-<h2 id="在你的clientserver中使用相关api使用"><a class="header" href="#在你的clientserver中使用相关api使用">在你的client/server中使用（相关api使用）</a></h2>
-<p>server端：和标准tls的server一样，无需做任何修改，仅需要注意是否强制签名算法使用SM2(虽然我们在标准中定义了tls1.3+国密的算法套件必须强制使用sm2签名算法，但由于国密证书还不够普及，所以我们在实现上暂时放宽了这个限制，而是提供了一个开关)，通过下面的代码开启/关闭：</p>
-<pre><code class="language-c">/* enable */
-SSL_CTX_enable_sm_tls13_strict(ctx);
-
-/* disable */
-SSL_CTX_disable_sm_tls13_strict(ctx);
-</code></pre>
-<p>client端：client无需做修改，只需要强制指定算法套件为<strong>TLS_SM4_GCM_SM3/TLS_SM4_CCM_SM3</strong>（国密套件的默认优先级低于现有的tls1.3算法套件），通过这种方式设定：</p>
-<pre><code class="language-c">SSL_CTX_set_ciphersuites(ctx, &quot;TLS_SM4_GCM_SM3&quot;);
-</code></pre>
+                        <h1 id="wireshark-国密调试实践"><a class="header" href="#wireshark-国密调试实践">Wireshark 国密调试实践</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p><a href="https://www.wireshark.org/">wireshark</a> 是开源的包分析工具，被广泛应用于网络调试中。在国密开发者的贡献下，wireshark 4.0 已支持导入预主密钥解密国密协议和 <a href="https://datatracker.ietf.org/doc/html/rfc8998">RFC8998</a> 的流量。可以用于上述协议的调试和分析。</p>
+<h2 id="安装"><a class="header" href="#安装">安装</a></h2>
+<p>wireshark的加解密功能依赖于 <a href="https://git.gnupg.org/cgi-bin/gitweb.cgi?p=libgcrypt.git">libgcrypt</a>，libgcrypt 1.9 开始支持 SM3 和 SM4 算法。wireshark 中国密协议的支持依赖于编译时 libgcrypt 的版本，目前 wireshark 官方下载的 windows 版本已内置 libgcrypt 1.10.1，可支持导入预主密钥解密国密协议和 RFC8998 流量。但 linux 和 mac 版本需更新 libgcrypt 版本到 1.9.0 或之后的版本并编译后才可支持。编译步骤可参考<a href="https://www.wireshark.org/docs/wsdg_html_chunked/ChapterSetup.html#ChSetupUNIX">编译文档</a>。</p>
+<h2 id="调试"><a class="header" href="#调试">调试</a></h2>
+<p>wireshark 需导入预主密钥才可解密国密协议或 RFC8998 流量。</p>
+<h3 id="导出预主密钥"><a class="header" href="#导出预主密钥">导出预主密钥</a></h3>
+<h4 id="浏览器导出预主密钥"><a class="header" href="#浏览器导出预主密钥">浏览器导出预主密钥</a></h4>
+<p>基于 chromium 的国密浏览器如<a href="https://browser.360.net/gc/">360安全浏览器</a>，一般都支持通过命令行参数 <code>--ssl-key-log-file=path</code> 的方式导出预主密钥。</p>
+<h4 id="网络程序导出预主密钥"><a class="header" href="#网络程序导出预主密钥">网络程序导出预主密钥</a></h4>
+<p>使用基于 OpenSSL/Tongsuo 的应用程序可以使用环境变量<code>SSLKEYLOGFILE=sslkey.log</code>的方式导出预主密钥，如<code>SSLKEYLOGFILE=sslkey.log curl -s https://example.com</code>。</p>
+<h3 id="导入预主密钥"><a class="header" href="#导入预主密钥">导入预主密钥</a></h3>
+<p>在 wireshark 的菜单中导入预主密钥，具体路径为<code>编辑-首选项-展开protocol列表-tls</code>，在 <code>(Pre)-Master-Secret log filename</code> 中添加导出的预主密钥。</p>
+<p><img src="images/wireshark-import.jpg" alt="wireshark import" /></p>
+<p>打开捕获到的国密数据包，即可看到解密后的国密流量或者 RFC8998 流量。</p>
+<p><img src="images/wireshark-decrypt.jpg" alt="wireshark decrypt" /></p>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
 <pre><code class="footer-code">作者: OpenAnolis
@@ -196,11 +173,11 @@ SSL_CTX_disable_sm_tls13_strict(ctx);
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="tongsuo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="nginx_tlcp.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="tongsuo_dc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="optimization.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -210,11 +187,11 @@ SSL_CTX_disable_sm_tls13_strict(ctx);
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="tongsuo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="nginx_tlcp.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="tongsuo_dc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="optimization.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
