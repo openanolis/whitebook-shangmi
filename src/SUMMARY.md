@@ -26,6 +26,7 @@
 - [国密应用开发实践](dev_practices.md)
     - [Python 国密签名实践](python_shangmi.md)
     - [Web 服务国密双证书支持](nginx_tlcp.md)
+    - [Wireshark 国密调试实践](wireshark.md)
 - [国密硬件加速与优化](optimization.md)
 
 [Contributors](contributors.md)
