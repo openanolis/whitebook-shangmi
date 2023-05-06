@@ -24,7 +24,7 @@ fscrypt 允许为文件内容指定一种加密模式，为文件名指定一种
 
 AES-128-CBC 仅为具有不支持 XTS 模式的加速器的低功耗嵌入式设备使用。 要使用 AES-128-CBC，必须启用 CONFIG_CRYPTO_ESSIV 和 CONFIG_CRYPTO_SHA256（或其他 SHA-256 实现）以便使用 ESSIV。
 
-Adiantum 是一种基于流密码的模式，即使在没有专用加密指令的 CPU 上也很快。 与 XTS 不同，它也是真正的宽块模式。 它还可以消除派生每个文件加密密钥的需要。 要使用 Adiantum，必须启用 CONFIG_CRYPTO_ADIANTUM。 此外，应启用 ChaCha 和 NHPoly1305 的快速实现，例如 ARM 架构上的 CONFIG_CRYPTO_CHACHA20_NEON 和 CONFIG_CRYPTO_NHPOLY1305_NEON。
+Adiantum 是一种基于流密码的模式，即使在没有专用加密指令的 CPU 上也很快。 与 XTS 不同，它也是真正的宽块模式。要使用 Adiantum，必须启用 CONFIG_CRYPTO_ADIANTUM。 此外，应启用 ChaCha 和 NHPoly1305 的快速实现，例如 ARM 架构上的 CONFIG_CRYPTO_CHACHA20_NEON 和 CONFIG_CRYPTO_NHPOLY1305_NEON。
 
 AES-256-HCTR2 是另一种真正的宽块加密模式，旨在用于具有专用加密指令的 CPU。 AES-256-HCTR2 具有明文中的位翻转会更改整个密文的属性。 由于初始化向量在目录中重复使用，因此此属性使其成为文件名加密的理想选择。 要使用 AES-256-HCTR2，必须启用 CONFIG_CRYPTO_HCTR2。 此外，应启用 XCTR 和 POLYVAL 的快速实现，例如 用于 ARM64 的 CRYPTO_POLYVAL_ARM64_CE 和 CRYPTO_AES_ARM64_CE_BLK。
 
