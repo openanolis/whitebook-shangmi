@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>磁盘加密（LUKS） - 商用密码技术最佳实践白皮书</title>
+        <title>海光密码技术（HCT） - 商用密码技术最佳实践白皮书</title>
 
 
         <!-- Custom HTML head -->
@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item expanded "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item expanded "><a href="kernel_dmcrypt.html" class="active">磁盘加密（LUKS）</a></li><li class="chapter-item "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item "><a href="wireshark.html">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item "><a href="optimization.html">国密硬件加速与优化</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="optimization_cpu.html">基于 CPU 指令集的国密算法优化</a></li><li class="chapter-item "><a href="optimization_hct.html">海光密码技术（HCT）</a></li><li class="chapter-item "><a href="optimization_montage.html">澜起加解密和可信计算芯片</a></li></ol></li><li class="chapter-item "><a href="contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item "><a href="wireshark.html">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item expanded "><a href="optimization.html">国密硬件加速与优化</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="optimization_cpu.html">基于 CPU 指令集的国密算法优化</a></li><li class="chapter-item expanded "><a href="optimization_hct.html" class="active">海光密码技术（HCT）</a></li><li class="chapter-item "><a href="optimization_montage.html">澜起加解密和可信计算芯片</a></li></ol></li><li class="chapter-item "><a href="contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -174,89 +174,101 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="磁盘加密luks"><a class="header" href="#磁盘加密luks">磁盘加密（LUKS）</a></h1>
-<p>类似于文件加密，磁盘加密很重要的一点也是为了解决因存储介质丢失而导致的敏感数据泄露问题。磁盘加密是以磁盘为加密对象来保护重要数据，磁盘之上的文件甚至文件系统对磁盘加密来说是透明的。</p>
-<h2 id="dm-crypt-和-luks-简介"><a class="header" href="#dm-crypt-和-luks-简介">dm-crypt 和 LUKS 简介</a></h2>
-<p><code>dm-crypt</code>是 Linux 内核提供的一个磁盘加密功能，负责对块设备进行加解密操作。dm-crypt 是 device-mapper 构架中用于块设备加密的一个模块。dm-crypt 通过 dm 框架虚拟一个块设备，并在BIO转发的时候将数据加密后存储来实现块设备的加密，而这些对于应用层是透明的。</p>
-<blockquote>
-<p>🟢 <strong>dm-crypt 的特点</strong></p>
-</blockquote>
+                        <h1 id="密码加速器---海光密码技术hct"><a class="header" href="#密码加速器---海光密码技术hct">密码加速器 - 海光密码技术（HCT）</a></h1>
+<h2 id="简介"><a class="header" href="#简介">简介</a></h2>
+<p>海光密码技术HCT（Hygon Cryptographic Technology）是基于海光芯片密码协处理器以及密码指令集特性，自主设计研发的一套密码算法加速软件开发套件。</p>
+<p>官方发布的 HCT 密码计算套件位于 gitee 的 <code>hygon-devkit</code> 仓库，地址：<a href="https://gitee.com/anolis/hygon-devkit.git">https://gitee.com/anolis/hygon-devkit.git</a></p>
+<pre><code class="language-sh">git clone https://gitee.com/anolis/hygon-devkit.git
+</code></pre>
+<p>HCT密码计算套件的目录结构示意图如下：</p>
+<pre><code>hygon-devkit/
+  ├─ hct
+  ├──pkg
+  │  ├── hct_x.x.x.xxxxxxxx_alpha
+  │  └── hct_x.x.x.xxxxxxxx_release
+  ├── readme
+  ├── sample
+  └── script
+</code></pre>
+<ul>
+<li>pkg目录：内含各版本hct密码计算套件（上述示意图中的x.x.x.xxxxxxxx代表版本信息）。</li>
+<li>sample目录：内含使用hct密码套件的示例程序代码。</li>
+<li>script目录：内含一些工具脚本。</li>
+<li>readme文件：有关HCT的简单情况及使用说明。</li>
+</ul>
+<h2 id="测试与开发"><a class="header" href="#测试与开发">测试与开发</a></h2>
+<h3 id="环境配置"><a class="header" href="#环境配置">环境配置</a></h3>
+<p>安装支持HCT的内核，参考<a href="https://conf.hygon.cn/pages/viewpage.action?pageId=76487872">安装开源OS镜像并编译软件页面</a>进行内核的编译与安装。完成内核安装后，重启系统，选择刚才安装的内核启动。</p>
+<p>按如下流程必要的模块跟依赖：</p>
+<pre><code class="language-sh"># 1. 检测并安装必须的内核模块 
+modprobe vfio vfio-pci vfio_iommu_type1 mdev vfio_mdev
+
+# 2. 安装需要依赖的软件库
+
+# numa 库
+yum install numactl -y
+
+# openssl 库
+wget https://www.openssl.org/source/old/1.1.1/openssl-1.1.1c.tar.gz
+tar –zxvf openssl-1.1.1c.tar.gz
+cd openssl-1.1.1c
+./config
+make
+sudo make install
+
+# Tips：HCT套件中的部分工具脚本需要用到uuidgen工具，安装方式如下。
+yum install util-linux -y
+
+# 3. 安装HCT开发套件
+
+cd hct/pkg/hct_1.0.0.20230224_rc
+./config 
+sudo make install
+</code></pre>
+<h3 id="测试"><a class="header" href="#测试">测试</a></h3>
 <ul>
 <li>
-<p>支持多种加密格式</p>
-<p>目前 dm-crypt 支持如下几种加密模式：</p>
-<ol>
-<li>LUKS（Linux Unified Key Setup）：这是 dm-crypt 最常用的一种模式，本节也是以 LUKS 为主展开。</li>
-<li>Plain：Plain 模式使用单个无salt的哈希值逐个扇区进行加密。</li>
-<li>loop-AES：loop-AES 是一款比较陈旧的 Linux 磁盘加密工具。dm-crypt 提供了对它的支持。</li>
-<li>TCRYPT：在 cryptsetup 的 1.6.0 版本之后，开始提供对 TrueCrypt 加密盘的支持。<code>TCRYPT</code> 是 <code>TrueCrypt</code> 的缩写。在该模式下，可以打开 TrueCrypt 和 VeraCrypt 的加密盘，并对盘中的文件进行读写。</li>
-</ol>
+<p>功能测试</p>
+<pre><code class="language-sh">cd /opt/hygon/hct/bin/hct/test
+./hct_test
+</code></pre>
 </li>
 <li>
-<p>无需额外安装软件</p>
-<p>由于 dm-crypt 早已被整合到 Linux Kernel 中。因此，无需额外安装它。至于它的命令行前端（cryptsetup），大部分主流的发行版都会内置 cryptsetup 的软件包。</p>
-</li>
-<li>
-<p>可以跟 LVM 无缝整合</p>
-<p>LVM（Logical Volume Manager）是 Linux 内核提供的另一个很有用的工具。比如用它来创建分区，将来可以随时调整分区大小；比如现有的硬盘空间用完了，可以另外加一块硬盘并且新加硬盘可以用来扩展现有分区。LVM 和 dm-crypt 都是基于 Linux 内核的 device mapper 机制。因此两者可以很好地整合。</p>
+<p>性能测试</p>
+<pre><code class="language-sh">cd /opt/hygon/hct/bin
+./hct_speed -elapsed -engine hct –multi 128 –seconds 60 sm2enc
+./hct_speed -elapsed -engine hct –multi 128 –seconds 60 sm2sign
+./hct_speed -elapsed -engine hct –multi 128 –seconds 60 –bytes 1024 -evp sm3
+./hct_speed -elapsed -engine hct –multi 128 –seconds 60 –bytes 1024 -evp sm4
+</code></pre>
 </li>
 </ul>
-<blockquote>
-<p>🟢 <strong>cryptsetup</strong></p>
-</blockquote>
-<p><code>cryptsetup</code> 是与 dm-crypt 交互的命令行工具，用于创建、访问和管理加密设备，主流的发行版已经内置了该工具。</p>
-<p>从原理上来说，cryptsetup 其实是一种设备的映射关系，我们用它来把一个设备映射成另外一个设备，然后对这个新的设备进行操作，并进行加密，这样就不会使我们的原设备直接被使用，从而达到一种安全的效果。</p>
-<blockquote>
-<p>🟢 <strong>LUKS</strong></p>
-</blockquote>
-<p>LUKS （Linux Unified Key Setup）是 Linux 硬盘加密的标准。 通过提供标准的磁盘格式，它不仅可以促进发行版之间的兼容性，还可以提供对多个用户密码的安全管理。 与现有解决方案相比，LUKS 将所有必要的设置信息存储在分区信息首部中，使用户能够无缝传输或迁移其数据。</p>
-<h2 id="使用-sm4-算法加密-luks-磁盘"><a class="header" href="#使用-sm4-算法加密-luks-磁盘">使用 SM4 算法加密 LUKS 磁盘</a></h2>
-<p>⚠️  <strong>选择一个不用的磁盘或者磁盘分区，该操作会清空设备上的所有数据，请谨慎操作。</strong></p>
-<p>这里选择使用 vda4 作为实验分区，使用 LUKS 格式格式化要加密的磁盘分区，加密算法是SM4 XTS：</p>
-<pre><code class="language-sh"># 根据提示输入大写的 YES 和密码完成格式化操作
-&gt; cryptsetup --cipher sm4-xts-plain64 --key-size=256 \
-            --hash sm3 luksFormat /dev/vda4
-
-# 打开该加密分区，密码正确后，会创建代表该分区的透明设备 /dev/mapper/diskluks
-# 该设备展示给用户的是一个未加密的普通的分区设备，可以对它进行任何针对分区的操作
-&gt; cryptsetup luksOpen /dev/vda4 diskluks
-
-# 使用status子命令可以看到加密分区的状态信息
-&gt; cryptsetup status diskluks
-/dev/mapper/diskluks is active.
-  type:    LUKS2
-  cipher:  sm4-xts-plain64
-  keysize: 256 bits
-  key location: keyring
-  device:  /dev/vda4
-  sector size:  512
-  offset:  32768 sectors
-  size:    14645248 sectors
-  mode:    read/write
-
-# 此时，diskluks表现为一个普通分区，我们可以格式化为任意支持的文件系统，并挂载它
-&gt; mkfs.ext4 /dev/mapper/diskluks
-&gt; mount /dev/mapper/diskluks /mnt/
-
-# 在磁盘树中可以观察到加密的设备和代表它的透明未加密设备diskluks
-&gt; lsblk -f
-NAME         FSTYPE      FSVER LABEL   UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
-vda
-├─vda1
-├─vda2       ext4        1.0   rootfs  e958d21c-63aa-46d7-a215-be264ccb02d5   23.2G    16% /
-├─vda3       ext4        1.0   fscrypt 0463916b-cd52-40f3-9c95-290bf4839d8e
-└─vda4       crypto_LUKS 2             b5338a30-6974-45f4-81da-98f1cb0cab72
-  └─diskluks ext4        1.0           683a0dc2-0755-4759-b94c-54687c706dd5    6.4G     0% /mnt
-
-# 取消挂载
-&gt; umount /mnt
-
-# 锁定加密分区，diskluks设备被删除，此时没有密码的用户看不到明文数据
-&gt; cryptsetup close diskluks
+<h2 id="hctconfig-服务命令"><a class="header" href="#hctconfig-服务命令">hctconfig 服务命令</a></h2>
+<p>HCT套件成功安装后，会在系统中增加一个hctconfig服务命令。通过hctconfig服务可以方便的管理CCP协处理器的绑定情况：</p>
+<ol>
+<li>使用默认配置，将 CCP 协处理器绑定至最佳性能状态：<code>service hctconfig start</code></li>
+<li>利用status参数查看HCT的相关状态信息及CCP协处理的绑定情况：<code>service hctconfig status</code></li>
+<li>利用rebond命令对CCP协处理器进行重新绑定：<code>service hctconfig rebond</code></li>
+</ol>
+<p><em><strong>Tips：start命令和rebond的命令都可以带参数，详情可参考 usage 命令</strong></em>：<code>service hctconfig usage</code></p>
+<h2 id="开发"><a class="header" href="#开发">开发</a></h2>
+<p>HCT通过 openssl 标准接口（EVP）向应用提供接口，使用HCT套件时，通过e=ENGINE_by_id（"hct"）选择密码引擎为hct，然后直接通过openssl标准（EVP）接口即可完成对hct密码计算套件的调用。</p>
+<h2 id="卸载hct套件"><a class="header" href="#卸载hct套件">卸载HCT套件</a></h2>
+<p>在对应HCT版本包内执行make uninstall即可卸载HCT套件</p>
+<pre><code class="language-sh">hct/pkg/hct_1.0.0.20230224_rc
+make uninstall
 </code></pre>
-<h2 id="后记"><a class="header" href="#后记">后记</a></h2>
-<p>SM4 的密钥长度是 128 位，因为 XTS 模式使用两个密钥，所以这里需要显式指定密钥长度是 256 位。</p>
-<p>除了密码之外，还可以选择使用密钥文件解密硬盘，也就是相当于一个密钥，当然也可以只使用密钥文件或者同时使用密码与密钥文件，用户需要使用子命令 <code>cryptsetup luksAddKey</code> 和 <code>cryptsetup luksRemoveKey</code> 来管理密钥。</p>
+<h2 id="其它注意事项"><a class="header" href="#其它注意事项">其它注意事项</a></h2>
+<p>如果BIOS支持，可以将PSP CCP配置给C86使用，BIOS设置步骤如下：</p>
+<ol>
+<li>进入BIOS，选择“HYGON CBS”，进入“Moksha Common Options”</li>
+<li>在“Available PSP CCP VQ Count”中输入4</li>
+</ol>
+<p><strong>说明：海光CPU芯片中包含两类CCP协处理器，一类为PSP CCP，一类为NTB CCP，通常BIOS只会将NTB CCP配置给用户使用，PSP CCP一般用于可信计算场景。如果BIOS支持将PSP CCP配置给用户（C86）使用，那么HCT就可以获得更多的协处理器资源，表现出更高的性能。</strong></p>
+<p>hct的正确执行依赖内核的iommu功能，所以需要使能内核的iommu功能</p>
+<p>hygon CPU上启动内核的命令行参数参考如下：</p>
+<pre><code>amd_iommu=on iommu=pt
+</code></pre>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
 <pre><code class="footer-code">作者: OpenAnolis
@@ -270,11 +282,11 @@ vda
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="kernel_fscrypt.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="optimization_cpu.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="kernel_ima.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="optimization_montage.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -284,11 +296,11 @@ vda
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="kernel_fscrypt.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="optimization_cpu.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="kernel_ima.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="optimization_montage.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

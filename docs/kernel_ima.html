@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -32,7 +32,7 @@
         <link rel="stylesheet" href="custom.css">
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -62,40 +62,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item expanded "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item expanded "><a href="kernel_ima.html" class="active">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item "><a href="wireshark.html">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item "><a href="optimization.html">国密硬件加速与优化</a></li><li class="chapter-item affix "><a href="contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item expanded "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item expanded "><a href="kernel_ima.html" class="active">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item "><a href="wireshark.html">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item "><a href="optimization.html">国密硬件加速与优化</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="optimization_cpu.html">基于 CPU 指令集的国密算法优化</a></li><li class="chapter-item "><a href="optimization_hct.html">海光密码技术（HCT）</a></li><li class="chapter-item "><a href="optimization_montage.html">澜起加解密和可信计算芯片</a></li></ol></li><li class="chapter-item "><a href="contributors.html">Contributors</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -200,7 +231,7 @@ EOF
 # 生成一个自签名的根证书ca.cert，作为CA证书
 openssl ecparam -genkey -name SM2 -text -out ca.key
 openssl req -verbose -new -days 10000 -x509 \
-    -sm3 -sigopt &quot;distid:1234567812345678&quot; \
+    -sm3 -sigopt "distid:1234567812345678" \
     -config genkey.conf -key ca.key -out ca.cert
 
 # 生成SM2私钥sm2.key
@@ -208,13 +239,13 @@ openssl ecparam -genkey -name SM2 -text -out sm2.key
 
 # 从私钥生成证书请求
 openssl req -verbose -new \
-    -sm3 -sigopt &quot;distid:1234567812345678&quot; \
+    -sm3 -sigopt "distid:1234567812345678" \
     -config genkey.conf -key sm2.key -out sm2.csr
 
 # 使用CA证书给SM2证书请求签名，生成IMA要使用的商密证书sm2.cert
 openssl x509 -req -days 10000 -sm3 \
-    -sigopt &quot;distid:1234567812345678&quot; \
-    -vfyopt &quot;distid:1234567812345678&quot; \
+    -sigopt "distid:1234567812345678" \
+    -vfyopt "distid:1234567812345678" \
     -CA ca.cert -CAkey ca.key -CAcreateserial \
     -extfile genkey.conf -extensions v3_ca \
     -in sm2.csr -out sm2.cert
@@ -241,7 +272,7 @@ cd &lt;kernel_src&gt;
 cp -f arch/x86/configs/anolis_defconfig .config
 
 # 配置系统的可信根证书
-sed -i 's/CONFIG_SYSTEM_TRUSTED_KEYS=\&quot;\&quot;/CONFIG_SYSTEM_TRUSTED_KEYS=\&quot;certs\/ca.cert\&quot;/' .config
+sed -i 's/CONFIG_SYSTEM_TRUSTED_KEYS=\"\"/CONFIG_SYSTEM_TRUSTED_KEYS=\"certs\/ca.cert\"/' .config
 
 # 编译
 make -j&lt;nproc&gt;
@@ -282,7 +313,7 @@ openssl x509 -in sm2.cert -outform der -out sm2.cert.der
 </code></pre>
 <p>用keyctl导入证书，注意<strong>系统重启后会失效</strong></p>
 <pre><code class="language-sh"># 非持久性导入, 重启后失效
-keyctl padd asymmetric &quot;IMA&quot; %:.ima &lt; sm2.cert.der
+keyctl padd asymmetric "IMA" %:.ima &lt; sm2.cert.der
 </code></pre>
 <p>IMA证书导入成功后，我们可以从<code>/proc/keys</code>看到证书信息</p>
 <pre><code class="language-sh"># IMA证书导入成功后，我们可以从/proc/keys看到证书信息：
@@ -359,7 +390,7 @@ gcc -o dummy dummy.c
 bash: ./dummy: Permission denied
 
 # dmesg
-audit: type=1800 audit(1631788187.296:8): pid=1426 uid=1001 auid=0 ses=4 op=appraise_data cause=IMA-signature-required comm=&quot;bash&quot; name=&quot;/home/imatest/dummy&quot; dev=&quot;vda2&quot; ino=668226 res=0
+audit: type=1800 audit(1631788187.296:8): pid=1426 uid=1001 auid=0 ses=4 op=appraise_data cause=IMA-signature-required comm="bash" name="/home/imatest/dummy" dev="vda2" ino=668226 res=0
 </code></pre>
 <p>我们看到，通过对这些软件栈的改造，可以平滑迁移到商密算法，并且完全基于商密算法构建出IMA的安全机制，而这些机制在以前都是完全且只能构建在国际标准的算法之上的。</p>
 <footer>
@@ -379,7 +410,7 @@ audit: type=1800 audit(1631788187.296:8): pid=1426 uid=1001 auid=0 ses=4 op=appr
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="kernel_modsign.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="kernel_modsign.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -393,29 +424,13 @@ audit: type=1800 audit(1631788187.296:8): pid=1426 uid=1001 auid=0 ses=4 op=appr
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="kernel_modsign.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="kernel_modsign.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

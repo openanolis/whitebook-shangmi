@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>商用密码技术最佳实践白皮书</title>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex">
 
 
         <!-- Custom HTML head -->
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="custom.css">
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -63,40 +63,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item "><a href="wireshark.html">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item "><a href="optimization.html">国密硬件加速与优化</a></li><li class="chapter-item affix "><a href="contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item "><a href="openanolis.html">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item "><a href="wireshark.html">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item "><a href="optimization.html">国密硬件加速与优化</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="optimization_cpu.html">基于 CPU 指令集的国密算法优化</a></li><li class="chapter-item "><a href="optimization_hct.html">海光密码技术（HCT）</a></li><li class="chapter-item "><a href="optimization_montage.html">澜起加解密和可信计算芯片</a></li></ol></li><li class="chapter-item "><a href="contributors.html">Contributors</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -172,7 +203,7 @@
 <blockquote>
 <p>🟢 <strong>龙蜥开源影响力</strong></p>
 </blockquote>
-<p>龙蜥社区及龙蜥操作系统也获得了一定的行业认可，<a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247489730&amp;idx=1&amp;sn=0b549f7feeffe565b99c939be916a939&amp;chksm=cf66ebb0f81162a6dcd528a82df831a35f94baaeb9b6e848d0bf9f293b74a12cb609b2e17282&amp;scene=21#wechat_redirect">工信部电子标准院首批开源项目成熟度评估，成为唯一获得“卓越级”认证的开源项目</a>、<a href="https://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247512407&amp;idx=1&amp;sn=49cf9cd12ee80fd16106463159184b08&amp;chksm=cf654225f812cb332b2d4aaaa4899f92c99f855ccacea073dfde2f57c477652d1996e73d9a30&amp;token=292629494&amp;lang=zh_CN#rd">龙蜥社区荣登 2022 科创中国&quot;开源创新榜&quot;、</a>荣获<a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247486523&amp;idx=1&amp;sn=7216b3ae7609263e53fc8161426b9556&amp;chksm=cf66ff49f811765f882930ec5646658c31e86026aa8e273272eed1d7e3bf083d57157e82f156&amp;scene=21#wechat_redirect">“中国开源云联盟年度优秀开源项目奖”</a><strong>、</strong><a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247485275&amp;idx=1&amp;sn=a7069bf2ab7f5112097790740a34cf04&amp;chksm=cf66f429f8117d3f08b768c58246e0623ea0d37a7dbcf985d55b20ea6f744e11f143df3c7c9b&amp;scene=21#wechat_redirect">“OSCAR 开源尖峰案例奖”</a>等 25 项行业奖项。</p>
+<p>龙蜥社区及龙蜥操作系统也获得了一定的行业认可，<a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247489730&amp;idx=1&amp;sn=0b549f7feeffe565b99c939be916a939&amp;chksm=cf66ebb0f81162a6dcd528a82df831a35f94baaeb9b6e848d0bf9f293b74a12cb609b2e17282&amp;scene=21#wechat_redirect">工信部电子标准院首批开源项目成熟度评估，成为唯一获得“卓越级”认证的开源项目</a>、<a href="https://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247512407&amp;idx=1&amp;sn=49cf9cd12ee80fd16106463159184b08&amp;chksm=cf654225f812cb332b2d4aaaa4899f92c99f855ccacea073dfde2f57c477652d1996e73d9a30&amp;token=292629494&amp;lang=zh_CN#rd">龙蜥社区荣登 2022 科创中国"开源创新榜"、</a>荣获<a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247486523&amp;idx=1&amp;sn=7216b3ae7609263e53fc8161426b9556&amp;chksm=cf66ff49f811765f882930ec5646658c31e86026aa8e273272eed1d7e3bf083d57157e82f156&amp;scene=21#wechat_redirect">“中国开源云联盟年度优秀开源项目奖”</a><strong>、</strong><a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247485275&amp;idx=1&amp;sn=a7069bf2ab7f5112097790740a34cf04&amp;chksm=cf66f429f8117d3f08b768c58246e0623ea0d37a7dbcf985d55b20ea6f744e11f143df3c7c9b&amp;scene=21#wechat_redirect">“OSCAR 开源尖峰案例奖”</a>等 25 项行业奖项。</p>
 <hr />
 <blockquote>
 <p>🟢 <strong>龙蜥项目运作模式</strong></p>
@@ -369,7 +400,7 @@
 <p>🟢 <strong>用户手册</strong></p>
 </blockquote>
 <p>根据规范 <code>GM/T 0003.2-2012</code> 和 <code>GM/T 0003.5-2012</code> 的定义，SM2 算法签名时需要一个计算了 Za 的哈希值，这个Za是通过固定的椭圆曲线参数、公钥数据以及一个用户输入的可辨别ID生成的。因此，就必须在用户界面添加一个指定用户ID的参数才能支持完整的SM2签名和验签能力，在龙蜥社区的OpenSSL库中，通过特殊参数向OpenSSL内部传递该参数。</p>
-<p>因此，龙蜥社区为签名工具扩展了<code>sigopt</code>参数，为验签工具添加了<code>vfyopt</code>参数来支撑用户界面的工具，SM2的可辨别标识通过<code>distid</code>子参数指定，比如可以使用<code>-sigopt &quot;distid:1234567812345678&quot;</code>在签名时指定SM2的可辨别标识值，终端用户可以通过命令行工具openssl来调用SM2的完整能力。</p>
+<p>因此，龙蜥社区为签名工具扩展了<code>sigopt</code>参数，为验签工具添加了<code>vfyopt</code>参数来支撑用户界面的工具，SM2的可辨别标识通过<code>distid</code>子参数指定，比如可以使用<code>-sigopt "distid:1234567812345678"</code>在签名时指定SM2的可辨别标识值，终端用户可以通过命令行工具openssl来调用SM2的完整能力。</p>
 <p>除此之外，其它完全兼容社区的OpenSSL 1.1.1，以下是使用这两个参数的具体例子，<code>1234567812345678</code> 是规范推荐使用的用户ID，用户可根据需要自行指定。</p>
 <ul>
 <li>
@@ -379,7 +410,7 @@
 openssl ecparam -genkey -name SM2 -text -out ca.key
 
 openssl req -verbose -new -days 10000 -x509 -sm3 \
-    -sigopt &quot;distid:1234567812345678&quot; \
+    -sigopt "distid:1234567812345678" \
     -config genkey.conf -key ca.key -out ca.cert
 </code></pre>
 </li>
@@ -390,11 +421,11 @@ openssl req -verbose -new -days 10000 -x509 -sm3 \
 openssl ecparam -genkey -name SM2 -text -out sm2.key
 
 openssl req -verbose -new -sm3 \
-    -sigopt &quot;distid:1234567812345678&quot; \
+    -sigopt "distid:1234567812345678" \
     -config genkey.conf -key sm2.key -out sm2.csr
 
 openssl req -verbose -verify \
-    -vfyopt &quot;distid:1234567812345678&quot; \
+    -vfyopt "distid:1234567812345678" \
     -config genkey.conf -noout -text -in sm2.csr
 </code></pre>
 </li>
@@ -403,8 +434,8 @@ openssl req -verbose -verify \
 <pre><code class="language-bash"># Sign a SM2 certificate request using the CA certificate and verify it
 
 openssl x509 -req -days 10000 -sm3 \
-    -sigopt &quot;distid:1234567812345678&quot; \
-    -vfyopt &quot;distid:1234567812345678&quot; \
+    -sigopt "distid:1234567812345678" \
+    -vfyopt "distid:1234567812345678" \
     -CA ca.cert -CAkey ca.key -CAcreateserial \
     -extfile genkey.conf -extensions v3_ca \
     -in sm2.csr -out sm2.cert
@@ -885,7 +916,7 @@ cbcmac-sm4-ce  |  371.63  675.33  903.23  972.07  981.42  990.93  991.45
 <li>SM4-XTS 算法用于加密内容，SM4-CTS-CBC 算法用于加密文件名（仅限 v2 策略）</li>
 </ul>
 <p>AES-128-CBC 仅为具有不支持 XTS 模式的加速器的低功耗嵌入式设备使用。 要使用 AES-128-CBC，必须启用 CONFIG_CRYPTO_ESSIV 和 CONFIG_CRYPTO_SHA256（或其他 SHA-256 实现）以便使用 ESSIV。</p>
-<p>Adiantum 是一种基于流密码的模式，即使在没有专用加密指令的 CPU 上也很快。 与 XTS 不同，它也是真正的宽块模式。 它还可以消除派生每个文件加密密钥的需要。 要使用 Adiantum，必须启用 CONFIG_CRYPTO_ADIANTUM。 此外，应启用 ChaCha 和 NHPoly1305 的快速实现，例如 ARM 架构上的 CONFIG_CRYPTO_CHACHA20_NEON 和 CONFIG_CRYPTO_NHPOLY1305_NEON。</p>
+<p>Adiantum 是一种基于流密码的模式，即使在没有专用加密指令的 CPU 上也很快。 与 XTS 不同，它也是真正的宽块模式。要使用 Adiantum，必须启用 CONFIG_CRYPTO_ADIANTUM。 此外，应启用 ChaCha 和 NHPoly1305 的快速实现，例如 ARM 架构上的 CONFIG_CRYPTO_CHACHA20_NEON 和 CONFIG_CRYPTO_NHPOLY1305_NEON。</p>
 <p>AES-256-HCTR2 是另一种真正的宽块加密模式，旨在用于具有专用加密指令的 CPU。 AES-256-HCTR2 具有明文中的位翻转会更改整个密文的属性。 由于初始化向量在目录中重复使用，因此此属性使其成为文件名加密的理想选择。 要使用 AES-256-HCTR2，必须启用 CONFIG_CRYPTO_HCTR2。 此外，应启用 XCTR 和 POLYVAL 的快速实现，例如 用于 ARM64 的 CRYPTO_POLYVAL_ARM64_CE 和 CRYPTO_AES_ARM64_CE_BLK。</p>
 <p>最后是 SM4 算法，目前仅在 fscrypt v2 策略中启用。</p>
 <h2 id="使用-sm4-算法加密文件"><a class="header" href="#使用-sm4-算法加密文件">使用 SM4 算法加密文件</a></h2>
@@ -1147,7 +1178,7 @@ EOF
 # 生成一个自签名的根证书ca.cert，作为CA证书
 openssl ecparam -genkey -name SM2 -text -out ca.key
 openssl req -verbose -new -days 10000 -x509 \
-    -sm3 -sigopt &quot;distid:1234567812345678&quot; \
+    -sm3 -sigopt "distid:1234567812345678" \
     -config genkey.conf -key ca.key -out ca.cert
 
 # 生成SM2私钥sm2.key
@@ -1155,13 +1186,13 @@ openssl ecparam -genkey -name SM2 -text -out sm2.key
 
 # 从私钥生成证书请求
 openssl req -verbose -new \
-    -sm3 -sigopt &quot;distid:1234567812345678&quot; \
+    -sm3 -sigopt "distid:1234567812345678" \
     -config genkey.conf -key sm2.key -out sm2.csr
 
 # 使用CA证书给SM2证书请求签名，生成IMA要使用的商密证书sm2.cert
 openssl x509 -req -days 10000 -sm3 \
-    -sigopt &quot;distid:1234567812345678&quot; \
-    -vfyopt &quot;distid:1234567812345678&quot; \
+    -sigopt "distid:1234567812345678" \
+    -vfyopt "distid:1234567812345678" \
     -CA ca.cert -CAkey ca.key -CAcreateserial \
     -extfile genkey.conf -extensions v3_ca \
     -in sm2.csr -out sm2.cert
@@ -1188,7 +1219,7 @@ cd &lt;kernel_src&gt;
 cp -f arch/x86/configs/anolis_defconfig .config
 
 # 配置系统的可信根证书
-sed -i 's/CONFIG_SYSTEM_TRUSTED_KEYS=\&quot;\&quot;/CONFIG_SYSTEM_TRUSTED_KEYS=\&quot;certs\/ca.cert\&quot;/' .config
+sed -i 's/CONFIG_SYSTEM_TRUSTED_KEYS=\"\"/CONFIG_SYSTEM_TRUSTED_KEYS=\"certs\/ca.cert\"/' .config
 
 # 编译
 make -j&lt;nproc&gt;
@@ -1229,7 +1260,7 @@ openssl x509 -in sm2.cert -outform der -out sm2.cert.der
 </code></pre>
 <p>用keyctl导入证书，注意<strong>系统重启后会失效</strong></p>
 <pre><code class="language-sh"># 非持久性导入, 重启后失效
-keyctl padd asymmetric &quot;IMA&quot; %:.ima &lt; sm2.cert.der
+keyctl padd asymmetric "IMA" %:.ima &lt; sm2.cert.der
 </code></pre>
 <p>IMA证书导入成功后，我们可以从<code>/proc/keys</code>看到证书信息</p>
 <pre><code class="language-sh"># IMA证书导入成功后，我们可以从/proc/keys看到证书信息：
@@ -1306,7 +1337,7 @@ gcc -o dummy dummy.c
 bash: ./dummy: Permission denied
 
 # dmesg
-audit: type=1800 audit(1631788187.296:8): pid=1426 uid=1001 auid=0 ses=4 op=appraise_data cause=IMA-signature-required comm=&quot;bash&quot; name=&quot;/home/imatest/dummy&quot; dev=&quot;vda2&quot; ino=668226 res=0
+audit: type=1800 audit(1631788187.296:8): pid=1426 uid=1001 auid=0 ses=4 op=appraise_data cause=IMA-signature-required comm="bash" name="/home/imatest/dummy" dev="vda2" ino=668226 res=0
 </code></pre>
 <p>我们看到，通过对这些软件栈的改造，可以平滑迁移到商密算法，并且完全基于商密算法构建出IMA的安全机制，而这些机制在以前都是完全且只能构建在国际标准的算法之上的。</p>
 <footer>
@@ -1389,7 +1420,7 @@ TLS（KTLS）从名字可以看到，是把TLS协议的数据平面（相对于�
 </blockquote>
 <p>创建新的TCP套接字，并通过 SOL_TCP 选项明确告诉内核使用KTLS：</p>
 <pre><code class="language-c">sock = socket(AF_INET, SOCK_STREAM, 0);
-setsockopt(sock, SOL_TCP, TCP_ULP, &quot;tls&quot;, sizeof(&quot;tls&quot;));
+setsockopt(sock, SOL_TCP, TCP_ULP, "tls", sizeof("tls"));
 </code></pre>
 <p>以下内容是在 <code>linux/tls.h</code> 头文件中与国密相关的定义，会在之后的代码片断中引用：</p>
 <pre><code class="language-c">/* From linux/tls.h */
@@ -1445,7 +1476,7 @@ setsockopt(sock, SOL_TLS, TLS_TX, &amp;crypto_info, sizeof(crypto_info));
 <p>🟢 <strong>发送 TLS 负载数据</strong></p>
 </blockquote>
 <p>设置了 <code>TLS_TX</code> 套接字选项后，通过该套接字发送的所有应用程序数据都使用 TLS 和套接字选项中提供的参数进行加密。 例如，我们可以发送一条加密的 hello world 记录，如下所示：</p>
-<pre><code class="language-c">const char *msg = &quot;hello world\n&quot;;
+<pre><code class="language-c">const char *msg = "hello world\n";
 send(sock, msg, strlen(msg));
 </code></pre>
 <p>如果可能的话，内核会使用用户态提供的缓冲区直接加密后发送。</p>
@@ -1482,7 +1513,7 @@ recv(sock, buffer, sizeof(buffer));
 <ul>
 <li>技术合规能力
 <ul>
-<li>符合GM/T 0028《密码模块安全技术要求》的&quot;软件密码模块安全一级&quot;资质</li>
+<li>符合GM/T 0028《密码模块安全技术要求》的"软件密码模块安全一级"资质</li>
 </ul>
 </li>
 <li>零知识证明（ZKP）
@@ -1553,12 +1584,12 @@ openssl ecparam -genkey -name SM2 -out sm2.key
 
 # 生成证书签名请求
 openssl req -new -key sm2.key -out sm2.csr \
-    -sm3 -sigopt &quot;sm2_id:1234567812345678&quot;
+    -sm3 -sigopt "sm2_id:1234567812345678"
 
 # 签名证书
 openssl x509 -req -in sm2.csr -signkey sm2.key \
     -out sm2.crt -sm3 -sm2-id 1234567812345678 \
-    -sigopt &quot;sm2_id:1234567812345678&quot;
+    -sigopt "sm2_id:1234567812345678"
 </code></pre>
 <h2 id="特性使用s_clients_server-工具验证"><a class="header" href="#特性使用s_clients_server-工具验证">特性使用（s_client/s_server 工具验证）</a></h2>
 <p>server端：命令行输入</p>
@@ -1580,7 +1611,7 @@ SSL_CTX_enable_sm_tls13_strict(ctx);
 SSL_CTX_disable_sm_tls13_strict(ctx);
 </code></pre>
 <p>client端：client无需做修改，只需要强制指定算法套件为<strong>TLS_SM4_GCM_SM3/TLS_SM4_CCM_SM3</strong>（国密套件的默认优先级低于现有的tls1.3算法套件），通过这种方式设定：</p>
-<pre><code class="language-c">SSL_CTX_set_ciphersuites(ctx, &quot;TLS_SM4_GCM_SM3&quot;);
+<pre><code class="language-c">SSL_CTX_set_ciphersuites(ctx, "TLS_SM4_GCM_SM3");
 </code></pre>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
@@ -1867,10 +1898,10 @@ openssl s_client -connect 127.0.0.1:34567 \
 <h2 id="ntls-api-使用"><a class="header" href="#ntls-api-使用">NTLS API 使用</a></h2>
 <p>server 端示例代码如下：</p>
 <pre><code class="language-c">SSL_CTX *ctx;
-const char *sign_key_file = &quot;/path/to/sign_key_file&quot;;
-const char *sign_cert_file = &quot;/path/to/sign_cert_file&quot;;
-const char *enc_key_file = &quot;/path/to/enc_key_file&quot;;
-const char *enc_cert_file = &quot;/path/to/enc_cert_file&quot;;
+const char *sign_key_file = "/path/to/sign_key_file";
+const char *sign_cert_file = "/path/to/sign_cert_file";
+const char *enc_key_file = "/path/to/enc_key_file";
+const char *enc_cert_file = "/path/to/enc_cert_file";
 
 /* 生成上下文 */
 ctx = SSL_CTX_new(NTLS_server_method());
@@ -1898,7 +1929,7 @@ ctx = SSL_CTX_new(NTLS_client_method());
 /* 设置算法套件为 ECC-SM2-WITH-SM4-SM3 或者 ECDHE-SM2-WITH-SM4-SM3
  * 这一步并不强制，默认 ECC-SM2-WITH-SM4-SM3 优先
  */
-SSL_CTX_set_cipher_list(ctx, &quot;ECC-SM2-WITH-SM4-SM3&quot;);
+SSL_CTX_set_cipher_list(ctx, "ECC-SM2-WITH-SM4-SM3");
 
 /* 设置签名证书，加密证书，这一步参考服务端相关代码
  * 仅ECDHE-SM2-WITH-SM4-SM3套件需要这一步
@@ -2261,7 +2292,7 @@ arg2          The second argument of a homomorphic operation
 
 openssl req -new -x509 -days 36500 \
     -key private.pem -out cert.crt -sm3 \
-    -subj &quot;/C=CN/ST=Zhejiang/L=Hangzhou/O=Alibaba/OU=OS/CN=CA/emailAddress=ca@foo.com&quot;
+    -subj "/C=CN/ST=Zhejiang/L=Hangzhou/O=Alibaba/OU=OS/CN=CA/emailAddress=ca@foo.com"
 </code></pre>
 <p>开发商密签名测试程序test_shangmi.py（以python 3为例），注意上文的 pyopenssl 与 cryptography 编译安装时与测试程序的python大版本号（同是python 2或者同是python 3）保持一致, 该测试程序功能主要是：</p>
 <ul>
@@ -2281,37 +2312,37 @@ from OpenSSL.crypto import (
     verify,
 )
 
-if __name__ == &quot;__main__&quot;:
+if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print(&quot;Usage: ./test_shangmi.py [private_key_file] [cert_file]&quot;)
+        print("Usage: ./test_shangmi.py [private_key_file] [cert_file]")
         exit()
 
     private_key_file = open(sys.argv[1], 'rb')
     if not private_key_file:
-        print(&quot;fail to open private_key_file&quot;)
+        print("fail to open private_key_file")
         exit()
     private_key = private_key_file.read()
 
     cert_file = open(sys.argv[2], 'rb')
     if not cert_file:
-        print(&quot;fail to open cert_file&quot;)
+        print("fail to open cert_file")
         exit()
     cert = cert_file.read()
 
     priv_key = load_privatekey(FILETYPE_PEM, private_key)
     cert = load_certificate(FILETYPE_PEM, cert)
     content = (
-        b&quot;It was a bright cold day in April, and the clocks were striking &quot;
-        b&quot;thirteen. Winston Smith, his chin nuzzled into his breast in an &quot;
-        b&quot;effort to escape the vile wind, slipped quickly through the &quot;
-        b&quot;glass doors of Victory Mansions, though not quickly enough to &quot;
-        b&quot;prevent a swirl of gritty dust from entering along with him.&quot;
+        b"It was a bright cold day in April, and the clocks were striking "
+        b"thirteen. Winston Smith, his chin nuzzled into his breast in an "
+        b"effort to escape the vile wind, slipped quickly through the "
+        b"glass doors of Victory Mansions, though not quickly enough to "
+        b"prevent a swirl of gritty dust from entering along with him."
     )
-    sig = sign(priv_key, content, &quot;sm3&quot;)
-    print(&quot;sig&quot;, sig)
+    sig = sign(priv_key, content, "sm3")
+    print("sig", sig)
     print(base64.b64encode(sig))
-    print(&quot;len(sig)&quot;, len(sig))
-    verify(cert, sig, content, &quot;sm3&quot;) 
+    print("len(sig)", len(sig))
+    verify(cert, sig, content, "sm3") 
 </code></pre>
 <p>执行测试程序即可 (无报错则验签成功，详见pyopenssl对应的验签函数逻辑)</p>
 <pre><code class="language-sh">./test_shangmi.py private.pem cert.crt
@@ -2365,7 +2396,7 @@ dir         = /home/gmssl/demoCA    # Where everything is kept
 certs       = $dir/certs        # Where the issued certs are kept
 crl_dir     = $dir/crl          # Where the issued crl are kept
 database    = $sdir/index.txt   # database index file.
-#unique_subject = no            # Set to &quot;no' to allow creation of
+#unique_subject = no            # Set to "no' to allow creation of
                                 # several certs with same subject.
 
 new_certs_dir = Sdir/newcerts   # default place for new certs.
@@ -2444,9 +2475,9 @@ gmssl x509 -req -sm3 -days 3650 -CA RootCA.crt \
     --with-http_stub_status_module \
     --with-http_v2_module \
     --with-file-aio \
-    --with-openssl=&quot;/usr/local/gmssl&quot; \
-    --with-cc-opt=&quot;-I/usr/local/gmssl/include&quot; \
-    --with-ld-opt=&quot;-lm&quot;
+    --with-openssl="/usr/local/gmssl" \
+    --with-cc-opt="-I/usr/local/gmssl/include" \
+    --with-ld-opt="-lm"
 
 make
 make install
@@ -2555,11 +2586,19 @@ make install
 <p>常用的密码算法经过验证后，算法本身是经久不变的，有着固定的输入输出，因此很容易作为固定的程序片断被固化到CPU或者外部集成电路上，固化到CPU上的往往表现为CPU
 的扩展指令，比如x86上的AESNI指令，固化到外部集成电路上就成了支持算法加速的 PCIE 卡，比如QAT，CCP等。</p>
 <p>国密算法的性能优化作为社区重点突破的方向，在 x86 和 ARM 架构上使用SIMD指令实现了 SM3 和 SM4 算法性能的突破，以 SM4 算法为例，在 x86 架构上性能提升最大达到 8 倍，在 arm64 架构上性能提升最大达到 40 倍。</p>
-<h2 id="基于-cpu-指令集的国密算法优化"><a class="header" href="#基于-cpu-指令集的国密算法优化">基于 CPU 指令集的国密算法优化</a></h2>
+<footer>
+<span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
+<pre><code class="footer-code">作者: OpenAnolis
+链接: https://github.com/openanolis/whitebook-shangmi
+来源: OpenAnolis
+本文原创发布于「OpenAnolis」,转载请注明出处,谢谢合作!
+</code></pre>
+</footer>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基于-cpu-指令集的国密算法优化"><a class="header" href="#基于-cpu-指令集的国密算法优化">基于 CPU 指令集的国密算法优化</a></h1>
 <p>现代CPU中SIMD指令集是标准配置，各架构的SIMD指令也是大同小异，主流的密码算法，比如哈希算法和对称加密算法都是结构化的，因此使用 SIMD 来优化通用密码算法就是很自然的一个事情，事实上也有不错的优化效果。</p>
 <p>AESNI是x86架构上专用于优化 AES 算法的SIMD指令，也常被用来间接优化其它算法，相比于通用的SIMD指令，专用指令能用更少的指令和时钟周期完成更多的操作，也会带来更大的性能提升。类似的，arm64架构上也提供了专用的 <code>Crypto Extension</code> 扩展，为主流的对称算法和哈希算法都提供了支持，也包括SM3和SM4算法。</p>
 <p>本小节会以armv8架构为例来介绍国密算法的指令集优化。</p>
-<h3 id="arm-架构下国密算法的优化"><a class="header" href="#arm-架构下国密算法的优化">ARM 架构下国密算法的优化</a></h3>
+<h2 id="arm-架构下国密算法的优化"><a class="header" href="#arm-架构下国密算法的优化">ARM 架构下国密算法的优化</a></h2>
 <p>为了提升国密算法的性能，Arm公司开发者基于Armv8.2中定义的<code>Cryptographic Extension</code>中的对国密SM3, SM4算法的硬件加速，实现了指令级的优化，获得了较好的性能提升。目前该优化在OpenSSL，libgcrypt和Linux内核中已经合入主线。</p>
 <blockquote>
 <p>🟢 <strong>SM3 在 Arm 架构上的优化实现</strong></p>
@@ -2571,7 +2610,7 @@ make install
 <p>第一步是将输入消息按照一定规则末尾填充一些比特，使得总比特长度为512的倍数。</p>
 <p>第二步是对填充后的消息按512b分块，对每个数据块B(i)按32b的字长分为16个字作为初始输入，依照P1(X)函数定义操作进行52次迭代扩展分别得到第16到67个字，然后使用0~67个字经过异或后生成最后的64个字的输出。</p>
 <p>第三步是以每个B(i)块在第二步生成的128个字(去掉其中的64~67)  和 256b的向量V(i)作为输入进行64轮的迭代，生成一个新的 256b的V(i+1)作为下一次循环的输入向量。直到最后一个B块完成处理后得到的最后一个256b向量为SM3的最终hash 值。</p>
-<h5 id="arm-sm3指令"><a class="header" href="#arm-sm3指令">Arm SM3指令</a></h5>
+<h4 id="arm-sm3指令"><a class="header" href="#arm-sm3指令">Arm SM3指令</a></h4>
 <p>Arm SM3指令是Armv8.2引入的七条基于ASIMD的加密扩展指令，支持对SM3 hash算法的硬件加速。</p>
 <p>消息扩展的处理由SM3PARTW1和SM3PARTW2配合完成，实现了P1(X)和简单的位移，异或操作。一次指令配对执行将并发生成4个扩展字。对于一个B(i)块的扩展需要循环13次。</p>
 <div align=center>
@@ -2582,12 +2621,12 @@ make install
 <p>SM3TT1A完成前16次循环所定义的TT1运算，而SM3TT1B完成后面48次循环所定义的TT1运算，输出的数据作为下一轮TT1运算的输入。每次执行完成对多个输入的字数据的并行处理。</p>
 <p>SM3TT2A完成前16次循环中所定义的的TT2运算和准备下一轮TT2运算的输入数据，而SM3TT2B完成后面48次循环中定义的TT2运算。</p>
 <p>可见SM3的压缩处理因为存在依赖而无法一次循环运算而完成多个256b的向量V(i)的输出。</p>
-<h5 id="sm3-优化效果"><a class="header" href="#sm3-优化效果">SM3 优化效果</a></h5>
+<h4 id="sm3-优化效果"><a class="header" href="#sm3-优化效果">SM3 优化效果</a></h4>
 <p>以下是在阿里云倚天710上的benchmark数据，SM3与SHA256哈希算法的软件实现（无优化）与Cryptographic Extension指令集优化后的性能对比：</p>
 <div align=center>
 <img src="images/sm3ce_4.png" alt="SM3CE" style="width: 90%; height: 90%">
 </div>
-<h5 id="sm3-优化总结"><a class="header" href="#sm3-优化总结">SM3 优化总结</a></h5>
+<h4 id="sm3-优化总结"><a class="header" href="#sm3-优化总结">SM3 优化总结</a></h4>
 <p>具体在OpenSSL中对SM3算法的优化参见<a href="https://github.com/openssl/openssl/blob/master/crypto/sm3/asm/sm3-armv8.pl"><strong>OpenSSL SM3 优化实现</strong></a>。从上面的描述可见，相关的指令都是借助了ASIMD中的128b vector寄存器，一次执行处理多个数据字，从而获得较好的并发度。其中压缩处理因为循环之间存在数据依赖，没法如同消息扩展的处理达到一次完成多个输出字的效果。</p>
 <blockquote>
 <p>🟢 <strong>SM4 在 Arm 架构上的优化实现</strong></p>
@@ -2598,12 +2637,12 @@ make install
 <p>对128b的分组数据进行加解密是使用上一步扩展出来的32个轮密钥rki进行32轮迭代，最后4轮迭代输出的4个字(128比特)就是密文或解压后的明文。下图是表示一次迭代的处理。</p>
 <p><img src="images/sm4ce_2.png" alt="SM4CE" /></p>
 <p>SM4算法中每次迭代的具体描述可以参看<a href="http://www.gmbz.org.cn/upload/2018-04-04/1522788048733065051.pdf"><strong>SM4分组加密算法规范</strong></a>。</p>
-<h5 id="arm-sm4指令"><a class="header" href="#arm-sm4指令">Arm SM4指令</a></h5>
+<h4 id="arm-sm4指令"><a class="header" href="#arm-sm4指令">Arm SM4指令</a></h4>
 <p>FEAT_SM4优化引入的两条可选加密扩展指令，同样是基于ASIMD技术来提升处理的并行度。其中指令<code>SM4EKEY</code>一次执行能扩展出来4个新的轮密钥，8次执行后就完成了所有32个轮密钥的生成。指令<code>SM4E</code>具有类似的并行度，每次执行能加解密出来4个字的数据，同样的8次执行后就能完成一个分组的加解密。</p>
-<h5 id="sm4-优化效果"><a class="header" href="#sm4-优化效果">SM4 优化效果</a></h5>
+<h4 id="sm4-优化效果"><a class="header" href="#sm4-优化效果">SM4 优化效果</a></h4>
 <p>以下是在阿里云倚天710上的benchmark数据，SM4与AES对称加密算法的软件实现（无优化）与Cryptographic Extension指令集优化后的性能对比：</p>
 <p><img src="images/sm4ce_3.png" alt="SM4CE" /></p>
-<h5 id="sm4-优化总结"><a class="header" href="#sm4-优化总结">SM4 优化总结</a></h5>
+<h4 id="sm4-优化总结"><a class="header" href="#sm4-优化总结">SM4 优化总结</a></h4>
 <p>具体在OpenSSL中对SM4算法的优化补丁参见<a href="https://github.com/openssl/openssl/blob/master/crypto/sm4/asm/sm4-armv8.pl"><strong>OpenSSL SM4优化实现</strong></a>。基于上面的描述，优化的主要有：</p>
 <ul>
 <li>借助SM4指令的SIMD属性一次执行完成多个字数据的处理。</li>
@@ -2612,8 +2651,16 @@ make install
 </ul>
 <p>除此之外，Arm公司开发者还进一步提升了SM4-GCM的性能。考虑到FEAT-SM4是可选的架构特性，在某些SoC中不一定支持，Arm公司开发者基于Neon指令实现了Armv8下的SM4，从而在没有FEAT-SM4的设备上也能获得相当的提升。</p>
 <p>从性能上来说SM4指令的使用可以大幅地提升性能。从安全性来说，硬件指令集成了S盒替换的功能，使得这部分计算变成了时间一致的操作，大大减小了侧信道攻击的可能性，保证了算法的安全。</p>
-<h2 id="密码加速器---海光密码技术hct"><a class="header" href="#密码加速器---海光密码技术hct">密码加速器 - 海光密码技术（HCT）</a></h2>
-<h3 id="简介-1"><a class="header" href="#简介-1">简介</a></h3>
+<footer>
+<span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
+<pre><code class="footer-code">作者: OpenAnolis
+链接: https://github.com/openanolis/whitebook-shangmi
+来源: OpenAnolis
+本文原创发布于「OpenAnolis」,转载请注明出处,谢谢合作!
+</code></pre>
+</footer>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="密码加速器---海光密码技术hct"><a class="header" href="#密码加速器---海光密码技术hct">密码加速器 - 海光密码技术（HCT）</a></h1>
+<h2 id="简介-1"><a class="header" href="#简介-1">简介</a></h2>
 <p>海光密码技术HCT（Hygon Cryptographic Technology）是基于海光芯片密码协处理器以及密码指令集特性，自主设计研发的一套密码算法加速软件开发套件。</p>
 <p>官方发布的 HCT 密码计算套件位于 gitee 的 <code>hygon-devkit</code> 仓库，地址：<a href="https://gitee.com/anolis/hygon-devkit.git">https://gitee.com/anolis/hygon-devkit.git</a></p>
 <pre><code class="language-sh">git clone https://gitee.com/anolis/hygon-devkit.git
@@ -2634,8 +2681,8 @@ make install
 <li>script目录：内含一些工具脚本。</li>
 <li>readme文件：有关HCT的简单情况及使用说明。</li>
 </ul>
-<h3 id="测试与开发"><a class="header" href="#测试与开发">测试与开发</a></h3>
-<h4 id="环境配置"><a class="header" href="#环境配置">环境配置</a></h4>
+<h2 id="测试与开发"><a class="header" href="#测试与开发">测试与开发</a></h2>
+<h3 id="环境配置"><a class="header" href="#环境配置">环境配置</a></h3>
 <p>安装支持HCT的内核，参考<a href="https://conf.hygon.cn/pages/viewpage.action?pageId=76487872">安装开源OS镜像并编译软件页面</a>进行内核的编译与安装。完成内核安装后，重启系统，选择刚才安装的内核启动。</p>
 <p>按如下流程必要的模块跟依赖：</p>
 <pre><code class="language-sh"># 1. 检测并安装必须的内核模块 
@@ -2663,7 +2710,7 @@ cd hct/pkg/hct_1.0.0.20230224_rc
 ./config 
 sudo make install
 </code></pre>
-<h4 id="测试"><a class="header" href="#测试">测试</a></h4>
+<h3 id="测试"><a class="header" href="#测试">测试</a></h3>
 <ul>
 <li>
 <p>功能测试</p>
@@ -2681,7 +2728,7 @@ sudo make install
 </code></pre>
 </li>
 </ul>
-<h3 id="hctconfig-服务命令"><a class="header" href="#hctconfig-服务命令">hctconfig 服务命令</a></h3>
+<h2 id="hctconfig-服务命令"><a class="header" href="#hctconfig-服务命令">hctconfig 服务命令</a></h2>
 <p>HCT套件成功安装后，会在系统中增加一个hctconfig服务命令。通过hctconfig服务可以方便的管理CCP协处理器的绑定情况：</p>
 <ol>
 <li>使用默认配置，将 CCP 协处理器绑定至最佳性能状态：<code>service hctconfig start</code></li>
@@ -2689,14 +2736,14 @@ sudo make install
 <li>利用rebond命令对CCP协处理器进行重新绑定：<code>service hctconfig rebond</code></li>
 </ol>
 <p><em><strong>Tips：start命令和rebond的命令都可以带参数，详情可参考 usage 命令</strong></em>：<code>service hctconfig usage</code></p>
-<h3 id="开发"><a class="header" href="#开发">开发</a></h3>
-<p>HCT通过 openssl 标准接口（EVP）向应用提供接口，使用HCT套件时，通过e=ENGINE_by_id（&quot;hct&quot;）选择密码引擎为hct，然后直接通过openssl标准（EVP）接口即可完成对hct密码计算套件的调用。</p>
-<h3 id="卸载hct套件"><a class="header" href="#卸载hct套件">卸载HCT套件</a></h3>
+<h2 id="开发"><a class="header" href="#开发">开发</a></h2>
+<p>HCT通过 openssl 标准接口（EVP）向应用提供接口，使用HCT套件时，通过e=ENGINE_by_id（"hct"）选择密码引擎为hct，然后直接通过openssl标准（EVP）接口即可完成对hct密码计算套件的调用。</p>
+<h2 id="卸载hct套件"><a class="header" href="#卸载hct套件">卸载HCT套件</a></h2>
 <p>在对应HCT版本包内执行make uninstall即可卸载HCT套件</p>
 <pre><code class="language-sh">hct/pkg/hct_1.0.0.20230224_rc
 make uninstall
 </code></pre>
-<h3 id="其它注意事项"><a class="header" href="#其它注意事项">其它注意事项</a></h3>
+<h2 id="其它注意事项"><a class="header" href="#其它注意事项">其它注意事项</a></h2>
 <p>如果BIOS支持，可以将PSP CCP配置给C86使用，BIOS设置步骤如下：</p>
 <ol>
 <li>进入BIOS，选择“HYGON CBS”，进入“Moksha Common Options”</li>
@@ -2706,6 +2753,110 @@ make uninstall
 <p>hct的正确执行依赖内核的iommu功能，所以需要使能内核的iommu功能</p>
 <p>hygon CPU上启动内核的命令行参数参考如下：</p>
 <pre><code>amd_iommu=on iommu=pt
+</code></pre>
+<footer>
+<span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
+<pre><code class="footer-code">作者: OpenAnolis
+链接: https://github.com/openanolis/whitebook-shangmi
+来源: OpenAnolis
+本文原创发布于「OpenAnolis」,转载请注明出处,谢谢合作!
+</code></pre>
+</footer>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="澜起高性能加解密和可信计算芯片---m88star5n"><a class="header" href="#澜起高性能加解密和可信计算芯片---m88star5n">澜起高性能加解密和可信计算芯片 - M88STAR5(N)</a></h1>
+<p>M88STAR5(N)芯片是澜起科技在数据保护和平台可信度量领域多年沉淀的产品化成果。凭借其创新的Mont-TSSE可信安全系统扩展架构和技术，澜起将硬件级数据加解密和平台可信度量两大核心功能无缝融合于这一颗单一芯片之上。该芯片硬件支持国密和国际主流加解密算法加速，片内集成了多个TRNG，搭配PCIe 5.0接口可提供高达160Gbps的吞吐量。芯片采用紧凑型封装，可直接安装于服务器主板之上，或通过AIC卡的方式集成多颗芯片，实现加密处理能力的倍增。同时，芯片兼容TPM、TCM和TPCM等可信计算相关标准，可作为硬件信任根（HRoT）使用，满足可信平台3.0规范的需求。澜起提供芯片配套的SDK和评估板，为客户在其现有系统平台上部署可信计算度量和加解密加速功能，提供了经济高效的一体化解决方案。</p>
+<h2 id="算法支持"><a class="header" href="#算法支持">算法支持</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>算法</th><th>模式和类型</th></tr></thead><tbody>
+<tr><td>SM4</td><td>ECB/CBC/CFB/GCM/XTS/OFB/CTR/GMAC</td></tr>
+<tr><td>AES</td><td>ECB/CBC/CFB/GCM/XTS/OFB/CTR/GMAC</td></tr>
+<tr><td>SM2</td><td>SIGN/VERIFY/ENC/DEC/kG/kP</td></tr>
+<tr><td>RSA</td><td>1024/2048/3072/4096</td></tr>
+<tr><td>SM3</td><td>HASH/HMAC</td></tr>
+<tr><td>SHA</td><td>256/384/512 HASH/HMAC</td></tr>
+<tr><td>ECC</td><td>SECP256R1/SECP256K1/SECP384R1</td></tr>
+<tr><td>TRNG</td><td>多个，符合商密安全芯片要求</td></tr>
+</tbody></table>
+</div>
+<h2 id="典型应用场景"><a class="header" href="#典型应用场景">典型应用场景</a></h2>
+<h3 id="加解密场景"><a class="header" href="#加解密场景">加解密场景</a></h3>
+<ul>
+<li>DPDK</li>
+<li>SPDK</li>
+<li>分布式文件系统加密</li>
+<li>数据库加密</li>
+<li>HTTPS加密加速</li>
+</ul>
+<div align=center>
+<img src="images/M88STAR5-DPDK.png" style="width: 80%; height: 80%">
+</div>
+<h3 id="可信度量场景"><a class="header" href="#可信度量场景">可信度量场景</a></h3>
+<ul>
+<li>高性能、高安全的硬件信任根，支持硬件虚拟化应用</li>
+<li>兼容TPM/TCM/TPCM标准，满足可信平台3.0规范需求</li>
+<li>支持动态度量卸载及弹性功耗控制机制，优化系统资源利用</li>
+</ul>
+<div align=center>
+<img src="images/M88STAR5-trust.png" style="width: 70%; height: 70%">
+</div>
+<h2 id="软件开发工具包"><a class="header" href="#软件开发工具包">软件开发工具包</a></h2>
+<div align=center>
+<img src="images/M88STAR5-sdk.png" style="width: 90%; height: 90%">
+</div>
+<ul>
+<li>Mont-TSSE Firmware SDK：安全固件软件开发工具包（Zephyr Based）</li>
+<li>Mont-TSSE Driver：Linux硬件驱动层</li>
+<li>Mont-TSSE DPDK Package：DPDK驱动接口</li>
+<li>Mont-TSSE Crypto Library：高性能加解密库</li>
+<li>Mont-TSSE SSL Provider：OpenSSL Engine接口
+官方发布的Mont-TSSE密码计算套件位于gitee的Mont-TSSE仓库</li>
+</ul>
+<h2 id="测试与开发-1"><a class="header" href="#测试与开发-1">测试与开发</a></h2>
+<h3 id="环境搭建"><a class="header" href="#环境搭建">环境搭建</a></h3>
+<p>在安装软件包之前需打开Intel VT-d和SR-IOV。</p>
+<ul>
+<li>安装依赖：</li>
+</ul>
+<pre><code>meson
+ninja
+pyt
+hon3
+pyelftools
+numactl
+numactl-devel
+</code></pre>
+<ul>
+<li>安装Mont-TSSE Driver</li>
+</ul>
+<p>1.安装Mont-TSSE Driver，可在gitee代码仓库上下载。最新的龙蜥操作系统已经包含Mont-TSSE Driver无需重复安装</p>
+<p>2.安装Mont-TSSE DPDK Package，可从gitee上下载RPM包安装</p>
+<ul>
+<li>绑定VFIO</li>
+</ul>
+<pre><code>sudo modprobe vfio_pci
+echo 4096 &gt; /proc/sys/vm/nr_hugepages
+lspci -d 1b00:d021      # 查询BDF
+sudo /usr/local/bin/dpdk-devbind.py -b vfio-pci  $BDF
+</code></pre>
+<h3 id="测试-1"><a class="header" href="#测试-1">测试</a></h3>
+<ul>
+<li>功能测试</li>
+</ul>
+<pre><code>sudo ./build/app/dpdk-test-crypto-perf \
+    -l 1-2 -a 15:00.1  -- --ptest verify \
+    --devtype crypto_tsse --optype aead \
+    --aead-algo sm4-gcm --aead-op encrypt \
+    --aead-key-sz 16 --aead-iv-sz 12 --aead-aad-sz 16 \
+    --total-ops 8 --burst-sz 8 --test-name aead_buff_64 \
+    --test-file ./app/test-crypto-perf/data/sm4_gcm.data
+</code></pre>
+<ul>
+<li>性能测试</li>
+</ul>
+<pre><code>sudo ./build/app/dpdk-test-crypto-perf \
+    -l 1-5 -a 15:00.1  -- --ptest throughput \
+    --devtype crypto_tsse --optype aead \
+    --aead-algo sm4-gcm --aead-op encrypt \
+    --aead-key-sz 16 --aead-iv-sz 12 --aead-aad-sz 16 \
+    --total-ops 81920 --buffer-sz 1440 --burst-sz 32
 </code></pre>
 <footer>
 <span class="copyright">Copyright © openanolis.cn 2023 all right reserved</span>
@@ -2743,6 +2894,7 @@ make uninstall
 <li>袁艳桃</li>
 <li>黄小平</li>
 <li>张志磊</li>
+<li>蔡仲斐</li>
 </ul>
 
                     </main>
@@ -2762,22 +2914,6 @@ make uninstall
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

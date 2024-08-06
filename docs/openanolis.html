@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -32,7 +32,7 @@
         <link rel="stylesheet" href="custom.css">
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -62,40 +62,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item expanded "><a href="openanolis.html" class="active">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item "><a href="wireshark.html">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item "><a href="optimization.html">国密硬件加速与优化</a></li><li class="chapter-item affix "><a href="contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="overview.html">前言</a></li><li class="chapter-item expanded "><a href="openanolis.html" class="active">OpenAnolis 龙蜥社区</a></li><li class="chapter-item "><a href="introduction.html">国密简介与现状</a></li><li class="chapter-item "><a href="shangmi_sig.html">OpenAnolis 全栈国密概述</a></li><li class="chapter-item "><a href="anolisos_guide.html">Anolis OS 国密开发指南</a></li><li class="chapter-item "><a href="trusted_computing.html">国密可信计算</a></li><li class="chapter-item "><a href="secure_boot.html">国密安全启动</a></li><li class="chapter-item "><a href="linux_kernel.html">Linux 内核国密支持</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="kernel_shangmi.html">内核国密算法</a></li><li class="chapter-item "><a href="kernel_fscrypt.html">文件加密（fscrypt）</a></li><li class="chapter-item "><a href="kernel_dmcrypt.html">磁盘加密（LUKS）</a></li><li class="chapter-item "><a href="kernel_ima.html">内核完整性度量架构（IMA）</a></li><li class="chapter-item "><a href="kernel_modsign.html">内核模块签名</a></li><li class="chapter-item "><a href="kernel_tls.html">Kernel TLS（KTLS）实践</a></li></ol></li><li class="chapter-item "><a href="tongsuo.html">Tongsuo（铜锁）密码库</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="tongsuo_tls.html">TLS 1.3 使用商密套件</a></li><li class="chapter-item "><a href="tongsuo_dc.html">委托凭证</a></li><li class="chapter-item "><a href="tongsuo_cc.html">证书压缩（RFC 8879）</a></li><li class="chapter-item "><a href="tongsuo_tlcp.html">TLCP 安全传输协议</a></li><li class="chapter-item "><a href="tongsuo_he.html">同态算法</a></li><li class="chapter-item "><a href="tongsuo_java_sdk.html">Tongsuo-Java-SDK</a></li></ol></li><li class="chapter-item "><a href="crypto_library.html">OpenAnolis 国密算法库</a></li><li class="chapter-item "><a href="dev_practices.html">国密应用开发实践</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="python_shangmi.html">Python 国密签名实践</a></li><li class="chapter-item "><a href="nginx_tlcp.html">Web 服务国密双证书支持</a></li><li class="chapter-item "><a href="wireshark.html">Wireshark 国密调试实践</a></li></ol></li><li class="chapter-item "><a href="optimization.html">国密硬件加速与优化</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="optimization_cpu.html">基于 CPU 指令集的国密算法优化</a></li><li class="chapter-item "><a href="optimization_hct.html">海光密码技术（HCT）</a></li><li class="chapter-item "><a href="optimization_montage.html">澜起加解密和可信计算芯片</a></li></ol></li><li class="chapter-item "><a href="contributors.html">Contributors</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -157,7 +188,7 @@
 <blockquote>
 <p>🟢 <strong>龙蜥开源影响力</strong></p>
 </blockquote>
-<p>龙蜥社区及龙蜥操作系统也获得了一定的行业认可，<a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247489730&amp;idx=1&amp;sn=0b549f7feeffe565b99c939be916a939&amp;chksm=cf66ebb0f81162a6dcd528a82df831a35f94baaeb9b6e848d0bf9f293b74a12cb609b2e17282&amp;scene=21#wechat_redirect">工信部电子标准院首批开源项目成熟度评估，成为唯一获得“卓越级”认证的开源项目</a>、<a href="https://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247512407&amp;idx=1&amp;sn=49cf9cd12ee80fd16106463159184b08&amp;chksm=cf654225f812cb332b2d4aaaa4899f92c99f855ccacea073dfde2f57c477652d1996e73d9a30&amp;token=292629494&amp;lang=zh_CN#rd">龙蜥社区荣登 2022 科创中国&quot;开源创新榜&quot;、</a>荣获<a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247486523&amp;idx=1&amp;sn=7216b3ae7609263e53fc8161426b9556&amp;chksm=cf66ff49f811765f882930ec5646658c31e86026aa8e273272eed1d7e3bf083d57157e82f156&amp;scene=21#wechat_redirect">“中国开源云联盟年度优秀开源项目奖”</a><strong>、</strong><a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247485275&amp;idx=1&amp;sn=a7069bf2ab7f5112097790740a34cf04&amp;chksm=cf66f429f8117d3f08b768c58246e0623ea0d37a7dbcf985d55b20ea6f744e11f143df3c7c9b&amp;scene=21#wechat_redirect">“OSCAR 开源尖峰案例奖”</a>等 25 项行业奖项。</p>
+<p>龙蜥社区及龙蜥操作系统也获得了一定的行业认可，<a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247489730&amp;idx=1&amp;sn=0b549f7feeffe565b99c939be916a939&amp;chksm=cf66ebb0f81162a6dcd528a82df831a35f94baaeb9b6e848d0bf9f293b74a12cb609b2e17282&amp;scene=21#wechat_redirect">工信部电子标准院首批开源项目成熟度评估，成为唯一获得“卓越级”认证的开源项目</a>、<a href="https://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247512407&amp;idx=1&amp;sn=49cf9cd12ee80fd16106463159184b08&amp;chksm=cf654225f812cb332b2d4aaaa4899f92c99f855ccacea073dfde2f57c477652d1996e73d9a30&amp;token=292629494&amp;lang=zh_CN#rd">龙蜥社区荣登 2022 科创中国"开源创新榜"、</a>荣获<a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247486523&amp;idx=1&amp;sn=7216b3ae7609263e53fc8161426b9556&amp;chksm=cf66ff49f811765f882930ec5646658c31e86026aa8e273272eed1d7e3bf083d57157e82f156&amp;scene=21#wechat_redirect">“中国开源云联盟年度优秀开源项目奖”</a><strong>、</strong><a href="http://mp.weixin.qq.com/s?__biz=Mzg4MTMyMTUwMQ==&amp;mid=2247485275&amp;idx=1&amp;sn=a7069bf2ab7f5112097790740a34cf04&amp;chksm=cf66f429f8117d3f08b768c58246e0623ea0d37a7dbcf985d55b20ea6f744e11f143df3c7c9b&amp;scene=21#wechat_redirect">“OSCAR 开源尖峰案例奖”</a>等 25 项行业奖项。</p>
 <hr />
 <blockquote>
 <p>🟢 <strong>龙蜥项目运作模式</strong></p>
@@ -198,7 +229,7 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="introduction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="introduction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -212,29 +243,13 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="introduction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="introduction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
