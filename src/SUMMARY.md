@@ -28,5 +28,8 @@
     - [Web 服务国密双证书支持](nginx_tlcp.md)
     - [Wireshark 国密调试实践](wireshark.md)
 - [国密硬件加速与优化](optimization.md)
+    - [基于 CPU 指令集的国密算法优化](optimization_cpu.md)
+    - [海光密码技术（HCT）](optimization_hct.md)
+    - [澜起加解密和可信计算芯片](optimization_montage.md)
 
 [Contributors](contributors.md)

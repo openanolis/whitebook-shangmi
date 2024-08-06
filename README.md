@@ -33,6 +33,18 @@ SM4算法主要分成两步，首先是每次密钥扩展会产生一个新的32
 
 文档以 Markdown 书写，使用 [mdBook](https://github.com/rust-lang/mdBook) 工具构建。
 
+```
+# install mdbook
+cargo install mdbook
+cargo install mdbook-template
+
+# develop
+mdbook serve --open
+
+# build
+mdbook build
+```
+
 ### Contributing
 
 这个仓库包含了龙蜥社区商密软件栈 SIG 的最新技术最佳实践。 用于向社区用户展示社区商密软件栈 SIG 的最新技术进展和实践。
